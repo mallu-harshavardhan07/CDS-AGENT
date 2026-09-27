@@ -1,0 +1,1921 @@
+{
+  "metadata": {
+    "total_views": 50,
+    "retriever": "TF-IDF (scikit-learn)",
+    "indexed_at": "2026-09-27 04:22:45 UTC",
+    "catalog_source": "C:\\Users\\harshavardhan.mallu\\Desktop\\cds-agent\\cds_catalog.json"
+  },
+  "index_to_cds": {
+    "0": {
+      "id": 0,
+      "cds_name": "I_ABAPApplCompText",
+      "name": "I_ABAPApplCompText",
+      "label": "ABAP Application Component Text",
+      "description": "ABAP Application Component Text",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 5,
+      "association_count": 1,
+      "fields": [
+        "Language",
+        "ABAPApplicationComponent",
+        "ABAPApplicationComponentName",
+        "_ABAPApplicationComponent",
+        "_Language"
+      ],
+      "associations": [
+        {
+          "target": "I_Language",
+          "alias": "_Language"
+        }
+      ],
+      "document_text": "CDS View: I_ABAPApplCompText\nBusiness Label: ABAP Application Component Text\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABAPApplCompText' (ABAP Application Component Text) belonging to CA.\nAttributes & Measures:\n  - Language (CHAR): Language\n  - ABAPApplicationComponent (CHAR): ABAPApplicationComponent\n  - ABAPApplicationComponentName (CHAR): ABAPApplicationComponentName\n  - _ABAPApplicationComponent (CHAR): _ABAPApplicationComponent\n  - _Language (CHAR): _Language\nAssociations & Relationships:\n  - _Language ->  [0..1] ON "
+    },
+    "1": {
+      "id": 1,
+      "cds_name": "I_ABAPApplicationComponent",
+      "name": "I_ABAPApplicationComponent",
+      "label": "ABAP Application Component",
+      "description": "ABAP Application Component",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 11,
+      "association_count": 0,
+      "fields": [
+        "ABAPApplicationComponent",
+        "ABAPApplCompRespUser",
+        "CreationDate",
+        "CreationTime",
+        "LastChangedByUser",
+        "LastChangeDate",
+        "LastChangeTime",
+        "ABAPApplCompExternalID",
+        "ABAPApplCompIsVisible",
+        "ABAPApplCompIsSelectable",
+        "_Text"
+      ],
+      "associations": [],
+      "document_text": "CDS View: I_ABAPApplicationComponent\nBusiness Label: ABAP Application Component\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABAPApplicationComponent' (ABAP Application Component) belonging to CA.\nAttributes & Measures:\n  - ABAPApplicationComponent (CHAR): ABAPApplicationComponent\n  - ABAPApplCompRespUser (CHAR): ABAPApplCompRespUser\n  - CreationDate (CHAR): CreationDate\n  - CreationTime (CHAR): CreationTime\n  - LastChangedByUser (CHAR): LastChangedByUser\n  - LastChangeDate (CHAR): LastChangeDate\n  - LastChangeTime (CHAR): LastChangeTime\n  - ABAPApplCompExternalID (CHAR): ABAPApplCompExternalID\n  - ABAPApplCompIsVisible (CHAR): ABAPApplCompIsVisible\n  - ABAPApplCompIsSelectable (CHAR): ABAPApplCompIsSelectable\n  - _Text (CHAR): _Text"
+    },
+    "2": {
+      "id": 2,
+      "cds_name": "I_ABAPObjectDirectoryEntry",
+      "name": "I_ABAPObjectDirectoryEntry",
+      "label": "ABAP Object Directory Entry",
+      "description": "ABAP Object Directory Entry",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 13,
+      "association_count": 2,
+      "fields": [
+        "ABAPObjectCategory",
+        "ABAPObjectType",
+        "ABAPObject",
+        "ABAPSourceSystem",
+        "ABAPObjectResponsibleUser",
+        "ABAPPackage",
+        "ABAPObjectGenerationCode",
+        "ABAPObjectMasterLanguage",
+        "ABAPObjectDeploymentTarget",
+        "ABAPObjectIsDeleted",
+        "CreationDate",
+        "_ABAPPackage",
+        "_ABAPObjectMasterLanguage"
+      ],
+      "associations": [
+        {
+          "target": "I_ABAPPackage",
+          "alias": "_ABAPPackage"
+        },
+        {
+          "target": "I_Language",
+          "alias": "_ABAPObjectMasterLanguage"
+        }
+      ],
+      "document_text": "CDS View: I_ABAPObjectDirectoryEntry\nBusiness Label: ABAP Object Directory Entry\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABAPObjectDirectoryEntry' (ABAP Object Directory Entry) belonging to CA.\nAttributes & Measures:\n  - ABAPObjectCategory (CHAR): ABAPObjectCategory\n  - ABAPObjectType (CHAR): ABAPObjectType\n  - ABAPObject (CHAR): ABAPObject\n  - ABAPSourceSystem (CHAR): ABAPSourceSystem\n  - ABAPObjectResponsibleUser (CHAR): ABAPObjectResponsibleUser\n  - ABAPPackage (CHAR): ABAPPackage\n  - ABAPObjectGenerationCode (CHAR): ABAPObjectGenerationCode\n  - ABAPObjectMasterLanguage (CHAR): ABAPObjectMasterLanguage\n  - ABAPObjectDeploymentTarget (CHAR): ABAPObjectDeploymentTarget\n  - ABAPObjectIsDeleted (CHAR): ABAPObjectIsDeleted\n  - CreationDate (CHAR): CreationDate\n  - _ABAPPackage (CHAR): _ABAPPackage\n  - _ABAPObjectMasterLanguage (CHAR): _ABAPObjectMasterLanguage\nAssociations & Relationships:\n  - _ABAPPackage ->  [0..1] ON \n  - _ABAPObjectMasterLanguage ->  [0..1] ON "
+    },
+    "3": {
+      "id": 3,
+      "cds_name": "I_ABAPPackage",
+      "name": "I_ABAPPackage",
+      "label": "ABAP Package",
+      "description": "ABAP Package",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 14,
+      "association_count": 2,
+      "fields": [
+        "ABAPPackage",
+        "ABAPPackageResponsibleUser",
+        "ABAPSoftwareComponent",
+        "ABAPApplicationComponent",
+        "ABAPNamespace",
+        "ABAPPackageTargetEnvironment",
+        "CreatedByUser",
+        "CreationDate",
+        "LastChangedByUser",
+        "LastChangeDate",
+        "ABAPLanguageVersion",
+        "_ABAPSoftwareComponent",
+        "_ABAPApplicationComponent",
+        "_Text"
+      ],
+      "associations": [
+        {
+          "target": "I_ABAPSoftwareComponent",
+          "alias": "_ABAPSoftwareComponent"
+        },
+        {
+          "target": "I_ABAPApplicationComponent",
+          "alias": "_ABAPApplicationComponent"
+        }
+      ],
+      "document_text": "CDS View: I_ABAPPackage\nBusiness Label: ABAP Package\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABAPPackage' (ABAP Package) belonging to CA.\nAttributes & Measures:\n  - ABAPPackage (CHAR): ABAPPackage\n  - ABAPPackageResponsibleUser (CHAR): ABAPPackageResponsibleUser\n  - ABAPSoftwareComponent (CHAR): ABAPSoftwareComponent\n  - ABAPApplicationComponent (CHAR): ABAPApplicationComponent\n  - ABAPNamespace (CHAR): ABAPNamespace\n  - ABAPPackageTargetEnvironment (CHAR): ABAPPackageTargetEnvironment\n  - CreatedByUser (CHAR): CreatedByUser\n  - CreationDate (CHAR): CreationDate\n  - LastChangedByUser (CHAR): LastChangedByUser\n  - LastChangeDate (CHAR): LastChangeDate\n  - ABAPLanguageVersion (CHAR): ABAPLanguageVersion\n  - _ABAPSoftwareComponent (CHAR): _ABAPSoftwareComponent\n  - _ABAPApplicationComponent (CHAR): _ABAPApplicationComponent\n  - _Text (CHAR): _Text\nAssociations & Relationships:\n  - _ABAPSoftwareComponent ->  [0..1] ON \n  - _ABAPApplicationComponent ->  [0..1] ON "
+    },
+    "4": {
+      "id": 4,
+      "cds_name": "I_ABAPPackageText",
+      "name": "I_ABAPPackageText",
+      "label": "ABAP Package Text",
+      "description": "ABAP Package Text",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 5,
+      "association_count": 1,
+      "fields": [
+        "ABAPPackage",
+        "Language",
+        "ABAPPackageName",
+        "_ABAPPackage",
+        "_Language"
+      ],
+      "associations": [
+        {
+          "target": "I_Language",
+          "alias": "_Language"
+        }
+      ],
+      "document_text": "CDS View: I_ABAPPackageText\nBusiness Label: ABAP Package Text\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABAPPackageText' (ABAP Package Text) belonging to CA.\nAttributes & Measures:\n  - ABAPPackage (CHAR): ABAPPackage\n  - Language (CHAR): Language\n  - ABAPPackageName (CHAR): ABAPPackageName\n  - _ABAPPackage (CHAR): _ABAPPackage\n  - _Language (CHAR): _Language\nAssociations & Relationships:\n  - _Language ->  [0..1] ON "
+    },
+    "5": {
+      "id": 5,
+      "cds_name": "I_ABAPSoftwareComponent",
+      "name": "I_ABAPSoftwareComponent",
+      "label": "ABAP Software Component",
+      "description": "ABAP Software Component",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 4,
+      "association_count": 0,
+      "fields": [
+        "ABAPSoftwareComponent",
+        "ABAPSoftwareComponentType",
+        "ABAPSoftwareComponentVersion",
+        "_Text"
+      ],
+      "associations": [],
+      "document_text": "CDS View: I_ABAPSoftwareComponent\nBusiness Label: ABAP Software Component\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABAPSoftwareComponent' (ABAP Software Component) belonging to CA.\nAttributes & Measures:\n  - ABAPSoftwareComponent (CHAR): ABAPSoftwareComponent\n  - ABAPSoftwareComponentType (CHAR): ABAPSoftwareComponentType\n  - ABAPSoftwareComponentVersion (CHAR): ABAPSoftwareComponentVersion\n  - _Text (CHAR): _Text"
+    },
+    "6": {
+      "id": 6,
+      "cds_name": "I_ABAPSoftwareComponentText",
+      "name": "I_ABAPSoftwareComponentText",
+      "label": "ABAP Software Component Text",
+      "description": "ABAP Software Component Text",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 5,
+      "association_count": 1,
+      "fields": [
+        "ABAPSoftwareComponent",
+        "Language",
+        "ABAPSoftwareComponentName",
+        "_ABAPSoftwareComponent",
+        "_Language"
+      ],
+      "associations": [
+        {
+          "target": "I_Language",
+          "alias": "_Language"
+        }
+      ],
+      "document_text": "CDS View: I_ABAPSoftwareComponentText\nBusiness Label: ABAP Software Component Text\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABAPSoftwareComponentText' (ABAP Software Component Text) belonging to CA.\nAttributes & Measures:\n  - ABAPSoftwareComponent (CHAR): ABAPSoftwareComponent\n  - Language (CHAR): Language\n  - ABAPSoftwareComponentName (CHAR): ABAPSoftwareComponentName\n  - _ABAPSoftwareComponent (CHAR): _ABAPSoftwareComponent\n  - _Language (CHAR): _Language\nAssociations & Relationships:\n  - _Language ->  [0..1] ON "
+    },
+    "7": {
+      "id": 7,
+      "cds_name": "I_ABCIndicator",
+      "name": "I_ABCIndicator",
+      "label": "ABC Indicator",
+      "description": "ABC Indicator",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 7,
+      "association_count": 1,
+      "fields": [
+        "I_ABCIndicator",
+        "t370c",
+        "ABCIndicator",
+        "initial",
+        "then",
+        "ABCIndicatorCodeOID",
+        "_Text"
+      ],
+      "associations": [
+        {
+          "target": "I_ABCIndicatorText",
+          "alias": "_Text"
+        }
+      ],
+      "document_text": "CDS View: I_ABCIndicator\nBusiness Label: ABC Indicator\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABCIndicator' (ABC Indicator) belonging to CA.\nAttributes & Measures:\n  - I_ABCIndicator (CHAR): I_ABCIndicator\n  - t370c (CHAR): t370c\n  - ABCIndicator (CHAR): ABCIndicator\n  - initial (CHAR): initial\n  - then (CHAR): then\n  - ABCIndicatorCodeOID (CHAR): ABCIndicatorCodeOID\n  - _Text (CHAR): _Text\nAssociations & Relationships:\n  - _Text ->  [0..1] ON "
+    },
+    "8": {
+      "id": 8,
+      "cds_name": "I_ABCIndicatorText",
+      "name": "I_ABCIndicatorText",
+      "label": "ABC Indicator - Text",
+      "description": "ABC Indicator - Text",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 10,
+      "association_count": 0,
+      "fields": [
+        "TEXT",
+        "CUSTOMIZING",
+        "S",
+        "A",
+        "t370c_t",
+        "ABCIndicator",
+        "Language",
+        "ABCIndicatorDesc",
+        "_ABCIndicator",
+        "_Language"
+      ],
+      "associations": [],
+      "document_text": "CDS View: I_ABCIndicatorText\nBusiness Label: ABC Indicator - Text\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABCIndicatorText' (ABC Indicator - Text) belonging to CA.\nAttributes & Measures:\n  - TEXT (CHAR): TEXT\n  - CUSTOMIZING (CHAR): CUSTOMIZING\n  - S (CHAR): S\n  - A (CHAR): A\n  - t370c_t (CHAR): t370c_t\n  - ABCIndicator (CHAR): ABCIndicator\n  - Language (CHAR): Language\n  - ABCIndicatorDesc (CHAR): ABCIndicatorDesc\n  - _ABCIndicator (CHAR): _ABCIndicator\n  - _Language (CHAR): _Language"
+    },
+    "9": {
+      "id": 9,
+      "cds_name": "I_ABOPAvailyChgLogFltr",
+      "name": "I_ABOPAvailyChgLogFltr",
+      "label": "BOP Variant Availability Chg Log Filters",
+      "description": "BOP Variant Availability Chg Log Filters",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 12,
+      "association_count": 3,
+      "fields": [
+        "A",
+        "M",
+        "MASTER",
+        "I_ABOPAvailyChgLogFltr",
+        "atp_bop_acl_fltr",
+        "system_language",
+        "AvailyChgLogFltrAssgmtUUID",
+        "ABOPVariantUUID",
+        "AvailyChgLogFltrCategory",
+        "_Variant",
+        "_ACLFltrCat",
+        "_ACLFltrCatText"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPVariant",
+          "alias": "_Variant"
+        },
+        {
+          "target": "I_AvailyChgLogFltrCat",
+          "alias": "_ACLFltrCat"
+        },
+        {
+          "target": "I_AvailyChgLogFltrCatText",
+          "alias": "_ACLFltrCatText"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPAvailyChgLogFltr\nBusiness Label: BOP Variant Availability Chg Log Filters\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPAvailyChgLogFltr' (BOP Variant Availability Chg Log Filters) belonging to CA.\nAttributes & Measures:\n  - A (CHAR): A\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPAvailyChgLogFltr (CHAR): I_ABOPAvailyChgLogFltr\n  - atp_bop_acl_fltr (CHAR): atp_bop_acl_fltr\n  - system_language (CHAR): system_language\n  - AvailyChgLogFltrAssgmtUUID (CHAR): AvailyChgLogFltrAssgmtUUID\n  - ABOPVariantUUID (CHAR): ABOPVariantUUID\n  - AvailyChgLogFltrCategory (CHAR): AvailyChgLogFltrCategory\n  - _Variant (CHAR): _Variant\n  - _ACLFltrCat (CHAR): _ACLFltrCat\n  - _ACLFltrCatText (CHAR): _ACLFltrCatText\nAssociations & Relationships:\n  - _Variant ->  [0..1] ON \n  - _ACLFltrCat ->  [0..1] ON \n  - _ACLFltrCatText ->  [0..1] ON "
+    },
+    "10": {
+      "id": 10,
+      "cds_name": "I_ABOPAvailyChgLogFltrTP",
+      "name": "I_ABOPAvailyChgLogFltrTP",
+      "label": "BOP Variant ACL - TP",
+      "description": "BOP Variant ACL - TP",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 12,
+      "association_count": 1,
+      "fields": [
+        "true",
+        "C",
+        "M",
+        "MASTER",
+        "I_ABOPAvailyChgLogFltrTP",
+        "I_ABOPAvailyChgLogFltr",
+        "AvailyChgLogFltrAssgmtUUID",
+        "ABOPVariantUUID",
+        "AvailyChgLogFltrCategory",
+        "_Variant",
+        "_ACLFltrCat",
+        "_ACLFltrCatText"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPVariantTP",
+          "alias": "_Variant"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPAvailyChgLogFltrTP\nBusiness Label: BOP Variant ACL - TP\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPAvailyChgLogFltrTP' (BOP Variant ACL - TP) belonging to CA.\nAttributes & Measures:\n  - true (CHAR): true\n  - C (CHAR): C\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPAvailyChgLogFltrTP (CHAR): I_ABOPAvailyChgLogFltrTP\n  - I_ABOPAvailyChgLogFltr (CHAR): I_ABOPAvailyChgLogFltr\n  - AvailyChgLogFltrAssgmtUUID (CHAR): AvailyChgLogFltrAssgmtUUID\n  - ABOPVariantUUID (CHAR): ABOPVariantUUID\n  - AvailyChgLogFltrCategory (CHAR): AvailyChgLogFltrCategory\n  - _Variant (CHAR): _Variant\n  - _ACLFltrCat (CHAR): _ACLFltrCat\n  - _ACLFltrCatText (CHAR): _ACLFltrCatText\nAssociations & Relationships:\n  - _Variant ->  [0..1] ON "
+    },
+    "11": {
+      "id": 11,
+      "cds_name": "I_ABOPBusinessScenario",
+      "name": "I_ABOPBusinessScenario",
+      "label": "All possible BOP business scenarios",
+      "description": "All possible BOP business scenarios",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 10,
+      "association_count": 0,
+      "fields": [
+        "D",
+        "M",
+        "MASTER",
+        "I_ABOPBusinessScenario",
+        "P_ABOPBusinessScenario",
+        "SalesDocumentsAreIncluded",
+        "StockTransportOrdsAreIncluded",
+        "ABOPExecutionMethod",
+        "ABOPCheckingRule",
+        "ABOPCheckingRuleText"
+      ],
+      "associations": [],
+      "document_text": "CDS View: I_ABOPBusinessScenario\nBusiness Label: All possible BOP business scenarios\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPBusinessScenario' (All possible BOP business scenarios) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPBusinessScenario (CHAR): I_ABOPBusinessScenario\n  - P_ABOPBusinessScenario (CHAR): P_ABOPBusinessScenario\n  - SalesDocumentsAreIncluded (CHAR): SalesDocumentsAreIncluded\n  - StockTransportOrdsAreIncluded (CHAR): StockTransportOrdsAreIncluded\n  - ABOPExecutionMethod (CHAR): ABOPExecutionMethod\n  - ABOPCheckingRule (CHAR): ABOPCheckingRule\n  - ABOPCheckingRuleText (CHAR): ABOPCheckingRuleText"
+    },
+    "12": {
+      "id": 12,
+      "cds_name": "I_ABOPCheckingRule",
+      "name": "I_ABOPCheckingRule",
+      "label": "Domain value ABOPChecking Rule",
+      "description": "Domain value ABOPChecking Rule",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 8,
+      "association_count": 1,
+      "fields": [
+        "B",
+        "L",
+        "META",
+        "I_ABOPCheckingRule",
+        "typ",
+        "system_language",
+        "ABOPCheckingRule",
+        "_CheckingRuleText"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPCheckingRuleText",
+          "alias": "_CheckingRuleText"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPCheckingRule\nBusiness Label: Domain value ABOPChecking Rule\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPCheckingRule' (Domain value ABOPChecking Rule) belonging to CA.\nAttributes & Measures:\n  - B (CHAR): B\n  - L (CHAR): L\n  - META (CHAR): META\n  - I_ABOPCheckingRule (CHAR): I_ABOPCheckingRule\n  - typ (CHAR): typ\n  - system_language (CHAR): system_language\n  - ABOPCheckingRule (CHAR): ABOPCheckingRule\n  - _CheckingRuleText (CHAR): _CheckingRuleText\nAssociations & Relationships:\n  - _CheckingRuleText ->  [0..1] ON "
+    },
+    "13": {
+      "id": 13,
+      "cds_name": "I_ABOPCheckingRuleText",
+      "name": "I_ABOPCheckingRuleText",
+      "label": "Domain value ABOPChecking Rule with text",
+      "description": "Domain value ABOPChecking Rule with text",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 10,
+      "association_count": 1,
+      "fields": [
+        "TEXT",
+        "B",
+        "L",
+        "CUSTOMIZING",
+        "I_ABOPCheckingRuleText",
+        "txt",
+        "ABOPCheckingRule",
+        "Language",
+        "ABOPCheckingRuleText",
+        "_Language"
+      ],
+      "associations": [
+        {
+          "target": "I_Language",
+          "alias": "_Language"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPCheckingRuleText\nBusiness Label: Domain value ABOPChecking Rule with text\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPCheckingRuleText' (Domain value ABOPChecking Rule with text) belonging to CA.\nAttributes & Measures:\n  - TEXT (CHAR): TEXT\n  - B (CHAR): B\n  - L (CHAR): L\n  - CUSTOMIZING (CHAR): CUSTOMIZING\n  - I_ABOPCheckingRuleText (CHAR): I_ABOPCheckingRuleText\n  - txt (CHAR): txt\n  - ABOPCheckingRule (CHAR): ABOPCheckingRule\n  - Language (CHAR): Language\n  - ABOPCheckingRuleText (CHAR): ABOPCheckingRuleText\n  - _Language (CHAR): _Language\nAssociations & Relationships:\n  - _Language ->  [0..1] ON "
+    },
+    "14": {
+      "id": 14,
+      "cds_name": "I_ABOPCheckingRuleValueHelp",
+      "name": "I_ABOPCheckingRuleValueHelp",
+      "label": "Value Help for ABOP Checking Rule",
+      "description": "Value Help for ABOP Checking Rule",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 10,
+      "association_count": 0,
+      "fields": [
+        "VALUE_HELP",
+        "C",
+        "M",
+        "MASTER",
+        "I_ABOPCheckingRuleValueHelp",
+        "I_ABOPPurchasingDocType",
+        "ABOPCheckingRule",
+        "ABOPCheckingRuleText",
+        "dd07t",
+        "mandt"
+      ],
+      "associations": [],
+      "document_text": "CDS View: I_ABOPCheckingRuleValueHelp\nBusiness Label: Value Help for ABOP Checking Rule\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPCheckingRuleValueHelp' (Value Help for ABOP Checking Rule) belonging to CA.\nAttributes & Measures:\n  - VALUE_HELP (CHAR): VALUE_HELP\n  - C (CHAR): C\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPCheckingRuleValueHelp (CHAR): I_ABOPCheckingRuleValueHelp\n  - I_ABOPPurchasingDocType (CHAR): I_ABOPPurchasingDocType\n  - ABOPCheckingRule (CHAR): ABOPCheckingRule\n  - ABOPCheckingRuleText (CHAR): ABOPCheckingRuleText\n  - dd07t (CHAR): dd07t\n  - mandt (CHAR): mandt"
+    },
+    "15": {
+      "id": 15,
+      "cds_name": "I_ABOPCustomSort",
+      "name": "I_ABOPCustomSort",
+      "label": "ABOP Custom Sort Sequence",
+      "description": "ABOP Custom Sort Sequence",
+      "domain": "SD",
+      "key_fields": [],
+      "field_count": 22,
+      "association_count": 4,
+      "fields": [
+        "true",
+        "BUSINESS_OBJECT",
+        "A",
+        "M",
+        "MASTER",
+        "I_ABOPCustomSort",
+        "atp_bop_css",
+        "ABOPCustomSortUUID",
+        "ABOPCustomSortName",
+        "ABOPSortAttribute",
+        "ABOPSortAttributeFldPathUUID",
+        "ABOPSortAttributeFldPathIntID",
+        "IsDefaultSortSequence",
+        "CreationDateTime",
+        "CreatedByUser",
+        "LastChangeDateTime",
+        "LastChangedByUser",
+        "LastUsageUTCDateTime",
+        "_CustomSortVal",
+        "_Text",
+        "_CreatedByUser",
+        "_LastChangedByUser"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPCustomSortVal",
+          "alias": "_CustomSortVal"
+        },
+        {
+          "target": "I_ABOPCustomSortText",
+          "alias": "_Text"
+        },
+        {
+          "target": "I_User",
+          "alias": "_CreatedByUser"
+        },
+        {
+          "target": "I_User",
+          "alias": "_LastChangedByUser"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPCustomSort\nBusiness Label: ABOP Custom Sort Sequence\nFunctional Domain: SD\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPCustomSort' (ABOP Custom Sort Sequence) belonging to SD.\nAttributes & Measures:\n  - true (CHAR): true\n  - BUSINESS_OBJECT (CHAR): BUSINESS_OBJECT\n  - A (CHAR): A\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPCustomSort (CHAR): I_ABOPCustomSort\n  - atp_bop_css (CHAR): atp_bop_css\n  - ABOPCustomSortUUID (CHAR): ABOPCustomSortUUID\n  - ABOPCustomSortName (CHAR): ABOPCustomSortName\n  - ABOPSortAttribute (CHAR): ABOPSortAttribute\n  - ABOPSortAttributeFldPathUUID (CHAR): ABOPSortAttributeFldPathUUID\n  - ABOPSortAttributeFldPathIntID (CHAR): ABOPSortAttributeFldPathIntID\n  - IsDefaultSortSequence (CHAR): IsDefaultSortSequence\n  - CreationDateTime (CHAR): CreationDateTime\n  - CreatedByUser (CHAR): CreatedByUser\n  - LastChangeDateTime (CHAR): LastChangeDateTime\n  - LastChangedByUser (CHAR): LastChangedByUser\n  - LastUsageUTCDateTime (CHAR): LastUsageUTCDateTime\n  - _CustomSortVal (CHAR): _CustomSortVal\n  - _Text (CHAR): _Text\n  - _CreatedByUser (CHAR): _CreatedByUser\n  - _LastChangedByUser (CHAR): _LastChangedByUser\nAssociations & Relationships:\n  - _CustomSortVal ->  [0..1] ON \n  - _Text ->  [0..1] ON \n  - _CreatedByUser ->  [0..1] ON \n  - _LastChangedByUser ->  [0..1] ON "
+    },
+    "16": {
+      "id": 16,
+      "cds_name": "I_ABOPCustomSortText",
+      "name": "I_ABOPCustomSortText",
+      "label": "ABOP Custom Sort Text",
+      "description": "ABOP Custom Sort Text",
+      "domain": "SD",
+      "key_fields": [],
+      "field_count": 11,
+      "association_count": 2,
+      "fields": [
+        "TEXT",
+        "A",
+        "M",
+        "MASTER",
+        "I_ABOPCustomSortText",
+        "atp_bop_csst",
+        "ABOPCustomSortUUID",
+        "Language",
+        "ABOPCustomSortDescription",
+        "_CustomSort",
+        "_Language"
+      ],
+      "associations": [
+        {
+          "target": "I_Language",
+          "alias": "_Language"
+        },
+        {
+          "target": "I_ABOPCustomSort",
+          "alias": "_CustomSort"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPCustomSortText\nBusiness Label: ABOP Custom Sort Text\nFunctional Domain: SD\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPCustomSortText' (ABOP Custom Sort Text) belonging to SD.\nAttributes & Measures:\n  - TEXT (CHAR): TEXT\n  - A (CHAR): A\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPCustomSortText (CHAR): I_ABOPCustomSortText\n  - atp_bop_csst (CHAR): atp_bop_csst\n  - ABOPCustomSortUUID (CHAR): ABOPCustomSortUUID\n  - Language (CHAR): Language\n  - ABOPCustomSortDescription (CHAR): ABOPCustomSortDescription\n  - _CustomSort (CHAR): _CustomSort\n  - _Language (CHAR): _Language\nAssociations & Relationships:\n  - _Language ->  [0..1] ON \n  - _CustomSort ->  [0..1] ON "
+    },
+    "17": {
+      "id": 17,
+      "cds_name": "I_ABOPCustomSortTextTP",
+      "name": "I_ABOPCustomSortTextTP",
+      "label": "Description for Custom Sort",
+      "description": "Description for Custom Sort",
+      "domain": "SD",
+      "key_fields": [],
+      "field_count": 12,
+      "association_count": 1,
+      "fields": [
+        "TEXT",
+        "true",
+        "C",
+        "M",
+        "MASTER",
+        "I_ABOPCustomSortTextTP",
+        "I_ABOPCustomSortText",
+        "ABOPCustomSortUUID",
+        "Language",
+        "ABOPCustomSortDescription",
+        "_CustomSort",
+        "_Language"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPCustomSortTP",
+          "alias": "_CustomSort"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPCustomSortTextTP\nBusiness Label: Description for Custom Sort\nFunctional Domain: SD\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPCustomSortTextTP' (Description for Custom Sort) belonging to SD.\nAttributes & Measures:\n  - TEXT (CHAR): TEXT\n  - true (CHAR): true\n  - C (CHAR): C\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPCustomSortTextTP (CHAR): I_ABOPCustomSortTextTP\n  - I_ABOPCustomSortText (CHAR): I_ABOPCustomSortText\n  - ABOPCustomSortUUID (CHAR): ABOPCustomSortUUID\n  - Language (CHAR): Language\n  - ABOPCustomSortDescription (CHAR): ABOPCustomSortDescription\n  - _CustomSort (CHAR): _CustomSort\n  - _Language (CHAR): _Language\nAssociations & Relationships:\n  - _CustomSort ->  [0..1] ON "
+    },
+    "18": {
+      "id": 18,
+      "cds_name": "I_ABOPCustomSortTP",
+      "name": "I_ABOPCustomSortTP",
+      "label": "ABOP Custom Sort Transactional Processing",
+      "description": "ABOP Custom Sort Transactional Processing",
+      "domain": "SD",
+      "key_fields": [],
+      "field_count": 22,
+      "association_count": 2,
+      "fields": [
+        "true",
+        "C",
+        "M",
+        "MASTER",
+        "I_ABOPCustomSortTP",
+        "I_ABOPCustomSort",
+        "ABOPCustomSortUUID",
+        "ABOPCustomSortName",
+        "ABOPSortAttribute",
+        "ABOPSortAttributeFldPathUUID",
+        "ABOPSortAttributeFldPathIntID",
+        "IsDefaultSortSequence",
+        "CreationDateTime",
+        "CreatedByUser",
+        "LastChangeDateTime",
+        "LastChangedByUser",
+        "LastUsageUTCDateTime",
+        "NumberOfRelatedABOPSegments",
+        "_Value",
+        "_Text",
+        "_CreatedByUser",
+        "_LastChangedByUser"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPCustomSortValTP",
+          "alias": "_Value"
+        },
+        {
+          "target": "I_ABOPCustomSortTextTP",
+          "alias": "_Text"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPCustomSortTP\nBusiness Label: ABOP Custom Sort Transactional Processing\nFunctional Domain: SD\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPCustomSortTP' (ABOP Custom Sort Transactional Processing) belonging to SD.\nAttributes & Measures:\n  - true (CHAR): true\n  - C (CHAR): C\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPCustomSortTP (CHAR): I_ABOPCustomSortTP\n  - I_ABOPCustomSort (CHAR): I_ABOPCustomSort\n  - ABOPCustomSortUUID (CHAR): ABOPCustomSortUUID\n  - ABOPCustomSortName (CHAR): ABOPCustomSortName\n  - ABOPSortAttribute (CHAR): ABOPSortAttribute\n  - ABOPSortAttributeFldPathUUID (CHAR): ABOPSortAttributeFldPathUUID\n  - ABOPSortAttributeFldPathIntID (CHAR): ABOPSortAttributeFldPathIntID\n  - IsDefaultSortSequence (CHAR): IsDefaultSortSequence\n  - CreationDateTime (CHAR): CreationDateTime\n  - CreatedByUser (CHAR): CreatedByUser\n  - LastChangeDateTime (CHAR): LastChangeDateTime\n  - LastChangedByUser (CHAR): LastChangedByUser\n  - LastUsageUTCDateTime (CHAR): LastUsageUTCDateTime\n  - NumberOfRelatedABOPSegments (CHAR): NumberOfRelatedABOPSegments\n  - _Value (CHAR): _Value\n  - _Text (CHAR): _Text\n  - _CreatedByUser (CHAR): _CreatedByUser\n  - _LastChangedByUser (CHAR): _LastChangedByUser\nAssociations & Relationships:\n  - _Value ->  [0..1] ON \n  - _Text ->  [0..1] ON "
+    },
+    "19": {
+      "id": 19,
+      "cds_name": "I_ABOPCustomSortVal",
+      "name": "I_ABOPCustomSortVal",
+      "label": "ABOP Custom Sort Sequence Values",
+      "description": "ABOP Custom Sort Sequence Values",
+      "domain": "SD",
+      "key_fields": [],
+      "field_count": 13,
+      "association_count": 1,
+      "fields": [
+        "A",
+        "M",
+        "MASTER",
+        "I_ABOPCustomSortVal",
+        "atp_bop_css_val",
+        "ABOPCustomSortValUUID",
+        "ABOPCustomSortUUID",
+        "ABOPSortAttributeValue",
+        "ABOPSortAttributeIntValue",
+        "BusPrpsOfRefdValueIsCompleted",
+        "ABOPSortPosition",
+        "ABOPSortPositionIsLow",
+        "_CustomSort"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPCustomSort",
+          "alias": "_CustomSort"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPCustomSortVal\nBusiness Label: ABOP Custom Sort Sequence Values\nFunctional Domain: SD\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPCustomSortVal' (ABOP Custom Sort Sequence Values) belonging to SD.\nAttributes & Measures:\n  - A (CHAR): A\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPCustomSortVal (CHAR): I_ABOPCustomSortVal\n  - atp_bop_css_val (CHAR): atp_bop_css_val\n  - ABOPCustomSortValUUID (CHAR): ABOPCustomSortValUUID\n  - ABOPCustomSortUUID (CHAR): ABOPCustomSortUUID\n  - ABOPSortAttributeValue (CHAR): ABOPSortAttributeValue\n  - ABOPSortAttributeIntValue (CHAR): ABOPSortAttributeIntValue\n  - BusPrpsOfRefdValueIsCompleted (CHAR): BusPrpsOfRefdValueIsCompleted\n  - ABOPSortPosition (CHAR): ABOPSortPosition\n  - ABOPSortPositionIsLow (CHAR): ABOPSortPositionIsLow\n  - _CustomSort (CHAR): _CustomSort\nAssociations & Relationships:\n  - _CustomSort ->  [0..1] ON "
+    },
+    "20": {
+      "id": 20,
+      "cds_name": "I_ABOPCustomSortValTP",
+      "name": "I_ABOPCustomSortValTP",
+      "label": "Custom Sort Attribute Values with Priorities",
+      "description": "Custom Sort Attribute Values with Priorities",
+      "domain": "SD",
+      "key_fields": [],
+      "field_count": 14,
+      "association_count": 1,
+      "fields": [
+        "true",
+        "C",
+        "M",
+        "MASTER",
+        "I_ABOPCustomSortValTP",
+        "I_ABOPCustomSortVal",
+        "ABOPCustomSortValUUID",
+        "ABOPCustomSortUUID",
+        "ABOPSortAttributeValue",
+        "ABOPSortAttributeIntValue",
+        "BusPrpsOfRefdValueIsCompleted",
+        "ABOPSortPosition",
+        "ABOPSortPositionIsLow",
+        "_CustomSort"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPCustomSortTP",
+          "alias": "_CustomSort"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPCustomSortValTP\nBusiness Label: Custom Sort Attribute Values with Priorities\nFunctional Domain: SD\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPCustomSortValTP' (Custom Sort Attribute Values with Priorities) belonging to SD.\nAttributes & Measures:\n  - true (CHAR): true\n  - C (CHAR): C\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPCustomSortValTP (CHAR): I_ABOPCustomSortValTP\n  - I_ABOPCustomSortVal (CHAR): I_ABOPCustomSortVal\n  - ABOPCustomSortValUUID (CHAR): ABOPCustomSortValUUID\n  - ABOPCustomSortUUID (CHAR): ABOPCustomSortUUID\n  - ABOPSortAttributeValue (CHAR): ABOPSortAttributeValue\n  - ABOPSortAttributeIntValue (CHAR): ABOPSortAttributeIntValue\n  - BusPrpsOfRefdValueIsCompleted (CHAR): BusPrpsOfRefdValueIsCompleted\n  - ABOPSortPosition (CHAR): ABOPSortPosition\n  - ABOPSortPositionIsLow (CHAR): ABOPSortPositionIsLow\n  - _CustomSort (CHAR): _CustomSort\nAssociations & Relationships:\n  - _CustomSort ->  [0..1] ON "
+    },
+    "21": {
+      "id": 21,
+      "cds_name": "I_ABOPCustomSortVH",
+      "name": "I_ABOPCustomSortVH",
+      "label": "Value Help for ABOP Custom Sort Name",
+      "description": "Value Help for ABOP Custom Sort Name",
+      "domain": "SD",
+      "key_fields": [],
+      "field_count": 15,
+      "association_count": 1,
+      "fields": [
+        "A",
+        "M",
+        "MASTER",
+        "I_ABOPCustomSortVH",
+        "atp_bop_css",
+        "system_language",
+        "ABOPCustomSortName",
+        "ABOPCustomSortUUID",
+        "ABOPSortAttribute",
+        "ABOPSortAttributeFldPathUUID",
+        "CreationDateTime",
+        "CreatedByUser",
+        "LastChangeDateTime",
+        "LastChangedByUser",
+        "_Text"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPCustomSortText",
+          "alias": "_Text"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPCustomSortVH\nBusiness Label: Value Help for ABOP Custom Sort Name\nFunctional Domain: SD\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPCustomSortVH' (Value Help for ABOP Custom Sort Name) belonging to SD.\nAttributes & Measures:\n  - A (CHAR): A\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPCustomSortVH (CHAR): I_ABOPCustomSortVH\n  - atp_bop_css (CHAR): atp_bop_css\n  - system_language (CHAR): system_language\n  - ABOPCustomSortName (CHAR): ABOPCustomSortName\n  - ABOPCustomSortUUID (CHAR): ABOPCustomSortUUID\n  - ABOPSortAttribute (CHAR): ABOPSortAttribute\n  - ABOPSortAttributeFldPathUUID (CHAR): ABOPSortAttributeFldPathUUID\n  - CreationDateTime (CHAR): CreationDateTime\n  - CreatedByUser (CHAR): CreatedByUser\n  - LastChangeDateTime (CHAR): LastChangeDateTime\n  - LastChangedByUser (CHAR): LastChangedByUser\n  - _Text (CHAR): _Text\nAssociations & Relationships:\n  - _Text ->  [0..1] ON "
+    },
+    "22": {
+      "id": 22,
+      "cds_name": "I_ABOPCustSortUsageInSegment",
+      "name": "I_ABOPCustSortUsageInSegment",
+      "label": "Usage of custom sort in segment",
+      "description": "Usage of custom sort in segment",
+      "domain": "SD",
+      "key_fields": [],
+      "field_count": 8,
+      "association_count": 0,
+      "fields": [
+        "C",
+        "M",
+        "MASTER",
+        "I_ABOPCustSortUsageInSegment",
+        "I_ABOPSegmentSortTP",
+        "ABOPCustomSortUUID",
+        "ABOPSegmentUUID",
+        "ABOPSegmentName"
+      ],
+      "associations": [],
+      "document_text": "CDS View: I_ABOPCustSortUsageInSegment\nBusiness Label: Usage of custom sort in segment\nFunctional Domain: SD\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPCustSortUsageInSegment' (Usage of custom sort in segment) belonging to SD.\nAttributes & Measures:\n  - C (CHAR): C\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPCustSortUsageInSegment (CHAR): I_ABOPCustSortUsageInSegment\n  - I_ABOPSegmentSortTP (CHAR): I_ABOPSegmentSortTP\n  - ABOPCustomSortUUID (CHAR): ABOPCustomSortUUID\n  - ABOPSegmentUUID (CHAR): ABOPSegmentUUID\n  - ABOPSegmentName (CHAR): ABOPSegmentName"
+    },
+    "23": {
+      "id": 23,
+      "cds_name": "I_ABOPExceptionBehaviorText",
+      "name": "I_ABOPExceptionBehaviorText",
+      "label": "Exceptional behavior text in BOP",
+      "description": "Exceptional behavior text in BOP",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 10,
+      "association_count": 1,
+      "fields": [
+        "TEXT",
+        "B",
+        "L",
+        "CUSTOMIZING",
+        "I_ABOPExceptionBehaviorText",
+        "txt",
+        "ABOPExceptionBehavior",
+        "Language",
+        "ABOPExceptionBehaviorText",
+        "_Language"
+      ],
+      "associations": [
+        {
+          "target": "I_Language",
+          "alias": "_Language"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPExceptionBehaviorText\nBusiness Label: Exceptional behavior text in BOP\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPExceptionBehaviorText' (Exceptional behavior text in BOP) belonging to CA.\nAttributes & Measures:\n  - TEXT (CHAR): TEXT\n  - B (CHAR): B\n  - L (CHAR): L\n  - CUSTOMIZING (CHAR): CUSTOMIZING\n  - I_ABOPExceptionBehaviorText (CHAR): I_ABOPExceptionBehaviorText\n  - txt (CHAR): txt\n  - ABOPExceptionBehavior (CHAR): ABOPExceptionBehavior\n  - Language (CHAR): Language\n  - ABOPExceptionBehaviorText (CHAR): ABOPExceptionBehaviorText\n  - _Language (CHAR): _Language\nAssociations & Relationships:\n  - _Language ->  [0..1] ON "
+    },
+    "24": {
+      "id": 24,
+      "cds_name": "I_ABOPExceptionBehaviourText",
+      "name": "I_ABOPExceptionBehaviourText",
+      "label": "Exceptional behavior text in BOP",
+      "description": "Exceptional behavior text in BOP",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 10,
+      "association_count": 1,
+      "fields": [
+        "TEXT",
+        "B",
+        "L",
+        "CUSTOMIZING",
+        "I_ABOPExceptionBehaviourText",
+        "txt",
+        "ABOPExceptionBehavior",
+        "Language",
+        "ABOPExceptionBehaviorText",
+        "_Language"
+      ],
+      "associations": [
+        {
+          "target": "I_Language",
+          "alias": "_Language"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPExceptionBehaviourText\nBusiness Label: Exceptional behavior text in BOP\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPExceptionBehaviourText' (Exceptional behavior text in BOP) belonging to CA.\nAttributes & Measures:\n  - TEXT (CHAR): TEXT\n  - B (CHAR): B\n  - L (CHAR): L\n  - CUSTOMIZING (CHAR): CUSTOMIZING\n  - I_ABOPExceptionBehaviourText (CHAR): I_ABOPExceptionBehaviourText\n  - txt (CHAR): txt\n  - ABOPExceptionBehavior (CHAR): ABOPExceptionBehavior\n  - Language (CHAR): Language\n  - ABOPExceptionBehaviorText (CHAR): ABOPExceptionBehaviorText\n  - _Language (CHAR): _Language\nAssociations & Relationships:\n  - _Language ->  [0..1] ON "
+    },
+    "25": {
+      "id": 25,
+      "cds_name": "I_ABOPExecutionMethodText",
+      "name": "I_ABOPExecutionMethodText",
+      "label": "Execution method text in BOP",
+      "description": "Execution method text in BOP",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 10,
+      "association_count": 1,
+      "fields": [
+        "TEXT",
+        "B",
+        "L",
+        "CUSTOMIZING",
+        "I_ABOPExecutionMethodText",
+        "txt",
+        "ABOPExecutionMethod",
+        "Language",
+        "ABOPExecutionMethodText",
+        "_Language"
+      ],
+      "associations": [
+        {
+          "target": "I_Language",
+          "alias": "_Language"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPExecutionMethodText\nBusiness Label: Execution method text in BOP\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPExecutionMethodText' (Execution method text in BOP) belonging to CA.\nAttributes & Measures:\n  - TEXT (CHAR): TEXT\n  - B (CHAR): B\n  - L (CHAR): L\n  - CUSTOMIZING (CHAR): CUSTOMIZING\n  - I_ABOPExecutionMethodText (CHAR): I_ABOPExecutionMethodText\n  - txt (CHAR): txt\n  - ABOPExecutionMethod (CHAR): ABOPExecutionMethod\n  - Language (CHAR): Language\n  - ABOPExecutionMethodText (CHAR): ABOPExecutionMethodText\n  - _Language (CHAR): _Language\nAssociations & Relationships:\n  - _Language ->  [0..1] ON "
+    },
+    "26": {
+      "id": 26,
+      "cds_name": "I_ABOPFallbackBehaviorText",
+      "name": "I_ABOPFallbackBehaviorText",
+      "label": "Fallback behavior Text in BOP",
+      "description": "Fallback behavior Text in BOP",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 10,
+      "association_count": 1,
+      "fields": [
+        "TEXT",
+        "B",
+        "L",
+        "CUSTOMIZING",
+        "I_ABOPFallbackBehaviorText",
+        "txt",
+        "ABOPFallbackRqmtRstrcnBehvr",
+        "Language",
+        "ABOPFallbackRqmtRstrcnBehvrTxt",
+        "_Language"
+      ],
+      "associations": [
+        {
+          "target": "I_Language",
+          "alias": "_Language"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPFallbackBehaviorText\nBusiness Label: Fallback behavior Text in BOP\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPFallbackBehaviorText' (Fallback behavior Text in BOP) belonging to CA.\nAttributes & Measures:\n  - TEXT (CHAR): TEXT\n  - B (CHAR): B\n  - L (CHAR): L\n  - CUSTOMIZING (CHAR): CUSTOMIZING\n  - I_ABOPFallbackBehaviorText (CHAR): I_ABOPFallbackBehaviorText\n  - txt (CHAR): txt\n  - ABOPFallbackRqmtRstrcnBehvr (CHAR): ABOPFallbackRqmtRstrcnBehvr\n  - Language (CHAR): Language\n  - ABOPFallbackRqmtRstrcnBehvrTxt (CHAR): ABOPFallbackRqmtRstrcnBehvrTxt\n  - _Language (CHAR): _Language\nAssociations & Relationships:\n  - _Language ->  [0..1] ON "
+    },
+    "27": {
+      "id": 27,
+      "cds_name": "I_ABOPPurchasingDocType",
+      "name": "I_ABOPPurchasingDocType",
+      "label": "Purchasing Document Type for ATP BOP",
+      "description": "Purchasing Document Type for ATP BOP",
+      "domain": "MM",
+      "key_fields": [],
+      "field_count": 9,
+      "association_count": 1,
+      "fields": [
+        "A",
+        "M",
+        "MASTER",
+        "I_ABOPPurchasingDocType",
+        "t161v",
+        "PurchasingDocumentType",
+        "system_language",
+        "PurchasingDocumentCategory",
+        "PurchasingDocumentTypeName"
+      ],
+      "associations": [
+        {
+          "target": "I_PurchasingDocumentTypeText",
+          "alias": "_Text"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPPurchasingDocType\nBusiness Label: Purchasing Document Type for ATP BOP\nFunctional Domain: MM\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPPurchasingDocType' (Purchasing Document Type for ATP BOP) belonging to MM.\nAttributes & Measures:\n  - A (CHAR): A\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPPurchasingDocType (CHAR): I_ABOPPurchasingDocType\n  - t161v (CHAR): t161v\n  - PurchasingDocumentType (CHAR): PurchasingDocumentType\n  - system_language (CHAR): system_language\n  - PurchasingDocumentCategory (CHAR): PurchasingDocumentCategory\n  - PurchasingDocumentTypeName (CHAR): PurchasingDocumentTypeName\nAssociations & Relationships:\n  - _Text ->  [0..1] ON "
+    },
+    "28": {
+      "id": 28,
+      "cds_name": "I_ABOPRun",
+      "name": "I_ABOPRun",
+      "label": "Run in backorder processing (BOP)",
+      "description": "Run in backorder processing (BOP)",
+      "domain": "SD",
+      "key_fields": [],
+      "field_count": 26,
+      "association_count": 4,
+      "fields": [
+        "D",
+        "L",
+        "MIXED",
+        "I_ABOPRun",
+        "I_ATPCheck",
+        "ABOPRunUUID",
+        "TransactionCode",
+        "ABOPVariantUUID",
+        "ABOPVariantName",
+        "StartedByUser",
+        "ABOPRunStartUTCDateTime",
+        "ABOPRunEndUTCDateTime",
+        "case",
+        "ABOPRunStatus",
+        "ABOPExecutionMode",
+        "ATPCheckHasOnlyHeader",
+        "ApplicationLogHandle",
+        "ABOPRunSummaryUUID",
+        "ABOPRunExecutionOrder",
+        "null",
+        "ABOPRunIsSummary",
+        "ABOPRunCustomExecutionName",
+        "_Variant",
+        "_ATPCheckStatusTypeText",
+        "_ResultFiguresForAllRqmts",
+        "_TriggeredByUser"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPRunPartResultFigures",
+          "alias": "_ResultFiguresForAllRqmts"
+        },
+        {
+          "target": "I_ABOPVariant",
+          "alias": "_Variant"
+        },
+        {
+          "target": "I_ATPCheckStatusTypeText",
+          "alias": "_ATPCheckStatusTypeText"
+        },
+        {
+          "target": "R_ABOPRunAPI",
+          "alias": "_APIRun"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPRun\nBusiness Label: Run in backorder processing (BOP)\nFunctional Domain: SD\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRun' (Run in backorder processing (BOP)) belonging to SD.\nAttributes & Measures:\n  - D (CHAR): D\n  - L (CHAR): L\n  - MIXED (CHAR): MIXED\n  - I_ABOPRun (CHAR): I_ABOPRun\n  - I_ATPCheck (CHAR): I_ATPCheck\n  - ABOPRunUUID (CHAR): ABOPRunUUID\n  - TransactionCode (CHAR): TransactionCode\n  - ABOPVariantUUID (CHAR): ABOPVariantUUID\n  - ABOPVariantName (CHAR): ABOPVariantName\n  - StartedByUser (CHAR): StartedByUser\n  - ABOPRunStartUTCDateTime (CHAR): ABOPRunStartUTCDateTime\n  - ABOPRunEndUTCDateTime (CHAR): ABOPRunEndUTCDateTime\n  - case (CHAR): case\n  - ABOPRunStatus (CHAR): ABOPRunStatus\n  - ABOPExecutionMode (CHAR): ABOPExecutionMode\n  - ATPCheckHasOnlyHeader (CHAR): ATPCheckHasOnlyHeader\n  - ApplicationLogHandle (CHAR): ApplicationLogHandle\n  - ABOPRunSummaryUUID (CHAR): ABOPRunSummaryUUID\n  - ABOPRunExecutionOrder (CHAR): ABOPRunExecutionOrder\n  - null (CHAR): null\n  - ABOPRunIsSummary (CHAR): ABOPRunIsSummary\n  - ABOPRunCustomExecutionName (CHAR): ABOPRunCustomExecutionName\n  - _Variant (CHAR): _Variant\n  - _ATPCheckStatusTypeText (CHAR): _ATPCheckStatusTypeText\n  - _ResultFiguresForAllRqmts (CHAR): _ResultFiguresForAllRqmts\n  - _TriggeredByUser (CHAR): _TriggeredByUser\nAssociations & Relationships:\n  - _ResultFiguresForAllRqmts ->  [0..1] ON \n  - _Variant ->  [0..1] ON \n  - _ATPCheckStatusTypeText ->  [0..1] ON \n  - _APIRun ->  [0..1] ON "
+    },
+    "29": {
+      "id": 29,
+      "cds_name": "I_ABOPRunConfirmation",
+      "name": "I_ABOPRunConfirmation",
+      "label": "Confirmation details of a requirement",
+      "description": "Confirmation details of a requirement",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 26,
+      "association_count": 3,
+      "fields": [
+        "D",
+        "XXL",
+        "MIXED",
+        "I_ABOPRunConfirmation",
+        "P_ABOPRunConfirmation",
+        "ATPRelevantDocument",
+        "ATPRelevantDocumentItem",
+        "ATPRelevantDocScheduleLine",
+        "ABOPRunUUID",
+        "ATPCheckRelevantDate",
+        "Product",
+        "Plant",
+        "StorageLocation",
+        "ATPCheckRelevantUTCDateTime",
+        "ATPCheckRelevantTimeZone",
+        "ConfdQtyBeforeRunInBaseUnit",
+        "ConfdQtyAfterRunInBaseUnit",
+        "SupAssgmtQtyBfrRunInBaseUnit",
+        "SupAssgmtQtyAftRunInBaseUnit",
+        "SupAssgmtReasonCode",
+        "BaseUnit",
+        "_Requirement",
+        "_DetailReasonCodeText",
+        "_BaseUnit",
+        "_SupplyingPlant",
+        "_SupplyingStorageLocation"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPRunRequirement",
+          "alias": "_Requirement"
+        },
+        {
+          "target": "I_UnitOfMeasure",
+          "alias": "_BaseUnit"
+        },
+        {
+          "target": "I_ATPCheckDetailReasonCodeText",
+          "alias": "_DetailReasonCodeText"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPRunConfirmation\nBusiness Label: Confirmation details of a requirement\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunConfirmation' (Confirmation details of a requirement) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - XXL (CHAR): XXL\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunConfirmation (CHAR): I_ABOPRunConfirmation\n  - P_ABOPRunConfirmation (CHAR): P_ABOPRunConfirmation\n  - ATPRelevantDocument (CHAR): ATPRelevantDocument\n  - ATPRelevantDocumentItem (CHAR): ATPRelevantDocumentItem\n  - ATPRelevantDocScheduleLine (CHAR): ATPRelevantDocScheduleLine\n  - ABOPRunUUID (CHAR): ABOPRunUUID\n  - ATPCheckRelevantDate (CHAR): ATPCheckRelevantDate\n  - Product (CHAR): Product\n  - Plant (CHAR): Plant\n  - StorageLocation (CHAR): StorageLocation\n  - ATPCheckRelevantUTCDateTime (CHAR): ATPCheckRelevantUTCDateTime\n  - ATPCheckRelevantTimeZone (CHAR): ATPCheckRelevantTimeZone\n  - ConfdQtyBeforeRunInBaseUnit (CHAR): ConfdQtyBeforeRunInBaseUnit\n  - ConfdQtyAfterRunInBaseUnit (CHAR): ConfdQtyAfterRunInBaseUnit\n  - SupAssgmtQtyBfrRunInBaseUnit (CHAR): SupAssgmtQtyBfrRunInBaseUnit\n  - SupAssgmtQtyAftRunInBaseUnit (CHAR): SupAssgmtQtyAftRunInBaseUnit\n  - SupAssgmtReasonCode (CHAR): SupAssgmtReasonCode\n  - BaseUnit (CHAR): BaseUnit\n  - _Requirement (CHAR): _Requirement\n  - _DetailReasonCodeText (CHAR): _DetailReasonCodeText\n  - _BaseUnit (CHAR): _BaseUnit\n  - _SupplyingPlant (CHAR): _SupplyingPlant\n  - _SupplyingStorageLocation (CHAR): _SupplyingStorageLocation\nAssociations & Relationships:\n  - _Requirement ->  [0..1] ON \n  - _BaseUnit ->  [0..1] ON \n  - _DetailReasonCodeText ->  [0..1] ON "
+    },
+    "30": {
+      "id": 30,
+      "cds_name": "I_ABOPRunIteration",
+      "name": "I_ABOPRunIteration",
+      "label": "Iterations of a Run in BOP",
+      "description": "Iterations of a Run in BOP",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 24,
+      "association_count": 3,
+      "fields": [
+        "D",
+        "L",
+        "MIXED",
+        "I_ABOPRunIteration",
+        "I_ATPCheckIteration",
+        "ABOPRunUUID",
+        "ATPCheckUUID",
+        "TransactionCode",
+        "ABOPVariantUUID",
+        "ABOPVariantName",
+        "StartedByUser",
+        "ABOPRunStartUTCDateTime",
+        "ABOPRunEndUTCDateTime",
+        "case",
+        "ABOPRunStatus",
+        "ABOPExecutionMode",
+        "ApplicationLogHandle",
+        "ABOPRunSummaryUUID",
+        "ATPCheckExecutionOrder",
+        "ABOPRunExecutionOrder",
+        "ABOPRunIsSummary",
+        "_ATPCheck",
+        "_Variant",
+        "_ATPCheckStatusTypeText"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPRun",
+          "alias": "_ATPCheck"
+        },
+        {
+          "target": "I_ABOPVariant",
+          "alias": "_Variant"
+        },
+        {
+          "target": "I_ATPCheckStatusTypeText",
+          "alias": "_ATPCheckStatusTypeText"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPRunIteration\nBusiness Label: Iterations of a Run in BOP\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunIteration' (Iterations of a Run in BOP) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - L (CHAR): L\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunIteration (CHAR): I_ABOPRunIteration\n  - I_ATPCheckIteration (CHAR): I_ATPCheckIteration\n  - ABOPRunUUID (CHAR): ABOPRunUUID\n  - ATPCheckUUID (CHAR): ATPCheckUUID\n  - TransactionCode (CHAR): TransactionCode\n  - ABOPVariantUUID (CHAR): ABOPVariantUUID\n  - ABOPVariantName (CHAR): ABOPVariantName\n  - StartedByUser (CHAR): StartedByUser\n  - ABOPRunStartUTCDateTime (CHAR): ABOPRunStartUTCDateTime\n  - ABOPRunEndUTCDateTime (CHAR): ABOPRunEndUTCDateTime\n  - case (CHAR): case\n  - ABOPRunStatus (CHAR): ABOPRunStatus\n  - ABOPExecutionMode (CHAR): ABOPExecutionMode\n  - ApplicationLogHandle (CHAR): ApplicationLogHandle\n  - ABOPRunSummaryUUID (CHAR): ABOPRunSummaryUUID\n  - ATPCheckExecutionOrder (CHAR): ATPCheckExecutionOrder\n  - ABOPRunExecutionOrder (CHAR): ABOPRunExecutionOrder\n  - ABOPRunIsSummary (CHAR): ABOPRunIsSummary\n  - _ATPCheck (CHAR): _ATPCheck\n  - _Variant (CHAR): _Variant\n  - _ATPCheckStatusTypeText (CHAR): _ATPCheckStatusTypeText\nAssociations & Relationships:\n  - _ATPCheck ->  [0..1] ON \n  - _Variant ->  [0..1] ON \n  - _ATPCheckStatusTypeText ->  [0..1] ON "
+    },
+    "31": {
+      "id": 31,
+      "cds_name": "I_ABOPRunIterationConfirmation",
+      "name": "I_ABOPRunIterationConfirmation",
+      "label": "Confirmation details of a requirement",
+      "description": "Confirmation details of a requirement",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 24,
+      "association_count": 2,
+      "fields": [
+        "D",
+        "XXL",
+        "MIXED",
+        "I_ABOPRunIterationConfirmation",
+        "P_ABOPRunIterationConfirmation",
+        "ATPRequirementUUID",
+        "ATPCheckUUID",
+        "ATPCheckRelevantDate",
+        "Product",
+        "Plant",
+        "StorageLocation",
+        "ATPCheckIterationUUID",
+        "ATPRelevantDocument",
+        "ATPRelevantDocumentItem",
+        "ATPRelevantDocScheduleLine",
+        "ATPCheckRelevantUTCDateTime",
+        "ATPCheckRelevantTimeZone",
+        "ConfdQtyBeforeRunInBaseUnit",
+        "ConfdQtyAfterRunInBaseUnit",
+        "BaseUnit",
+        "_Requirement",
+        "_BaseUnit",
+        "_SupplyingPlant",
+        "_SupplyingStorageLocation"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPRunIterationRequirement",
+          "alias": "_Requirement"
+        },
+        {
+          "target": "I_UnitOfMeasure",
+          "alias": "_BaseUnit"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPRunIterationConfirmation\nBusiness Label: Confirmation details of a requirement\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunIterationConfirmation' (Confirmation details of a requirement) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - XXL (CHAR): XXL\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunIterationConfirmation (CHAR): I_ABOPRunIterationConfirmation\n  - P_ABOPRunIterationConfirmation (CHAR): P_ABOPRunIterationConfirmation\n  - ATPRequirementUUID (CHAR): ATPRequirementUUID\n  - ATPCheckUUID (CHAR): ATPCheckUUID\n  - ATPCheckRelevantDate (CHAR): ATPCheckRelevantDate\n  - Product (CHAR): Product\n  - Plant (CHAR): Plant\n  - StorageLocation (CHAR): StorageLocation\n  - ATPCheckIterationUUID (CHAR): ATPCheckIterationUUID\n  - ATPRelevantDocument (CHAR): ATPRelevantDocument\n  - ATPRelevantDocumentItem (CHAR): ATPRelevantDocumentItem\n  - ATPRelevantDocScheduleLine (CHAR): ATPRelevantDocScheduleLine\n  - ATPCheckRelevantUTCDateTime (CHAR): ATPCheckRelevantUTCDateTime\n  - ATPCheckRelevantTimeZone (CHAR): ATPCheckRelevantTimeZone\n  - ConfdQtyBeforeRunInBaseUnit (CHAR): ConfdQtyBeforeRunInBaseUnit\n  - ConfdQtyAfterRunInBaseUnit (CHAR): ConfdQtyAfterRunInBaseUnit\n  - BaseUnit (CHAR): BaseUnit\n  - _Requirement (CHAR): _Requirement\n  - _BaseUnit (CHAR): _BaseUnit\n  - _SupplyingPlant (CHAR): _SupplyingPlant\n  - _SupplyingStorageLocation (CHAR): _SupplyingStorageLocation\nAssociations & Relationships:\n  - _Requirement ->  [0..1] ON \n  - _BaseUnit ->  [0..1] ON "
+    },
+    "32": {
+      "id": 32,
+      "cds_name": "I_ABOPRunIterationProductPlant",
+      "name": "I_ABOPRunIterationProductPlant",
+      "label": "Iteration conf. details by product-plant",
+      "description": "Iteration conf. details by product-plant",
+      "domain": "PP",
+      "key_fields": [],
+      "field_count": 10,
+      "association_count": 0,
+      "fields": [
+        "D",
+        "L",
+        "MIXED",
+        "I_ABOPRunIterationProductPlant",
+        "P_ABOPRunIterationProductPlant",
+        "ATPCheckUUID",
+        "ATPCheckIterationUUID",
+        "Material",
+        "Plant",
+        "_SupplyingPlant"
+      ],
+      "associations": [],
+      "document_text": "CDS View: I_ABOPRunIterationProductPlant\nBusiness Label: Iteration conf. details by product-plant\nFunctional Domain: PP\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunIterationProductPlant' (Iteration conf. details by product-plant) belonging to PP.\nAttributes & Measures:\n  - D (CHAR): D\n  - L (CHAR): L\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunIterationProductPlant (CHAR): I_ABOPRunIterationProductPlant\n  - P_ABOPRunIterationProductPlant (CHAR): P_ABOPRunIterationProductPlant\n  - ATPCheckUUID (CHAR): ATPCheckUUID\n  - ATPCheckIterationUUID (CHAR): ATPCheckIterationUUID\n  - Material (CHAR): Material\n  - Plant (CHAR): Plant\n  - _SupplyingPlant (CHAR): _SupplyingPlant"
+    },
+    "33": {
+      "id": 33,
+      "cds_name": "I_ABOPRunIterationRequirement",
+      "name": "I_ABOPRunIterationRequirement",
+      "label": "Requested Schedule Line in BOP",
+      "description": "Requested Schedule Line in BOP",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 61,
+      "association_count": 8,
+      "fields": [
+        "D",
+        "XL",
+        "MIXED",
+        "I_ABOPRunIterationRequirement",
+        "ATPRequirementUUID",
+        "ATPCheckIterationUUID",
+        "ATPCheckUUID",
+        "ATPRelevantDocument",
+        "ATPRelevantDocumentItem",
+        "ATPRelevantDocScheduleLine",
+        "ATPRelevantDocumentCategory",
+        "Recipient",
+        "RecipientText",
+        "PurchaseOrderItem",
+        "ATPRecipientType",
+        "Material",
+        "Plant",
+        "StorageLocation",
+        "IsBusinessPurposeCompleted",
+        "IsSalesDocument",
+        "IsStockTransportDocument",
+        "ABOPConfirmationStrategy",
+        "ABOPRqmtEvaluationSequence",
+        "ATPCheckItemStatus",
+        "RqmtIsProcessed",
+        "RqmtIsLocked",
+        "RqmtIsWithIssues",
+        "RqmtIsWithOrderUpdateIssues",
+        "ABOPSegmentUUID",
+        "RqmtIsSupAssgmtRelevant",
+        "SupAssgmtItemStatus",
+        "ReqdProdAvailabilityUTCDateTme",
+        "ReqdProdAvailabilityTimeZone",
+        "RequestedQuantityInBaseUnit",
+        "RqmtIsFullyConfdOnTimeAfterRun",
+        "RqmtIsFullyConfdAfterRun",
+        "OnTimeConfdQtyBfrRunInBaseUnit",
+        "OnTimeConfdQtyAftRunInBaseUnit",
+        "ErlstConfdProdAvailyDteTmeBfr",
+        "ErlstConfdProdAvailyTmznBfr",
+        "LatestConfdProdAvailyDteTmeBfr",
+        "LatestConfdProdAvailyTmznBfr",
+        "ErlstConfdQtyBfrRunInBaseUnit",
+        "ConfdQtyBeforeRunInBaseUnit",
+        "ErlstConfdProdAvailyDteTmeAft",
+        "ErlstConfdProdAvailyTmznAft",
+        "LatestConfdProdAvailyDteTmeAft",
+        "LatestConfdProdAvailyTmznAft",
+        "ErlstConfdQtyAftRunInBaseUnit",
+        "ConfdQtyAfterRunInBaseUnit",
+        "RqmtHasSubstitutionsAfterRun",
+        "BaseUnit",
+        "_ATPRecipientTypeText",
+        "_Material",
+        "_Segment",
+        "_BaseUnit",
+        "_SupplyingPlant",
+        "_SupplyingStorageLocation",
+        "_ABOPStrategyText",
+        "_SupAssgmtItemStatusText",
+        "_ItemStatusText"
+      ],
+      "associations": [
+        {
+          "target": "I_SalesDocument",
+          "alias": "_SalesDocument"
+        },
+        {
+          "target": "I_Material",
+          "alias": "_Material"
+        },
+        {
+          "target": "I_UnitOfMeasure",
+          "alias": "_BaseUnit"
+        },
+        {
+          "target": "I_ABOPStrategyText",
+          "alias": "_ABOPStrategyText"
+        },
+        {
+          "target": "I_ATPCheckItemStatusText",
+          "alias": "_ItemStatusText"
+        },
+        {
+          "target": "I_ATPSupAssgmtItemStatusText",
+          "alias": "_SupAssgmtItemStatusText"
+        },
+        {
+          "target": "I_ATPRecipientTypeText",
+          "alias": "_ATPRecipientTypeText"
+        },
+        {
+          "target": "I_ABOPSegment",
+          "alias": "_Segment"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPRunIterationRequirement\nBusiness Label: Requested Schedule Line in BOP\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunIterationRequirement' (Requested Schedule Line in BOP) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - XL (CHAR): XL\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunIterationRequirement (CHAR): I_ABOPRunIterationRequirement\n  - ATPRequirementUUID (CHAR): ATPRequirementUUID\n  - ATPCheckIterationUUID (CHAR): ATPCheckIterationUUID\n  - ATPCheckUUID (CHAR): ATPCheckUUID\n  - ATPRelevantDocument (CHAR): ATPRelevantDocument\n  - ATPRelevantDocumentItem (CHAR): ATPRelevantDocumentItem\n  - ATPRelevantDocScheduleLine (CHAR): ATPRelevantDocScheduleLine\n  - ATPRelevantDocumentCategory (CHAR): ATPRelevantDocumentCategory\n  - Recipient (CHAR): Recipient\n  - RecipientText (CHAR): RecipientText\n  - PurchaseOrderItem (CHAR): PurchaseOrderItem\n  - ATPRecipientType (CHAR): ATPRecipientType\n  - Material (CHAR): Material\n  - Plant (CHAR): Plant\n  - StorageLocation (CHAR): StorageLocation\n  - IsBusinessPurposeCompleted (CHAR): IsBusinessPurposeCompleted\n  - IsSalesDocument (CHAR): IsSalesDocument\n  - IsStockTransportDocument (CHAR): IsStockTransportDocument\n  - ABOPConfirmationStrategy (CHAR): ABOPConfirmationStrategy\n  - ABOPRqmtEvaluationSequence (CHAR): ABOPRqmtEvaluationSequence\n  - ATPCheckItemStatus (CHAR): ATPCheckItemStatus\n  - RqmtIsProcessed (CHAR): RqmtIsProcessed\n  - RqmtIsLocked (CHAR): RqmtIsLocked\n  - RqmtIsWithIssues (CHAR): RqmtIsWithIssues\n  - RqmtIsWithOrderUpdateIssues (CHAR): RqmtIsWithOrderUpdateIssues\n  - ABOPSegmentUUID (CHAR): ABOPSegmentUUID\n  - RqmtIsSupAssgmtRelevant (CHAR): RqmtIsSupAssgmtRelevant\n  - SupAssgmtItemStatus (CHAR): SupAssgmtItemStatus\n  - ReqdProdAvailabilityUTCDateTme (CHAR): ReqdProdAvailabilityUTCDateTme\n  - ReqdProdAvailabilityTimeZone (CHAR): ReqdProdAvailabilityTimeZone\n  - RequestedQuantityInBaseUnit (CHAR): RequestedQuantityInBaseUnit\n  - RqmtIsFullyConfdOnTimeAfterRun (CHAR): RqmtIsFullyConfdOnTimeAfterRun\n  - RqmtIsFullyConfdAfterRun (CHAR): RqmtIsFullyConfdAfterRun\n  - OnTimeConfdQtyBfrRunInBaseUnit (CHAR): OnTimeConfdQtyBfrRunInBaseUnit\n  - OnTimeConfdQtyAftRunInBaseUnit (CHAR): OnTimeConfdQtyAftRunInBaseUnit\n  - ErlstConfdProdAvailyDteTmeBfr (CHAR): ErlstConfdProdAvailyDteTmeBfr\n  - ErlstConfdProdAvailyTmznBfr (CHAR): ErlstConfdProdAvailyTmznBfr\n  - LatestConfdProdAvailyDteTmeBfr (CHAR): LatestConfdProdAvailyDteTmeBfr\n  - LatestConfdProdAvailyTmznBfr (CHAR): LatestConfdProdAvailyTmznBfr\n  - ErlstConfdQtyBfrRunInBaseUnit (CHAR): ErlstConfdQtyBfrRunInBaseUnit\n  - ConfdQtyBeforeRunInBaseUnit (CHAR): ConfdQtyBeforeRunInBaseUnit\n  - ErlstConfdProdAvailyDteTmeAft (CHAR): ErlstConfdProdAvailyDteTmeAft\n  - ErlstConfdProdAvailyTmznAft (CHAR): ErlstConfdProdAvailyTmznAft\n  - LatestConfdProdAvailyDteTmeAft (CHAR): LatestConfdProdAvailyDteTmeAft\n  - LatestConfdProdAvailyTmznAft (CHAR): LatestConfdProdAvailyTmznAft\n  - ErlstConfdQtyAftRunInBaseUnit (CHAR): ErlstConfdQtyAftRunInBaseUnit\n  - ConfdQtyAfterRunInBaseUnit (CHAR): ConfdQtyAfterRunInBaseUnit\n  - RqmtHasSubstitutionsAfterRun (CHAR): RqmtHasSubstitutionsAfterRun\n  - BaseUnit (CHAR): BaseUnit\n  - _ATPRecipientTypeText (CHAR): _ATPRecipientTypeText\n  - _Material (CHAR): _Material\n  - _Segment (CHAR): _Segment\n  - _BaseUnit (CHAR): _BaseUnit\n  - _SupplyingPlant (CHAR): _SupplyingPlant\n  - _SupplyingStorageLocation (CHAR): _SupplyingStorageLocation\n  - _ABOPStrategyText (CHAR): _ABOPStrategyText\n  - _SupAssgmtItemStatusText (CHAR): _SupAssgmtItemStatusText\n  - _ItemStatusText (CHAR): _ItemStatusText\nAssociations & Relationships:\n  - _SalesDocument ->  [0..1] ON \n  - _Material ->  [0..1] ON \n  - _BaseUnit ->  [0..1] ON \n  - _ABOPStrategyText ->  [0..1] ON \n  - _ItemStatusText ->  [0..1] ON \n  - _SupAssgmtItemStatusText ->  [0..1] ON \n  - _ATPRecipientTypeText ->  [0..1] ON \n  - _Segment ->  [0..1] ON "
+    },
+    "34": {
+      "id": 34,
+      "cds_name": "I_ABOPRunIterationSoldToParty",
+      "name": "I_ABOPRunIterationSoldToParty",
+      "label": "Iteration conf. details by Sold To Party",
+      "description": "Iteration conf. details by Sold To Party",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 12,
+      "association_count": 1,
+      "fields": [
+        "D",
+        "L",
+        "MIXED",
+        "I_ABOPRunIterationSoldToParty",
+        "P_ABOPRunIterationSoldToParty",
+        "ATPCheckUUID",
+        "ATPCheckIterationUUID",
+        "Recipient",
+        "RecipientText",
+        "ATPRecipientType",
+        "IsBusinessPurposeCompleted",
+        "_ATPRecipientTypeText"
+      ],
+      "associations": [
+        {
+          "target": "I_ATPRecipientTypeText",
+          "alias": "_ATPRecipientTypeText"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPRunIterationSoldToParty\nBusiness Label: Iteration conf. details by Sold To Party\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunIterationSoldToParty' (Iteration conf. details by Sold To Party) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - L (CHAR): L\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunIterationSoldToParty (CHAR): I_ABOPRunIterationSoldToParty\n  - P_ABOPRunIterationSoldToParty (CHAR): P_ABOPRunIterationSoldToParty\n  - ATPCheckUUID (CHAR): ATPCheckUUID\n  - ATPCheckIterationUUID (CHAR): ATPCheckIterationUUID\n  - Recipient (CHAR): Recipient\n  - RecipientText (CHAR): RecipientText\n  - ATPRecipientType (CHAR): ATPRecipientType\n  - IsBusinessPurposeCompleted (CHAR): IsBusinessPurposeCompleted\n  - _ATPRecipientTypeText (CHAR): _ATPRecipientTypeText\nAssociations & Relationships:\n  - _ATPRecipientTypeText ->  [0..1] ON "
+    },
+    "35": {
+      "id": 35,
+      "cds_name": "I_ABOPRunIterationStrategy",
+      "name": "I_ABOPRunIterationStrategy",
+      "label": "Iteration conf. details by strategy",
+      "description": "Iteration conf. details by strategy",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 11,
+      "association_count": 3,
+      "fields": [
+        "D",
+        "L",
+        "MIXED",
+        "I_ABOPRunIterationStrategy",
+        "P_ABOPRunIterationStrategy",
+        "ATPCheckIterationUUID",
+        "ABOPConfirmationStrategy",
+        "ATPCheckUUID",
+        "_ABOPStrategyText",
+        "_Requirements",
+        "_ABOPRun"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPRunIterationRequirement",
+          "alias": "_Requirements"
+        },
+        {
+          "target": "I_ABOPRunIteration",
+          "alias": "_ABOPRun"
+        },
+        {
+          "target": "I_ABOPStrategyText",
+          "alias": "_ABOPStrategyText"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPRunIterationStrategy\nBusiness Label: Iteration conf. details by strategy\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunIterationStrategy' (Iteration conf. details by strategy) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - L (CHAR): L\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunIterationStrategy (CHAR): I_ABOPRunIterationStrategy\n  - P_ABOPRunIterationStrategy (CHAR): P_ABOPRunIterationStrategy\n  - ATPCheckIterationUUID (CHAR): ATPCheckIterationUUID\n  - ABOPConfirmationStrategy (CHAR): ABOPConfirmationStrategy\n  - ATPCheckUUID (CHAR): ATPCheckUUID\n  - _ABOPStrategyText (CHAR): _ABOPStrategyText\n  - _Requirements (CHAR): _Requirements\n  - _ABOPRun (CHAR): _ABOPRun\nAssociations & Relationships:\n  - _Requirements ->  [0..1] ON \n  - _ABOPRun ->  [0..1] ON \n  - _ABOPStrategyText ->  [0..1] ON "
+    },
+    "36": {
+      "id": 36,
+      "cds_name": "I_ABOPRunMaterialPlant",
+      "name": "I_ABOPRunMaterialPlant",
+      "label": "Run conf. details by material-plant",
+      "description": "Run conf. details by material-plant",
+      "domain": "MM",
+      "key_fields": [],
+      "field_count": 10,
+      "association_count": 1,
+      "fields": [
+        "D",
+        "L",
+        "MIXED",
+        "I_ABOPRunMaterialPlant",
+        "P_ABOPRunMaterialPlant",
+        "Material",
+        "Plant",
+        "ABOPRunUUID",
+        "_SupplyingPlant",
+        "_ResultFiguresForAllRqmts"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPRunPrtRsltFigsByProdPlnt",
+          "alias": "_ResultFiguresForAllRqmts"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPRunMaterialPlant\nBusiness Label: Run conf. details by material-plant\nFunctional Domain: MM\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunMaterialPlant' (Run conf. details by material-plant) belonging to MM.\nAttributes & Measures:\n  - D (CHAR): D\n  - L (CHAR): L\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunMaterialPlant (CHAR): I_ABOPRunMaterialPlant\n  - P_ABOPRunMaterialPlant (CHAR): P_ABOPRunMaterialPlant\n  - Material (CHAR): Material\n  - Plant (CHAR): Plant\n  - ABOPRunUUID (CHAR): ABOPRunUUID\n  - _SupplyingPlant (CHAR): _SupplyingPlant\n  - _ResultFiguresForAllRqmts (CHAR): _ResultFiguresForAllRqmts\nAssociations & Relationships:\n  - _ResultFiguresForAllRqmts ->  [0..1] ON "
+    },
+    "37": {
+      "id": 37,
+      "cds_name": "I_ABOPRunPartResultFigures",
+      "name": "I_ABOPRunPartResultFigures",
+      "label": "BOP Run Part Result Figures",
+      "description": "BOP Run Part Result Figures",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 25,
+      "association_count": 0,
+      "fields": [
+        "D",
+        "L",
+        "MIXED",
+        "I_ABOPRunPartResultFigures",
+        "parameters",
+        "boole_d",
+        "ABOPRunPartUUID",
+        "NumberOfRequirements",
+        "NumberOfProcessedRequirements",
+        "NumberOfLockedRequirements",
+        "NumberOfExcludedRequirements",
+        "NumberOfRequirementsWithIssues",
+        "NumberOfSupAssgmtRelevantRqmts",
+        "NumberOfRqmtsIncldInConfFigs",
+        "NumberOfRqmtsIncldInAssgmtFigs",
+        "NmbrOfConfdRqmtsOnTimeBfrRun",
+        "NmbrOfConfdRqmtsOnTimeAfterRun",
+        "NmbrOfSupAssgdRqmtsOnTmeBfrRun",
+        "NmbrOfSupAssgdRqmtsOnTmeAftRun",
+        "NmbrOfConfdRqmtsBeforeRun",
+        "NmbrOfConfdRqmtsAfterRun",
+        "NmbrOfSupAssgdRqmtsBeforeRun",
+        "NmbrOfSupAssgdRqmtsAfterRun",
+        "NmbrOfRqmtsSentToOrderUpdate",
+        "NmbrOfRqmtsWithOrderUpdtIssues"
+      ],
+      "associations": [],
+      "document_text": "CDS View: I_ABOPRunPartResultFigures\nBusiness Label: BOP Run Part Result Figures\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunPartResultFigures' (BOP Run Part Result Figures) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - L (CHAR): L\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunPartResultFigures (CHAR): I_ABOPRunPartResultFigures\n  - parameters (CHAR): parameters\n  - boole_d (CHAR): boole_d\n  - ABOPRunPartUUID (CHAR): ABOPRunPartUUID\n  - NumberOfRequirements (CHAR): NumberOfRequirements\n  - NumberOfProcessedRequirements (CHAR): NumberOfProcessedRequirements\n  - NumberOfLockedRequirements (CHAR): NumberOfLockedRequirements\n  - NumberOfExcludedRequirements (CHAR): NumberOfExcludedRequirements\n  - NumberOfRequirementsWithIssues (CHAR): NumberOfRequirementsWithIssues\n  - NumberOfSupAssgmtRelevantRqmts (CHAR): NumberOfSupAssgmtRelevantRqmts\n  - NumberOfRqmtsIncldInConfFigs (CHAR): NumberOfRqmtsIncldInConfFigs\n  - NumberOfRqmtsIncldInAssgmtFigs (CHAR): NumberOfRqmtsIncldInAssgmtFigs\n  - NmbrOfConfdRqmtsOnTimeBfrRun (CHAR): NmbrOfConfdRqmtsOnTimeBfrRun\n  - NmbrOfConfdRqmtsOnTimeAfterRun (CHAR): NmbrOfConfdRqmtsOnTimeAfterRun\n  - NmbrOfSupAssgdRqmtsOnTmeBfrRun (CHAR): NmbrOfSupAssgdRqmtsOnTmeBfrRun\n  - NmbrOfSupAssgdRqmtsOnTmeAftRun (CHAR): NmbrOfSupAssgdRqmtsOnTmeAftRun\n  - NmbrOfConfdRqmtsBeforeRun (CHAR): NmbrOfConfdRqmtsBeforeRun\n  - NmbrOfConfdRqmtsAfterRun (CHAR): NmbrOfConfdRqmtsAfterRun\n  - NmbrOfSupAssgdRqmtsBeforeRun (CHAR): NmbrOfSupAssgdRqmtsBeforeRun\n  - NmbrOfSupAssgdRqmtsAfterRun (CHAR): NmbrOfSupAssgdRqmtsAfterRun\n  - NmbrOfRqmtsSentToOrderUpdate (CHAR): NmbrOfRqmtsSentToOrderUpdate\n  - NmbrOfRqmtsWithOrderUpdtIssues (CHAR): NmbrOfRqmtsWithOrderUpdtIssues"
+    },
+    "38": {
+      "id": 38,
+      "cds_name": "I_ABOPRunPartRsltFigsByRcpnt",
+      "name": "I_ABOPRunPartRsltFigsByRcpnt",
+      "label": "BOP Run Part Result Figures By Recipient",
+      "description": "BOP Run Part Result Figures By Recipient",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 25,
+      "association_count": 0,
+      "fields": [
+        "D",
+        "L",
+        "MIXED",
+        "I_ABOPRunPartRsltFigsByRcpnt",
+        "boole_d",
+        "ABOPRunPartUUID",
+        "Recipient",
+        "NumberOfRequirements",
+        "NumberOfProcessedRequirements",
+        "NumberOfLockedRequirements",
+        "NumberOfExcludedRequirements",
+        "NumberOfRequirementsWithIssues",
+        "NumberOfSupAssgmtRelevantRqmts",
+        "NumberOfRqmtsIncldInConfFigs",
+        "NumberOfRqmtsIncldInAssgmtFigs",
+        "NmbrOfConfdRqmtsOnTimeBfrRun",
+        "NmbrOfConfdRqmtsOnTimeAfterRun",
+        "NmbrOfSupAssgdRqmtsOnTmeBfrRun",
+        "NmbrOfSupAssgdRqmtsOnTmeAftRun",
+        "NmbrOfConfdRqmtsBeforeRun",
+        "NmbrOfConfdRqmtsAfterRun",
+        "NmbrOfSupAssgdRqmtsBeforeRun",
+        "NmbrOfSupAssgdRqmtsAfterRun",
+        "NmbrOfRqmtsSentToOrderUpdate",
+        "NmbrOfRqmtsWithOrderUpdtIssues"
+      ],
+      "associations": [],
+      "document_text": "CDS View: I_ABOPRunPartRsltFigsByRcpnt\nBusiness Label: BOP Run Part Result Figures By Recipient\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunPartRsltFigsByRcpnt' (BOP Run Part Result Figures By Recipient) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - L (CHAR): L\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunPartRsltFigsByRcpnt (CHAR): I_ABOPRunPartRsltFigsByRcpnt\n  - boole_d (CHAR): boole_d\n  - ABOPRunPartUUID (CHAR): ABOPRunPartUUID\n  - Recipient (CHAR): Recipient\n  - NumberOfRequirements (CHAR): NumberOfRequirements\n  - NumberOfProcessedRequirements (CHAR): NumberOfProcessedRequirements\n  - NumberOfLockedRequirements (CHAR): NumberOfLockedRequirements\n  - NumberOfExcludedRequirements (CHAR): NumberOfExcludedRequirements\n  - NumberOfRequirementsWithIssues (CHAR): NumberOfRequirementsWithIssues\n  - NumberOfSupAssgmtRelevantRqmts (CHAR): NumberOfSupAssgmtRelevantRqmts\n  - NumberOfRqmtsIncldInConfFigs (CHAR): NumberOfRqmtsIncldInConfFigs\n  - NumberOfRqmtsIncldInAssgmtFigs (CHAR): NumberOfRqmtsIncldInAssgmtFigs\n  - NmbrOfConfdRqmtsOnTimeBfrRun (CHAR): NmbrOfConfdRqmtsOnTimeBfrRun\n  - NmbrOfConfdRqmtsOnTimeAfterRun (CHAR): NmbrOfConfdRqmtsOnTimeAfterRun\n  - NmbrOfSupAssgdRqmtsOnTmeBfrRun (CHAR): NmbrOfSupAssgdRqmtsOnTmeBfrRun\n  - NmbrOfSupAssgdRqmtsOnTmeAftRun (CHAR): NmbrOfSupAssgdRqmtsOnTmeAftRun\n  - NmbrOfConfdRqmtsBeforeRun (CHAR): NmbrOfConfdRqmtsBeforeRun\n  - NmbrOfConfdRqmtsAfterRun (CHAR): NmbrOfConfdRqmtsAfterRun\n  - NmbrOfSupAssgdRqmtsBeforeRun (CHAR): NmbrOfSupAssgdRqmtsBeforeRun\n  - NmbrOfSupAssgdRqmtsAfterRun (CHAR): NmbrOfSupAssgdRqmtsAfterRun\n  - NmbrOfRqmtsSentToOrderUpdate (CHAR): NmbrOfRqmtsSentToOrderUpdate\n  - NmbrOfRqmtsWithOrderUpdtIssues (CHAR): NmbrOfRqmtsWithOrderUpdtIssues"
+    },
+    "39": {
+      "id": 39,
+      "cds_name": "I_ABOPRunPartRsltFigsByStrgy",
+      "name": "I_ABOPRunPartRsltFigsByStrgy",
+      "label": "BOP Run Part Result Figures By Confirmation Strategy",
+      "description": "BOP Run Part Result Figures By Confirmation Strategy",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 25,
+      "association_count": 0,
+      "fields": [
+        "D",
+        "L",
+        "MIXED",
+        "I_ABOPRunPartRsltFigsByStrgy",
+        "boole_d",
+        "ABOPRunPartUUID",
+        "ABOPConfirmationStrategy",
+        "NumberOfRequirements",
+        "NumberOfProcessedRequirements",
+        "NumberOfLockedRequirements",
+        "NumberOfExcludedRequirements",
+        "NumberOfRequirementsWithIssues",
+        "NumberOfSupAssgmtRelevantRqmts",
+        "NumberOfRqmtsIncldInConfFigs",
+        "NumberOfRqmtsIncldInAssgmtFigs",
+        "NmbrOfConfdRqmtsOnTimeBfrRun",
+        "NmbrOfConfdRqmtsOnTimeAfterRun",
+        "NmbrOfSupAssgdRqmtsOnTmeBfrRun",
+        "NmbrOfSupAssgdRqmtsOnTmeAftRun",
+        "NmbrOfConfdRqmtsBeforeRun",
+        "NmbrOfConfdRqmtsAfterRun",
+        "NmbrOfSupAssgdRqmtsBeforeRun",
+        "NmbrOfSupAssgdRqmtsAfterRun",
+        "NmbrOfRqmtsSentToOrderUpdate",
+        "NmbrOfRqmtsWithOrderUpdtIssues"
+      ],
+      "associations": [],
+      "document_text": "CDS View: I_ABOPRunPartRsltFigsByStrgy\nBusiness Label: BOP Run Part Result Figures By Confirmation Strategy\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunPartRsltFigsByStrgy' (BOP Run Part Result Figures By Confirmation Strategy) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - L (CHAR): L\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunPartRsltFigsByStrgy (CHAR): I_ABOPRunPartRsltFigsByStrgy\n  - boole_d (CHAR): boole_d\n  - ABOPRunPartUUID (CHAR): ABOPRunPartUUID\n  - ABOPConfirmationStrategy (CHAR): ABOPConfirmationStrategy\n  - NumberOfRequirements (CHAR): NumberOfRequirements\n  - NumberOfProcessedRequirements (CHAR): NumberOfProcessedRequirements\n  - NumberOfLockedRequirements (CHAR): NumberOfLockedRequirements\n  - NumberOfExcludedRequirements (CHAR): NumberOfExcludedRequirements\n  - NumberOfRequirementsWithIssues (CHAR): NumberOfRequirementsWithIssues\n  - NumberOfSupAssgmtRelevantRqmts (CHAR): NumberOfSupAssgmtRelevantRqmts\n  - NumberOfRqmtsIncldInConfFigs (CHAR): NumberOfRqmtsIncldInConfFigs\n  - NumberOfRqmtsIncldInAssgmtFigs (CHAR): NumberOfRqmtsIncldInAssgmtFigs\n  - NmbrOfConfdRqmtsOnTimeBfrRun (CHAR): NmbrOfConfdRqmtsOnTimeBfrRun\n  - NmbrOfConfdRqmtsOnTimeAfterRun (CHAR): NmbrOfConfdRqmtsOnTimeAfterRun\n  - NmbrOfSupAssgdRqmtsOnTmeBfrRun (CHAR): NmbrOfSupAssgdRqmtsOnTmeBfrRun\n  - NmbrOfSupAssgdRqmtsOnTmeAftRun (CHAR): NmbrOfSupAssgdRqmtsOnTmeAftRun\n  - NmbrOfConfdRqmtsBeforeRun (CHAR): NmbrOfConfdRqmtsBeforeRun\n  - NmbrOfConfdRqmtsAfterRun (CHAR): NmbrOfConfdRqmtsAfterRun\n  - NmbrOfSupAssgdRqmtsBeforeRun (CHAR): NmbrOfSupAssgdRqmtsBeforeRun\n  - NmbrOfSupAssgdRqmtsAfterRun (CHAR): NmbrOfSupAssgdRqmtsAfterRun\n  - NmbrOfRqmtsSentToOrderUpdate (CHAR): NmbrOfRqmtsSentToOrderUpdate\n  - NmbrOfRqmtsWithOrderUpdtIssues (CHAR): NmbrOfRqmtsWithOrderUpdtIssues"
+    },
+    "40": {
+      "id": 40,
+      "cds_name": "I_ABOPRunPrtRsltFigsByProdPlnt",
+      "name": "I_ABOPRunPrtRsltFigsByProdPlnt",
+      "label": "BOP Run Part Result Figures By Product Plant-Combination",
+      "description": "BOP Run Part Result Figures By Product Plant-Combination",
+      "domain": "PP",
+      "key_fields": [],
+      "field_count": 26,
+      "association_count": 0,
+      "fields": [
+        "D",
+        "L",
+        "MIXED",
+        "I_ABOPRunPrtRsltFigsByProdPlnt",
+        "boole_d",
+        "ABOPRunPartUUID",
+        "Material",
+        "Plant",
+        "NumberOfRequirements",
+        "NumberOfProcessedRequirements",
+        "NumberOfLockedRequirements",
+        "NumberOfExcludedRequirements",
+        "NumberOfRequirementsWithIssues",
+        "NumberOfSupAssgmtRelevantRqmts",
+        "NumberOfRqmtsIncldInConfFigs",
+        "NumberOfRqmtsIncldInAssgmtFigs",
+        "NmbrOfConfdRqmtsOnTimeBfrRun",
+        "NmbrOfConfdRqmtsOnTimeAfterRun",
+        "NmbrOfSupAssgdRqmtsOnTmeBfrRun",
+        "NmbrOfSupAssgdRqmtsOnTmeAftRun",
+        "NmbrOfConfdRqmtsBeforeRun",
+        "NmbrOfConfdRqmtsAfterRun",
+        "NmbrOfSupAssgdRqmtsBeforeRun",
+        "NmbrOfSupAssgdRqmtsAfterRun",
+        "NmbrOfRqmtsSentToOrderUpdate",
+        "NmbrOfRqmtsWithOrderUpdtIssues"
+      ],
+      "associations": [],
+      "document_text": "CDS View: I_ABOPRunPrtRsltFigsByProdPlnt\nBusiness Label: BOP Run Part Result Figures By Product Plant-Combination\nFunctional Domain: PP\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunPrtRsltFigsByProdPlnt' (BOP Run Part Result Figures By Product Plant-Combination) belonging to PP.\nAttributes & Measures:\n  - D (CHAR): D\n  - L (CHAR): L\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunPrtRsltFigsByProdPlnt (CHAR): I_ABOPRunPrtRsltFigsByProdPlnt\n  - boole_d (CHAR): boole_d\n  - ABOPRunPartUUID (CHAR): ABOPRunPartUUID\n  - Material (CHAR): Material\n  - Plant (CHAR): Plant\n  - NumberOfRequirements (CHAR): NumberOfRequirements\n  - NumberOfProcessedRequirements (CHAR): NumberOfProcessedRequirements\n  - NumberOfLockedRequirements (CHAR): NumberOfLockedRequirements\n  - NumberOfExcludedRequirements (CHAR): NumberOfExcludedRequirements\n  - NumberOfRequirementsWithIssues (CHAR): NumberOfRequirementsWithIssues\n  - NumberOfSupAssgmtRelevantRqmts (CHAR): NumberOfSupAssgmtRelevantRqmts\n  - NumberOfRqmtsIncldInConfFigs (CHAR): NumberOfRqmtsIncldInConfFigs\n  - NumberOfRqmtsIncldInAssgmtFigs (CHAR): NumberOfRqmtsIncldInAssgmtFigs\n  - NmbrOfConfdRqmtsOnTimeBfrRun (CHAR): NmbrOfConfdRqmtsOnTimeBfrRun\n  - NmbrOfConfdRqmtsOnTimeAfterRun (CHAR): NmbrOfConfdRqmtsOnTimeAfterRun\n  - NmbrOfSupAssgdRqmtsOnTmeBfrRun (CHAR): NmbrOfSupAssgdRqmtsOnTmeBfrRun\n  - NmbrOfSupAssgdRqmtsOnTmeAftRun (CHAR): NmbrOfSupAssgdRqmtsOnTmeAftRun\n  - NmbrOfConfdRqmtsBeforeRun (CHAR): NmbrOfConfdRqmtsBeforeRun\n  - NmbrOfConfdRqmtsAfterRun (CHAR): NmbrOfConfdRqmtsAfterRun\n  - NmbrOfSupAssgdRqmtsBeforeRun (CHAR): NmbrOfSupAssgdRqmtsBeforeRun\n  - NmbrOfSupAssgdRqmtsAfterRun (CHAR): NmbrOfSupAssgdRqmtsAfterRun\n  - NmbrOfRqmtsSentToOrderUpdate (CHAR): NmbrOfRqmtsSentToOrderUpdate\n  - NmbrOfRqmtsWithOrderUpdtIssues (CHAR): NmbrOfRqmtsWithOrderUpdtIssues"
+    },
+    "41": {
+      "id": 41,
+      "cds_name": "I_ABOPRunRequirement",
+      "name": "I_ABOPRunRequirement",
+      "label": "Requested Schedule Line in BOP",
+      "description": "Requested Schedule Line in BOP",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 72,
+      "association_count": 7,
+      "fields": [
+        "D",
+        "XL",
+        "MIXED",
+        "I_ABOPRunRequirement",
+        "ABOPRunUUID",
+        "ATPRelevantDocument",
+        "ATPRelevantDocumentItem",
+        "ATPRelevantDocScheduleLine",
+        "ATPRelevantDocumentCategory",
+        "Recipient",
+        "RecipientText",
+        "PurchaseOrderItem",
+        "ATPRecipientType",
+        "Material",
+        "Plant",
+        "StorageLocation",
+        "IsBusinessPurposeCompleted",
+        "IsSalesDocument",
+        "IsStockTransportDocument",
+        "ABOPConfirmationStrategy",
+        "ABOPRqmtEvaluationSequence",
+        "ATPCheckItemStatus",
+        "RqmtIsProcessed",
+        "RqmtIsLocked",
+        "RqmtIsWithIssues",
+        "RqmtIsWithOrderUpdateIssues",
+        "ABOPSegmentUUID",
+        "RqmtIsSupAssgmtRelevant",
+        "SupAssgmtItemStatus",
+        "ReqdProdAvailabilityUTCDateTme",
+        "ReqdProdAvailabilityTimeZone",
+        "RequestedQuantityInBaseUnit",
+        "RqmtIsFullyConfdOnTimeAfterRun",
+        "RqmtIsFullyConfdAfterRun",
+        "OnTimeConfdQtyBfrRunInBaseUnit",
+        "OnTimeConfdQtyAftRunInBaseUnit",
+        "ErlstConfdProdAvailyDteTmeBfr",
+        "ErlstConfdProdAvailyTmznBfr",
+        "LatestConfdProdAvailyDteTmeBfr",
+        "LatestConfdProdAvailyTmznBfr",
+        "ErlstConfdQtyBfrRunInBaseUnit",
+        "ConfdQtyBeforeRunInBaseUnit",
+        "ErlstConfdProdAvailyDteTmeAft",
+        "ErlstConfdProdAvailyTmznAft",
+        "LatestConfdProdAvailyDteTmeAft",
+        "LatestConfdProdAvailyTmznAft",
+        "ErlstConfdQtyAftRunInBaseUnit",
+        "ConfdQtyAfterRunInBaseUnit",
+        "RqmtHasSubstitutionsAfterRun",
+        "RqmtIsFullyAssignedAfterRun",
+        "ErlstSupAssgmtDteTmeBeforeRun",
+        "ErlstSupAssgmtTmznBeforeRun",
+        "LatestSupAssgmtDteTmeBeforeRun",
+        "LatestSupAssgmtTmznBeforeRun",
+        "ErlstSupAssgmtQtyBfrInBaseUnit",
+        "SupAssgmtQtyBfrRunInBaseUnit",
+        "ErlstSupAssgmtDteTmeAfterRun",
+        "ErlstSupAssgmtTmznAfterRun",
+        "LatestSupAssgmtDteTmeAfterRun",
+        "LatestSupAssgmtTmznAfterRun",
+        "ErlstSupAssgmtQtyAftInBaseUnit",
+        "SupAssgmtQtyAftRunInBaseUnit",
+        "BaseUnit",
+        "_ATPRecipientTypeText",
+        "_Material",
+        "_Segment",
+        "_BaseUnit",
+        "_SupplyingPlant",
+        "_SupplyingStorageLocation",
+        "_ABOPStrategyText",
+        "_SupAssgmtItemStatusText",
+        "_ItemStatusText"
+      ],
+      "associations": [
+        {
+          "target": "I_Material",
+          "alias": "_Material"
+        },
+        {
+          "target": "I_UnitOfMeasure",
+          "alias": "_BaseUnit"
+        },
+        {
+          "target": "I_ABOPStrategyText",
+          "alias": "_ABOPStrategyText"
+        },
+        {
+          "target": "I_ATPCheckItemStatusText",
+          "alias": "_ItemStatusText"
+        },
+        {
+          "target": "I_ATPSupAssgmtItemStatusText",
+          "alias": "_SupAssgmtItemStatusText"
+        },
+        {
+          "target": "I_ATPRecipientTypeText",
+          "alias": "_ATPRecipientTypeText"
+        },
+        {
+          "target": "I_ABOPSegment",
+          "alias": "_Segment"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPRunRequirement\nBusiness Label: Requested Schedule Line in BOP\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunRequirement' (Requested Schedule Line in BOP) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - XL (CHAR): XL\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunRequirement (CHAR): I_ABOPRunRequirement\n  - ABOPRunUUID (CHAR): ABOPRunUUID\n  - ATPRelevantDocument (CHAR): ATPRelevantDocument\n  - ATPRelevantDocumentItem (CHAR): ATPRelevantDocumentItem\n  - ATPRelevantDocScheduleLine (CHAR): ATPRelevantDocScheduleLine\n  - ATPRelevantDocumentCategory (CHAR): ATPRelevantDocumentCategory\n  - Recipient (CHAR): Recipient\n  - RecipientText (CHAR): RecipientText\n  - PurchaseOrderItem (CHAR): PurchaseOrderItem\n  - ATPRecipientType (CHAR): ATPRecipientType\n  - Material (CHAR): Material\n  - Plant (CHAR): Plant\n  - StorageLocation (CHAR): StorageLocation\n  - IsBusinessPurposeCompleted (CHAR): IsBusinessPurposeCompleted\n  - IsSalesDocument (CHAR): IsSalesDocument\n  - IsStockTransportDocument (CHAR): IsStockTransportDocument\n  - ABOPConfirmationStrategy (CHAR): ABOPConfirmationStrategy\n  - ABOPRqmtEvaluationSequence (CHAR): ABOPRqmtEvaluationSequence\n  - ATPCheckItemStatus (CHAR): ATPCheckItemStatus\n  - RqmtIsProcessed (CHAR): RqmtIsProcessed\n  - RqmtIsLocked (CHAR): RqmtIsLocked\n  - RqmtIsWithIssues (CHAR): RqmtIsWithIssues\n  - RqmtIsWithOrderUpdateIssues (CHAR): RqmtIsWithOrderUpdateIssues\n  - ABOPSegmentUUID (CHAR): ABOPSegmentUUID\n  - RqmtIsSupAssgmtRelevant (CHAR): RqmtIsSupAssgmtRelevant\n  - SupAssgmtItemStatus (CHAR): SupAssgmtItemStatus\n  - ReqdProdAvailabilityUTCDateTme (CHAR): ReqdProdAvailabilityUTCDateTme\n  - ReqdProdAvailabilityTimeZone (CHAR): ReqdProdAvailabilityTimeZone\n  - RequestedQuantityInBaseUnit (CHAR): RequestedQuantityInBaseUnit\n  - RqmtIsFullyConfdOnTimeAfterRun (CHAR): RqmtIsFullyConfdOnTimeAfterRun\n  - RqmtIsFullyConfdAfterRun (CHAR): RqmtIsFullyConfdAfterRun\n  - OnTimeConfdQtyBfrRunInBaseUnit (CHAR): OnTimeConfdQtyBfrRunInBaseUnit\n  - OnTimeConfdQtyAftRunInBaseUnit (CHAR): OnTimeConfdQtyAftRunInBaseUnit\n  - ErlstConfdProdAvailyDteTmeBfr (CHAR): ErlstConfdProdAvailyDteTmeBfr\n  - ErlstConfdProdAvailyTmznBfr (CHAR): ErlstConfdProdAvailyTmznBfr\n  - LatestConfdProdAvailyDteTmeBfr (CHAR): LatestConfdProdAvailyDteTmeBfr\n  - LatestConfdProdAvailyTmznBfr (CHAR): LatestConfdProdAvailyTmznBfr\n  - ErlstConfdQtyBfrRunInBaseUnit (CHAR): ErlstConfdQtyBfrRunInBaseUnit\n  - ConfdQtyBeforeRunInBaseUnit (CHAR): ConfdQtyBeforeRunInBaseUnit\n  - ErlstConfdProdAvailyDteTmeAft (CHAR): ErlstConfdProdAvailyDteTmeAft\n  - ErlstConfdProdAvailyTmznAft (CHAR): ErlstConfdProdAvailyTmznAft\n  - LatestConfdProdAvailyDteTmeAft (CHAR): LatestConfdProdAvailyDteTmeAft\n  - LatestConfdProdAvailyTmznAft (CHAR): LatestConfdProdAvailyTmznAft\n  - ErlstConfdQtyAftRunInBaseUnit (CHAR): ErlstConfdQtyAftRunInBaseUnit\n  - ConfdQtyAfterRunInBaseUnit (CHAR): ConfdQtyAfterRunInBaseUnit\n  - RqmtHasSubstitutionsAfterRun (CHAR): RqmtHasSubstitutionsAfterRun\n  - RqmtIsFullyAssignedAfterRun (CHAR): RqmtIsFullyAssignedAfterRun\n  - ErlstSupAssgmtDteTmeBeforeRun (CHAR): ErlstSupAssgmtDteTmeBeforeRun\n  - ErlstSupAssgmtTmznBeforeRun (CHAR): ErlstSupAssgmtTmznBeforeRun\n  - LatestSupAssgmtDteTmeBeforeRun (CHAR): LatestSupAssgmtDteTmeBeforeRun\n  - LatestSupAssgmtTmznBeforeRun (CHAR): LatestSupAssgmtTmznBeforeRun\n  - ErlstSupAssgmtQtyBfrInBaseUnit (CHAR): ErlstSupAssgmtQtyBfrInBaseUnit\n  - SupAssgmtQtyBfrRunInBaseUnit (CHAR): SupAssgmtQtyBfrRunInBaseUnit\n  - ErlstSupAssgmtDteTmeAfterRun (CHAR): ErlstSupAssgmtDteTmeAfterRun\n  - ErlstSupAssgmtTmznAfterRun (CHAR): ErlstSupAssgmtTmznAfterRun\n  - LatestSupAssgmtDteTmeAfterRun (CHAR): LatestSupAssgmtDteTmeAfterRun\n  - LatestSupAssgmtTmznAfterRun (CHAR): LatestSupAssgmtTmznAfterRun\n  - ErlstSupAssgmtQtyAftInBaseUnit (CHAR): ErlstSupAssgmtQtyAftInBaseUnit\n  - SupAssgmtQtyAftRunInBaseUnit (CHAR): SupAssgmtQtyAftRunInBaseUnit\n  - BaseUnit (CHAR): BaseUnit\n  - _ATPRecipientTypeText (CHAR): _ATPRecipientTypeText\n  - _Material (CHAR): _Material\n  - _Segment (CHAR): _Segment\n  - _BaseUnit (CHAR): _BaseUnit\n  - _SupplyingPlant (CHAR): _SupplyingPlant\n  - _SupplyingStorageLocation (CHAR): _SupplyingStorageLocation\n  - _ABOPStrategyText (CHAR): _ABOPStrategyText\n  - _SupAssgmtItemStatusText (CHAR): _SupAssgmtItemStatusText\n  - _ItemStatusText (CHAR): _ItemStatusText\nAssociations & Relationships:\n  - _Material ->  [0..1] ON \n  - _BaseUnit ->  [0..1] ON \n  - _ABOPStrategyText ->  [0..1] ON \n  - _ItemStatusText ->  [0..1] ON \n  - _SupAssgmtItemStatusText ->  [0..1] ON \n  - _ATPRecipientTypeText ->  [0..1] ON \n  - _Segment ->  [0..1] ON "
+    },
+    "42": {
+      "id": 42,
+      "cds_name": "I_ABOPRunSoldToParty",
+      "name": "I_ABOPRunSoldToParty",
+      "label": "Run confirmation details by Sold To Party",
+      "description": "Run confirmation details by Sold To Party",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 12,
+      "association_count": 2,
+      "fields": [
+        "D",
+        "L",
+        "MIXED",
+        "I_ABOPRunSoldToParty",
+        "P_ABOPRunSoldToParty",
+        "Recipient",
+        "ABOPRunUUID",
+        "RecipientText",
+        "ATPRecipientType",
+        "IsBusinessPurposeCompleted",
+        "_ResultFiguresForAllRqmts",
+        "_ATPRecipientTypeText"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPRunPartRsltFigsByRcpnt",
+          "alias": "_ResultFiguresForAllRqmts"
+        },
+        {
+          "target": "I_ATPRecipientTypeText",
+          "alias": "_ATPRecipientTypeText"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPRunSoldToParty\nBusiness Label: Run confirmation details by Sold To Party\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunSoldToParty' (Run confirmation details by Sold To Party) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - L (CHAR): L\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunSoldToParty (CHAR): I_ABOPRunSoldToParty\n  - P_ABOPRunSoldToParty (CHAR): P_ABOPRunSoldToParty\n  - Recipient (CHAR): Recipient\n  - ABOPRunUUID (CHAR): ABOPRunUUID\n  - RecipientText (CHAR): RecipientText\n  - ATPRecipientType (CHAR): ATPRecipientType\n  - IsBusinessPurposeCompleted (CHAR): IsBusinessPurposeCompleted\n  - _ResultFiguresForAllRqmts (CHAR): _ResultFiguresForAllRqmts\n  - _ATPRecipientTypeText (CHAR): _ATPRecipientTypeText\nAssociations & Relationships:\n  - _ResultFiguresForAllRqmts ->  [0..1] ON \n  - _ATPRecipientTypeText ->  [0..1] ON "
+    },
+    "43": {
+      "id": 43,
+      "cds_name": "I_ABOPRunStrategy",
+      "name": "I_ABOPRunStrategy",
+      "label": "Run confirmation details by strategy",
+      "description": "Run confirmation details by strategy",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 11,
+      "association_count": 4,
+      "fields": [
+        "D",
+        "L",
+        "MIXED",
+        "I_ABOPRunStrategy",
+        "P_ABOPRunStrategy",
+        "ABOPConfirmationStrategy",
+        "ABOPRunUUID",
+        "_ResultFiguresForAllRqmts",
+        "_ABOPStrategyText",
+        "_Requirements",
+        "_ABOPRun"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPRunPartRsltFigsByStrgy",
+          "alias": "_ResultFiguresForAllRqmts"
+        },
+        {
+          "target": "I_ABOPRunRequirement",
+          "alias": "_Requirements"
+        },
+        {
+          "target": "I_ABOPRun",
+          "alias": "_ABOPRun"
+        },
+        {
+          "target": "I_ABOPStrategyText",
+          "alias": "_ABOPStrategyText"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPRunStrategy\nBusiness Label: Run confirmation details by strategy\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPRunStrategy' (Run confirmation details by strategy) belonging to CA.\nAttributes & Measures:\n  - D (CHAR): D\n  - L (CHAR): L\n  - MIXED (CHAR): MIXED\n  - I_ABOPRunStrategy (CHAR): I_ABOPRunStrategy\n  - P_ABOPRunStrategy (CHAR): P_ABOPRunStrategy\n  - ABOPConfirmationStrategy (CHAR): ABOPConfirmationStrategy\n  - ABOPRunUUID (CHAR): ABOPRunUUID\n  - _ResultFiguresForAllRqmts (CHAR): _ResultFiguresForAllRqmts\n  - _ABOPStrategyText (CHAR): _ABOPStrategyText\n  - _Requirements (CHAR): _Requirements\n  - _ABOPRun (CHAR): _ABOPRun\nAssociations & Relationships:\n  - _ResultFiguresForAllRqmts ->  [0..1] ON \n  - _Requirements ->  [0..1] ON \n  - _ABOPRun ->  [0..1] ON \n  - _ABOPStrategyText ->  [0..1] ON "
+    },
+    "44": {
+      "id": 44,
+      "cds_name": "I_ABOPSegment",
+      "name": "I_ABOPSegment",
+      "label": "ABOP Segment",
+      "description": "ABOP Segment",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 25,
+      "association_count": 6,
+      "fields": [
+        "true",
+        "BUSINESS_OBJECT",
+        "A",
+        "M",
+        "MASTER",
+        "I_ABOPSegment",
+        "atp_bop_seg",
+        "ABOPSegmentUUID",
+        "ABOPSegmentName",
+        "ABOPSegmentType",
+        "ABOPSegmentCondition",
+        "ABOPSegmentProcedure",
+        "ATPSelOptnToolDefUUID",
+        "ABOPSegmentSelOptnToolProced",
+        "CreationDateTime",
+        "CreatedByUser",
+        "LastChangeDateTime",
+        "LastChangedByUser",
+        "LastUsageUTCDateTime",
+        "_Sort",
+        "_Simulation",
+        "_Text",
+        "_SelOptnToolDefinition",
+        "_CreatedByUser",
+        "_LastChangedByUser"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPSegmentSort",
+          "alias": "_Sort"
+        },
+        {
+          "target": "I_ABOPSegmentSimulation",
+          "alias": "_Simulation"
+        },
+        {
+          "target": "I_ABOPSegmentText",
+          "alias": "_Text"
+        },
+        {
+          "target": "I_ATPSelOptnToolDefinition",
+          "alias": "_SelOptnToolDefinition"
+        },
+        {
+          "target": "I_User",
+          "alias": "_CreatedByUser"
+        },
+        {
+          "target": "I_User",
+          "alias": "_LastChangedByUser"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPSegment\nBusiness Label: ABOP Segment\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPSegment' (ABOP Segment) belonging to CA.\nAttributes & Measures:\n  - true (CHAR): true\n  - BUSINESS_OBJECT (CHAR): BUSINESS_OBJECT\n  - A (CHAR): A\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPSegment (CHAR): I_ABOPSegment\n  - atp_bop_seg (CHAR): atp_bop_seg\n  - ABOPSegmentUUID (CHAR): ABOPSegmentUUID\n  - ABOPSegmentName (CHAR): ABOPSegmentName\n  - ABOPSegmentType (CHAR): ABOPSegmentType\n  - ABOPSegmentCondition (CHAR): ABOPSegmentCondition\n  - ABOPSegmentProcedure (CHAR): ABOPSegmentProcedure\n  - ATPSelOptnToolDefUUID (CHAR): ATPSelOptnToolDefUUID\n  - ABOPSegmentSelOptnToolProced (CHAR): ABOPSegmentSelOptnToolProced\n  - CreationDateTime (CHAR): CreationDateTime\n  - CreatedByUser (CHAR): CreatedByUser\n  - LastChangeDateTime (CHAR): LastChangeDateTime\n  - LastChangedByUser (CHAR): LastChangedByUser\n  - LastUsageUTCDateTime (CHAR): LastUsageUTCDateTime\n  - _Sort (CHAR): _Sort\n  - _Simulation (CHAR): _Simulation\n  - _Text (CHAR): _Text\n  - _SelOptnToolDefinition (CHAR): _SelOptnToolDefinition\n  - _CreatedByUser (CHAR): _CreatedByUser\n  - _LastChangedByUser (CHAR): _LastChangedByUser\nAssociations & Relationships:\n  - _Sort ->  [0..1] ON \n  - _Simulation ->  [0..1] ON \n  - _Text ->  [0..1] ON \n  - _SelOptnToolDefinition ->  [0..1] ON \n  - _CreatedByUser ->  [0..1] ON \n  - _LastChangedByUser ->  [0..1] ON "
+    },
+    "45": {
+      "id": 45,
+      "cds_name": "I_ABOPSegmentSimulation",
+      "name": "I_ABOPSegmentSimulation",
+      "label": "ABOP Segment Simulation",
+      "description": "ABOP Segment Simulation",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 11,
+      "association_count": 0,
+      "fields": [
+        "A",
+        "M",
+        "MASTER",
+        "I_ABOPSegmentSimulation",
+        "atp_bop_seg_sim",
+        "ABOPSegmentSimulationUUID",
+        "ABOPSegmentUUID",
+        "CreatedByUser",
+        "CreationDateTime",
+        "_Segment",
+        "_ScheduleLine"
+      ],
+      "associations": [],
+      "document_text": "CDS View: I_ABOPSegmentSimulation\nBusiness Label: ABOP Segment Simulation\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPSegmentSimulation' (ABOP Segment Simulation) belonging to CA.\nAttributes & Measures:\n  - A (CHAR): A\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPSegmentSimulation (CHAR): I_ABOPSegmentSimulation\n  - atp_bop_seg_sim (CHAR): atp_bop_seg_sim\n  - ABOPSegmentSimulationUUID (CHAR): ABOPSegmentSimulationUUID\n  - ABOPSegmentUUID (CHAR): ABOPSegmentUUID\n  - CreatedByUser (CHAR): CreatedByUser\n  - CreationDateTime (CHAR): CreationDateTime\n  - _Segment (CHAR): _Segment\n  - _ScheduleLine (CHAR): _ScheduleLine"
+    },
+    "46": {
+      "id": 46,
+      "cds_name": "I_ABOPSegmentSimulationTP",
+      "name": "I_ABOPSegmentSimulationTP",
+      "label": "ABOP Segment Simulation Transactional Processing",
+      "description": "ABOP Segment Simulation Transactional Processing",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 12,
+      "association_count": 2,
+      "fields": [
+        "true",
+        "C",
+        "M",
+        "MASTER",
+        "I_ABOPSegmentSimulationTP",
+        "I_ABOPSegmentSimulation",
+        "ABOPSegmentSimulationUUID",
+        "ABOPSegmentUUID",
+        "CreatedByUser",
+        "CreationDateTime",
+        "_Segment",
+        "_ScheduleLine"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPSegmentTP",
+          "alias": "_Segment"
+        },
+        {
+          "target": "I_ABOPSgmtSimlnSchedLineTP",
+          "alias": "_ScheduleLine"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPSegmentSimulationTP\nBusiness Label: ABOP Segment Simulation Transactional Processing\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPSegmentSimulationTP' (ABOP Segment Simulation Transactional Processing) belonging to CA.\nAttributes & Measures:\n  - true (CHAR): true\n  - C (CHAR): C\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPSegmentSimulationTP (CHAR): I_ABOPSegmentSimulationTP\n  - I_ABOPSegmentSimulation (CHAR): I_ABOPSegmentSimulation\n  - ABOPSegmentSimulationUUID (CHAR): ABOPSegmentSimulationUUID\n  - ABOPSegmentUUID (CHAR): ABOPSegmentUUID\n  - CreatedByUser (CHAR): CreatedByUser\n  - CreationDateTime (CHAR): CreationDateTime\n  - _Segment (CHAR): _Segment\n  - _ScheduleLine (CHAR): _ScheduleLine\nAssociations & Relationships:\n  - _Segment ->  [0..1] ON \n  - _ScheduleLine ->  [0..1] ON "
+    },
+    "47": {
+      "id": 47,
+      "cds_name": "I_ABOPSegmentSort",
+      "name": "I_ABOPSegmentSort",
+      "label": "ABOP Segment Sort",
+      "description": "ABOP Segment Sort",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 16,
+      "association_count": 2,
+      "fields": [
+        "TEXT",
+        "A",
+        "M",
+        "MASTER",
+        "I_ABOPSegmentSort",
+        "atp_bop_seg_sort",
+        "ABOPSegmentSortUUID",
+        "ABOPSegmentUUID",
+        "ABOPSortAttribute",
+        "ABOPSortAttributeFldPathUUID",
+        "ABOPSortAttributeFldPathIntID",
+        "ABOPSortDirection",
+        "ABOPSortAttributeSequence",
+        "ABOPCustomSortUUID",
+        "_Segment",
+        "_CustomSort"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPSegment",
+          "alias": "_Segment"
+        },
+        {
+          "target": "I_ABOPCustomSort",
+          "alias": "_CustomSort"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPSegmentSort\nBusiness Label: ABOP Segment Sort\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPSegmentSort' (ABOP Segment Sort) belonging to CA.\nAttributes & Measures:\n  - TEXT (CHAR): TEXT\n  - A (CHAR): A\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPSegmentSort (CHAR): I_ABOPSegmentSort\n  - atp_bop_seg_sort (CHAR): atp_bop_seg_sort\n  - ABOPSegmentSortUUID (CHAR): ABOPSegmentSortUUID\n  - ABOPSegmentUUID (CHAR): ABOPSegmentUUID\n  - ABOPSortAttribute (CHAR): ABOPSortAttribute\n  - ABOPSortAttributeFldPathUUID (CHAR): ABOPSortAttributeFldPathUUID\n  - ABOPSortAttributeFldPathIntID (CHAR): ABOPSortAttributeFldPathIntID\n  - ABOPSortDirection (CHAR): ABOPSortDirection\n  - ABOPSortAttributeSequence (CHAR): ABOPSortAttributeSequence\n  - ABOPCustomSortUUID (CHAR): ABOPCustomSortUUID\n  - _Segment (CHAR): _Segment\n  - _CustomSort (CHAR): _CustomSort\nAssociations & Relationships:\n  - _Segment ->  [0..1] ON \n  - _CustomSort ->  [0..1] ON "
+    },
+    "48": {
+      "id": 48,
+      "cds_name": "I_ABOPSegmentSortTP",
+      "name": "I_ABOPSegmentSortTP",
+      "label": "BOP Segment Sort Transactional Processing",
+      "description": "BOP Segment Sort Transactional Processing",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 17,
+      "association_count": 1,
+      "fields": [
+        "true",
+        "C",
+        "M",
+        "MASTER",
+        "I_ABOPSegmentSortTP",
+        "I_ABOPSegmentSort",
+        "ABOPSegmentSortUUID",
+        "ABOPSegmentUUID",
+        "ABOPSortAttribute",
+        "ABOPSortAttributeFldPathUUID",
+        "ABOPSortAttributeFldPathIntID",
+        "ABOPSortDirection",
+        "ABOPSortAttributeSequence",
+        "ABOPCustomSortUUID",
+        "ABOPCustomSortName",
+        "_Segment",
+        "_CustomSort"
+      ],
+      "associations": [
+        {
+          "target": "I_ABOPSegmentTP",
+          "alias": "_Segment"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPSegmentSortTP\nBusiness Label: BOP Segment Sort Transactional Processing\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPSegmentSortTP' (BOP Segment Sort Transactional Processing) belonging to CA.\nAttributes & Measures:\n  - true (CHAR): true\n  - C (CHAR): C\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPSegmentSortTP (CHAR): I_ABOPSegmentSortTP\n  - I_ABOPSegmentSort (CHAR): I_ABOPSegmentSort\n  - ABOPSegmentSortUUID (CHAR): ABOPSegmentSortUUID\n  - ABOPSegmentUUID (CHAR): ABOPSegmentUUID\n  - ABOPSortAttribute (CHAR): ABOPSortAttribute\n  - ABOPSortAttributeFldPathUUID (CHAR): ABOPSortAttributeFldPathUUID\n  - ABOPSortAttributeFldPathIntID (CHAR): ABOPSortAttributeFldPathIntID\n  - ABOPSortDirection (CHAR): ABOPSortDirection\n  - ABOPSortAttributeSequence (CHAR): ABOPSortAttributeSequence\n  - ABOPCustomSortUUID (CHAR): ABOPCustomSortUUID\n  - ABOPCustomSortName (CHAR): ABOPCustomSortName\n  - _Segment (CHAR): _Segment\n  - _CustomSort (CHAR): _CustomSort\nAssociations & Relationships:\n  - _Segment ->  [0..1] ON "
+    },
+    "49": {
+      "id": 49,
+      "cds_name": "I_ABOPSegmentText",
+      "name": "I_ABOPSegmentText",
+      "label": "ABOP Segment Text",
+      "description": "ABOP Segment Text",
+      "domain": "CA",
+      "key_fields": [],
+      "field_count": 12,
+      "association_count": 2,
+      "fields": [
+        "TEXT",
+        "A",
+        "M",
+        "MASTER",
+        "I_ABOPSegmentText",
+        "atp_bop_segt",
+        "ABOPSegmentUUID",
+        "Language",
+        "ABOPSegmentDescription",
+        "ABOPSegmentDescriptionUUID",
+        "_Segment",
+        "_Language"
+      ],
+      "associations": [
+        {
+          "target": "I_Language",
+          "alias": "_Language"
+        },
+        {
+          "target": "I_ABOPSegment",
+          "alias": "_Segment"
+        }
+      ],
+      "document_text": "CDS View: I_ABOPSegmentText\nBusiness Label: ABOP Segment Text\nFunctional Domain: CA\nSummary: Standard SAP S/4HANA CDS View 'I_ABOPSegmentText' (ABOP Segment Text) belonging to CA.\nAttributes & Measures:\n  - TEXT (CHAR): TEXT\n  - A (CHAR): A\n  - M (CHAR): M\n  - MASTER (CHAR): MASTER\n  - I_ABOPSegmentText (CHAR): I_ABOPSegmentText\n  - atp_bop_segt (CHAR): atp_bop_segt\n  - ABOPSegmentUUID (CHAR): ABOPSegmentUUID\n  - Language (CHAR): Language\n  - ABOPSegmentDescription (CHAR): ABOPSegmentDescription\n  - ABOPSegmentDescriptionUUID (CHAR): ABOPSegmentDescriptionUUID\n  - _Segment (CHAR): _Segment\n  - _Language (CHAR): _Language\nAssociations & Relationships:\n  - _Language ->  [0..1] ON \n  - _Segment ->  [0..1] ON "
+    }
+  }
+}

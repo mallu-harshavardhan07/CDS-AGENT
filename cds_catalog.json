@@ -1,0 +1,1563 @@
+[
+  {
+    "name": "I_ABAPApplCompText",
+    "description": "ABAP Application Component Text",
+    "domain": "CA",
+    "fields": [
+      "Language",
+      "ABAPApplicationComponent",
+      "ABAPApplicationComponentName",
+      "_ABAPApplicationComponent",
+      "_Language"
+    ],
+    "associations": [
+      {
+        "target": "I_Language",
+        "alias": "_Language"
+      }
+    ]
+  },
+  {
+    "name": "I_ABAPApplicationComponent",
+    "description": "ABAP Application Component",
+    "domain": "CA",
+    "fields": [
+      "ABAPApplicationComponent",
+      "ABAPApplCompRespUser",
+      "CreationDate",
+      "CreationTime",
+      "LastChangedByUser",
+      "LastChangeDate",
+      "LastChangeTime",
+      "ABAPApplCompExternalID",
+      "ABAPApplCompIsVisible",
+      "ABAPApplCompIsSelectable",
+      "_Text"
+    ],
+    "associations": []
+  },
+  {
+    "name": "I_ABAPObjectDirectoryEntry",
+    "description": "ABAP Object Directory Entry",
+    "domain": "CA",
+    "fields": [
+      "ABAPObjectCategory",
+      "ABAPObjectType",
+      "ABAPObject",
+      "ABAPSourceSystem",
+      "ABAPObjectResponsibleUser",
+      "ABAPPackage",
+      "ABAPObjectGenerationCode",
+      "ABAPObjectMasterLanguage",
+      "ABAPObjectDeploymentTarget",
+      "ABAPObjectIsDeleted",
+      "CreationDate",
+      "_ABAPPackage",
+      "_ABAPObjectMasterLanguage"
+    ],
+    "associations": [
+      {
+        "target": "I_ABAPPackage",
+        "alias": "_ABAPPackage"
+      },
+      {
+        "target": "I_Language",
+        "alias": "_ABAPObjectMasterLanguage"
+      }
+    ]
+  },
+  {
+    "name": "I_ABAPPackage",
+    "description": "ABAP Package",
+    "domain": "CA",
+    "fields": [
+      "ABAPPackage",
+      "ABAPPackageResponsibleUser",
+      "ABAPSoftwareComponent",
+      "ABAPApplicationComponent",
+      "ABAPNamespace",
+      "ABAPPackageTargetEnvironment",
+      "CreatedByUser",
+      "CreationDate",
+      "LastChangedByUser",
+      "LastChangeDate",
+      "ABAPLanguageVersion",
+      "_ABAPSoftwareComponent",
+      "_ABAPApplicationComponent",
+      "_Text"
+    ],
+    "associations": [
+      {
+        "target": "I_ABAPSoftwareComponent",
+        "alias": "_ABAPSoftwareComponent"
+      },
+      {
+        "target": "I_ABAPApplicationComponent",
+        "alias": "_ABAPApplicationComponent"
+      }
+    ]
+  },
+  {
+    "name": "I_ABAPPackageText",
+    "description": "ABAP Package Text",
+    "domain": "CA",
+    "fields": [
+      "ABAPPackage",
+      "Language",
+      "ABAPPackageName",
+      "_ABAPPackage",
+      "_Language"
+    ],
+    "associations": [
+      {
+        "target": "I_Language",
+        "alias": "_Language"
+      }
+    ]
+  },
+  {
+    "name": "I_ABAPSoftwareComponent",
+    "description": "ABAP Software Component",
+    "domain": "CA",
+    "fields": [
+      "ABAPSoftwareComponent",
+      "ABAPSoftwareComponentType",
+      "ABAPSoftwareComponentVersion",
+      "_Text"
+    ],
+    "associations": []
+  },
+  {
+    "name": "I_ABAPSoftwareComponentText",
+    "description": "ABAP Software Component Text",
+    "domain": "CA",
+    "fields": [
+      "ABAPSoftwareComponent",
+      "Language",
+      "ABAPSoftwareComponentName",
+      "_ABAPSoftwareComponent",
+      "_Language"
+    ],
+    "associations": [
+      {
+        "target": "I_Language",
+        "alias": "_Language"
+      }
+    ]
+  },
+  {
+    "name": "I_ABCIndicator",
+    "description": "ABC Indicator",
+    "domain": "CA",
+    "fields": [
+      "I_ABCIndicator",
+      "t370c",
+      "ABCIndicator",
+      "initial",
+      "then",
+      "ABCIndicatorCodeOID",
+      "_Text"
+    ],
+    "associations": [
+      {
+        "target": "I_ABCIndicatorText",
+        "alias": "_Text"
+      }
+    ]
+  },
+  {
+    "name": "I_ABCIndicatorText",
+    "description": "ABC Indicator - Text",
+    "domain": "CA",
+    "fields": [
+      "TEXT",
+      "CUSTOMIZING",
+      "S",
+      "A",
+      "t370c_t",
+      "ABCIndicator",
+      "Language",
+      "ABCIndicatorDesc",
+      "_ABCIndicator",
+      "_Language"
+    ],
+    "associations": []
+  },
+  {
+    "name": "I_ABOPAvailyChgLogFltr",
+    "description": "BOP Variant Availability Chg Log Filters",
+    "domain": "CA",
+    "fields": [
+      "A",
+      "M",
+      "MASTER",
+      "I_ABOPAvailyChgLogFltr",
+      "atp_bop_acl_fltr",
+      "system_language",
+      "AvailyChgLogFltrAssgmtUUID",
+      "ABOPVariantUUID",
+      "AvailyChgLogFltrCategory",
+      "_Variant",
+      "_ACLFltrCat",
+      "_ACLFltrCatText"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPVariant",
+        "alias": "_Variant"
+      },
+      {
+        "target": "I_AvailyChgLogFltrCat",
+        "alias": "_ACLFltrCat"
+      },
+      {
+        "target": "I_AvailyChgLogFltrCatText",
+        "alias": "_ACLFltrCatText"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPAvailyChgLogFltrTP",
+    "description": "BOP Variant ACL - TP",
+    "domain": "CA",
+    "fields": [
+      "true",
+      "C",
+      "M",
+      "MASTER",
+      "I_ABOPAvailyChgLogFltrTP",
+      "I_ABOPAvailyChgLogFltr",
+      "AvailyChgLogFltrAssgmtUUID",
+      "ABOPVariantUUID",
+      "AvailyChgLogFltrCategory",
+      "_Variant",
+      "_ACLFltrCat",
+      "_ACLFltrCatText"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPVariantTP",
+        "alias": "_Variant"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPBusinessScenario",
+    "description": "All possible BOP business scenarios",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "M",
+      "MASTER",
+      "I_ABOPBusinessScenario",
+      "P_ABOPBusinessScenario",
+      "SalesDocumentsAreIncluded",
+      "StockTransportOrdsAreIncluded",
+      "ABOPExecutionMethod",
+      "ABOPCheckingRule",
+      "ABOPCheckingRuleText"
+    ],
+    "associations": []
+  },
+  {
+    "name": "I_ABOPCheckingRule",
+    "description": "Domain value ABOPChecking Rule",
+    "domain": "CA",
+    "fields": [
+      "B",
+      "L",
+      "META",
+      "I_ABOPCheckingRule",
+      "typ",
+      "system_language",
+      "ABOPCheckingRule",
+      "_CheckingRuleText"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPCheckingRuleText",
+        "alias": "_CheckingRuleText"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPCheckingRuleText",
+    "description": "Domain value ABOPChecking Rule with text",
+    "domain": "CA",
+    "fields": [
+      "TEXT",
+      "B",
+      "L",
+      "CUSTOMIZING",
+      "I_ABOPCheckingRuleText",
+      "txt",
+      "ABOPCheckingRule",
+      "Language",
+      "ABOPCheckingRuleText",
+      "_Language"
+    ],
+    "associations": [
+      {
+        "target": "I_Language",
+        "alias": "_Language"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPCheckingRuleValueHelp",
+    "description": "Value Help for ABOP Checking Rule",
+    "domain": "CA",
+    "fields": [
+      "VALUE_HELP",
+      "C",
+      "M",
+      "MASTER",
+      "I_ABOPCheckingRuleValueHelp",
+      "I_ABOPPurchasingDocType",
+      "ABOPCheckingRule",
+      "ABOPCheckingRuleText",
+      "dd07t",
+      "mandt"
+    ],
+    "associations": []
+  },
+  {
+    "name": "I_ABOPCustomSort",
+    "description": "ABOP Custom Sort Sequence",
+    "domain": "SD",
+    "fields": [
+      "true",
+      "BUSINESS_OBJECT",
+      "A",
+      "M",
+      "MASTER",
+      "I_ABOPCustomSort",
+      "atp_bop_css",
+      "ABOPCustomSortUUID",
+      "ABOPCustomSortName",
+      "ABOPSortAttribute",
+      "ABOPSortAttributeFldPathUUID",
+      "ABOPSortAttributeFldPathIntID",
+      "IsDefaultSortSequence",
+      "CreationDateTime",
+      "CreatedByUser",
+      "LastChangeDateTime",
+      "LastChangedByUser",
+      "LastUsageUTCDateTime",
+      "_CustomSortVal",
+      "_Text",
+      "_CreatedByUser",
+      "_LastChangedByUser"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPCustomSortVal",
+        "alias": "_CustomSortVal"
+      },
+      {
+        "target": "I_ABOPCustomSortText",
+        "alias": "_Text"
+      },
+      {
+        "target": "I_User",
+        "alias": "_CreatedByUser"
+      },
+      {
+        "target": "I_User",
+        "alias": "_LastChangedByUser"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPCustomSortText",
+    "description": "ABOP Custom Sort Text",
+    "domain": "SD",
+    "fields": [
+      "TEXT",
+      "A",
+      "M",
+      "MASTER",
+      "I_ABOPCustomSortText",
+      "atp_bop_csst",
+      "ABOPCustomSortUUID",
+      "Language",
+      "ABOPCustomSortDescription",
+      "_CustomSort",
+      "_Language"
+    ],
+    "associations": [
+      {
+        "target": "I_Language",
+        "alias": "_Language"
+      },
+      {
+        "target": "I_ABOPCustomSort",
+        "alias": "_CustomSort"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPCustomSortTextTP",
+    "description": "Description for Custom Sort",
+    "domain": "SD",
+    "fields": [
+      "TEXT",
+      "true",
+      "C",
+      "M",
+      "MASTER",
+      "I_ABOPCustomSortTextTP",
+      "I_ABOPCustomSortText",
+      "ABOPCustomSortUUID",
+      "Language",
+      "ABOPCustomSortDescription",
+      "_CustomSort",
+      "_Language"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPCustomSortTP",
+        "alias": "_CustomSort"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPCustomSortTP",
+    "description": "ABOP Custom Sort Transactional Processing",
+    "domain": "SD",
+    "fields": [
+      "true",
+      "C",
+      "M",
+      "MASTER",
+      "I_ABOPCustomSortTP",
+      "I_ABOPCustomSort",
+      "ABOPCustomSortUUID",
+      "ABOPCustomSortName",
+      "ABOPSortAttribute",
+      "ABOPSortAttributeFldPathUUID",
+      "ABOPSortAttributeFldPathIntID",
+      "IsDefaultSortSequence",
+      "CreationDateTime",
+      "CreatedByUser",
+      "LastChangeDateTime",
+      "LastChangedByUser",
+      "LastUsageUTCDateTime",
+      "NumberOfRelatedABOPSegments",
+      "_Value",
+      "_Text",
+      "_CreatedByUser",
+      "_LastChangedByUser"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPCustomSortValTP",
+        "alias": "_Value"
+      },
+      {
+        "target": "I_ABOPCustomSortTextTP",
+        "alias": "_Text"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPCustomSortVal",
+    "description": "ABOP Custom Sort Sequence Values",
+    "domain": "SD",
+    "fields": [
+      "A",
+      "M",
+      "MASTER",
+      "I_ABOPCustomSortVal",
+      "atp_bop_css_val",
+      "ABOPCustomSortValUUID",
+      "ABOPCustomSortUUID",
+      "ABOPSortAttributeValue",
+      "ABOPSortAttributeIntValue",
+      "BusPrpsOfRefdValueIsCompleted",
+      "ABOPSortPosition",
+      "ABOPSortPositionIsLow",
+      "_CustomSort"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPCustomSort",
+        "alias": "_CustomSort"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPCustomSortValTP",
+    "description": "Custom Sort Attribute Values with Priorities",
+    "domain": "SD",
+    "fields": [
+      "true",
+      "C",
+      "M",
+      "MASTER",
+      "I_ABOPCustomSortValTP",
+      "I_ABOPCustomSortVal",
+      "ABOPCustomSortValUUID",
+      "ABOPCustomSortUUID",
+      "ABOPSortAttributeValue",
+      "ABOPSortAttributeIntValue",
+      "BusPrpsOfRefdValueIsCompleted",
+      "ABOPSortPosition",
+      "ABOPSortPositionIsLow",
+      "_CustomSort"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPCustomSortTP",
+        "alias": "_CustomSort"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPCustomSortVH",
+    "description": "Value Help for ABOP Custom Sort Name",
+    "domain": "SD",
+    "fields": [
+      "A",
+      "M",
+      "MASTER",
+      "I_ABOPCustomSortVH",
+      "atp_bop_css",
+      "system_language",
+      "ABOPCustomSortName",
+      "ABOPCustomSortUUID",
+      "ABOPSortAttribute",
+      "ABOPSortAttributeFldPathUUID",
+      "CreationDateTime",
+      "CreatedByUser",
+      "LastChangeDateTime",
+      "LastChangedByUser",
+      "_Text"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPCustomSortText",
+        "alias": "_Text"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPCustSortUsageInSegment",
+    "description": "Usage of custom sort in segment",
+    "domain": "SD",
+    "fields": [
+      "C",
+      "M",
+      "MASTER",
+      "I_ABOPCustSortUsageInSegment",
+      "I_ABOPSegmentSortTP",
+      "ABOPCustomSortUUID",
+      "ABOPSegmentUUID",
+      "ABOPSegmentName"
+    ],
+    "associations": []
+  },
+  {
+    "name": "I_ABOPExceptionBehaviorText",
+    "description": "Exceptional behavior text in BOP",
+    "domain": "CA",
+    "fields": [
+      "TEXT",
+      "B",
+      "L",
+      "CUSTOMIZING",
+      "I_ABOPExceptionBehaviorText",
+      "txt",
+      "ABOPExceptionBehavior",
+      "Language",
+      "ABOPExceptionBehaviorText",
+      "_Language"
+    ],
+    "associations": [
+      {
+        "target": "I_Language",
+        "alias": "_Language"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPExceptionBehaviourText",
+    "description": "Exceptional behavior text in BOP",
+    "domain": "CA",
+    "fields": [
+      "TEXT",
+      "B",
+      "L",
+      "CUSTOMIZING",
+      "I_ABOPExceptionBehaviourText",
+      "txt",
+      "ABOPExceptionBehavior",
+      "Language",
+      "ABOPExceptionBehaviorText",
+      "_Language"
+    ],
+    "associations": [
+      {
+        "target": "I_Language",
+        "alias": "_Language"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPExecutionMethodText",
+    "description": "Execution method text in BOP",
+    "domain": "CA",
+    "fields": [
+      "TEXT",
+      "B",
+      "L",
+      "CUSTOMIZING",
+      "I_ABOPExecutionMethodText",
+      "txt",
+      "ABOPExecutionMethod",
+      "Language",
+      "ABOPExecutionMethodText",
+      "_Language"
+    ],
+    "associations": [
+      {
+        "target": "I_Language",
+        "alias": "_Language"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPFallbackBehaviorText",
+    "description": "Fallback behavior Text in BOP",
+    "domain": "CA",
+    "fields": [
+      "TEXT",
+      "B",
+      "L",
+      "CUSTOMIZING",
+      "I_ABOPFallbackBehaviorText",
+      "txt",
+      "ABOPFallbackRqmtRstrcnBehvr",
+      "Language",
+      "ABOPFallbackRqmtRstrcnBehvrTxt",
+      "_Language"
+    ],
+    "associations": [
+      {
+        "target": "I_Language",
+        "alias": "_Language"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPPurchasingDocType",
+    "description": "Purchasing Document Type for ATP BOP",
+    "domain": "MM",
+    "fields": [
+      "A",
+      "M",
+      "MASTER",
+      "I_ABOPPurchasingDocType",
+      "t161v",
+      "PurchasingDocumentType",
+      "system_language",
+      "PurchasingDocumentCategory",
+      "PurchasingDocumentTypeName"
+    ],
+    "associations": [
+      {
+        "target": "I_PurchasingDocumentTypeText",
+        "alias": "_Text"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPRun",
+    "description": "Run in backorder processing (BOP)",
+    "domain": "SD",
+    "fields": [
+      "D",
+      "L",
+      "MIXED",
+      "I_ABOPRun",
+      "I_ATPCheck",
+      "ABOPRunUUID",
+      "TransactionCode",
+      "ABOPVariantUUID",
+      "ABOPVariantName",
+      "StartedByUser",
+      "ABOPRunStartUTCDateTime",
+      "ABOPRunEndUTCDateTime",
+      "case",
+      "ABOPRunStatus",
+      "ABOPExecutionMode",
+      "ATPCheckHasOnlyHeader",
+      "ApplicationLogHandle",
+      "ABOPRunSummaryUUID",
+      "ABOPRunExecutionOrder",
+      "null",
+      "ABOPRunIsSummary",
+      "ABOPRunCustomExecutionName",
+      "_Variant",
+      "_ATPCheckStatusTypeText",
+      "_ResultFiguresForAllRqmts",
+      "_TriggeredByUser"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPRunPartResultFigures",
+        "alias": "_ResultFiguresForAllRqmts"
+      },
+      {
+        "target": "I_ABOPVariant",
+        "alias": "_Variant"
+      },
+      {
+        "target": "I_ATPCheckStatusTypeText",
+        "alias": "_ATPCheckStatusTypeText"
+      },
+      {
+        "target": "R_ABOPRunAPI",
+        "alias": "_APIRun"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPRunConfirmation",
+    "description": "Confirmation details of a requirement",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "XXL",
+      "MIXED",
+      "I_ABOPRunConfirmation",
+      "P_ABOPRunConfirmation",
+      "ATPRelevantDocument",
+      "ATPRelevantDocumentItem",
+      "ATPRelevantDocScheduleLine",
+      "ABOPRunUUID",
+      "ATPCheckRelevantDate",
+      "Product",
+      "Plant",
+      "StorageLocation",
+      "ATPCheckRelevantUTCDateTime",
+      "ATPCheckRelevantTimeZone",
+      "ConfdQtyBeforeRunInBaseUnit",
+      "ConfdQtyAfterRunInBaseUnit",
+      "SupAssgmtQtyBfrRunInBaseUnit",
+      "SupAssgmtQtyAftRunInBaseUnit",
+      "SupAssgmtReasonCode",
+      "BaseUnit",
+      "_Requirement",
+      "_DetailReasonCodeText",
+      "_BaseUnit",
+      "_SupplyingPlant",
+      "_SupplyingStorageLocation"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPRunRequirement",
+        "alias": "_Requirement"
+      },
+      {
+        "target": "I_UnitOfMeasure",
+        "alias": "_BaseUnit"
+      },
+      {
+        "target": "I_ATPCheckDetailReasonCodeText",
+        "alias": "_DetailReasonCodeText"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPRunIteration",
+    "description": "Iterations of a Run in BOP",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "L",
+      "MIXED",
+      "I_ABOPRunIteration",
+      "I_ATPCheckIteration",
+      "ABOPRunUUID",
+      "ATPCheckUUID",
+      "TransactionCode",
+      "ABOPVariantUUID",
+      "ABOPVariantName",
+      "StartedByUser",
+      "ABOPRunStartUTCDateTime",
+      "ABOPRunEndUTCDateTime",
+      "case",
+      "ABOPRunStatus",
+      "ABOPExecutionMode",
+      "ApplicationLogHandle",
+      "ABOPRunSummaryUUID",
+      "ATPCheckExecutionOrder",
+      "ABOPRunExecutionOrder",
+      "ABOPRunIsSummary",
+      "_ATPCheck",
+      "_Variant",
+      "_ATPCheckStatusTypeText"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPRun",
+        "alias": "_ATPCheck"
+      },
+      {
+        "target": "I_ABOPVariant",
+        "alias": "_Variant"
+      },
+      {
+        "target": "I_ATPCheckStatusTypeText",
+        "alias": "_ATPCheckStatusTypeText"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPRunIterationConfirmation",
+    "description": "Confirmation details of a requirement",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "XXL",
+      "MIXED",
+      "I_ABOPRunIterationConfirmation",
+      "P_ABOPRunIterationConfirmation",
+      "ATPRequirementUUID",
+      "ATPCheckUUID",
+      "ATPCheckRelevantDate",
+      "Product",
+      "Plant",
+      "StorageLocation",
+      "ATPCheckIterationUUID",
+      "ATPRelevantDocument",
+      "ATPRelevantDocumentItem",
+      "ATPRelevantDocScheduleLine",
+      "ATPCheckRelevantUTCDateTime",
+      "ATPCheckRelevantTimeZone",
+      "ConfdQtyBeforeRunInBaseUnit",
+      "ConfdQtyAfterRunInBaseUnit",
+      "BaseUnit",
+      "_Requirement",
+      "_BaseUnit",
+      "_SupplyingPlant",
+      "_SupplyingStorageLocation"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPRunIterationRequirement",
+        "alias": "_Requirement"
+      },
+      {
+        "target": "I_UnitOfMeasure",
+        "alias": "_BaseUnit"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPRunIterationProductPlant",
+    "description": "Iteration conf. details by product-plant",
+    "domain": "PP",
+    "fields": [
+      "D",
+      "L",
+      "MIXED",
+      "I_ABOPRunIterationProductPlant",
+      "P_ABOPRunIterationProductPlant",
+      "ATPCheckUUID",
+      "ATPCheckIterationUUID",
+      "Material",
+      "Plant",
+      "_SupplyingPlant"
+    ],
+    "associations": []
+  },
+  {
+    "name": "I_ABOPRunIterationRequirement",
+    "description": "Requested Schedule Line in BOP",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "XL",
+      "MIXED",
+      "I_ABOPRunIterationRequirement",
+      "ATPRequirementUUID",
+      "ATPCheckIterationUUID",
+      "ATPCheckUUID",
+      "ATPRelevantDocument",
+      "ATPRelevantDocumentItem",
+      "ATPRelevantDocScheduleLine",
+      "ATPRelevantDocumentCategory",
+      "Recipient",
+      "RecipientText",
+      "PurchaseOrderItem",
+      "ATPRecipientType",
+      "Material",
+      "Plant",
+      "StorageLocation",
+      "IsBusinessPurposeCompleted",
+      "IsSalesDocument",
+      "IsStockTransportDocument",
+      "ABOPConfirmationStrategy",
+      "ABOPRqmtEvaluationSequence",
+      "ATPCheckItemStatus",
+      "RqmtIsProcessed",
+      "RqmtIsLocked",
+      "RqmtIsWithIssues",
+      "RqmtIsWithOrderUpdateIssues",
+      "ABOPSegmentUUID",
+      "RqmtIsSupAssgmtRelevant",
+      "SupAssgmtItemStatus",
+      "ReqdProdAvailabilityUTCDateTme",
+      "ReqdProdAvailabilityTimeZone",
+      "RequestedQuantityInBaseUnit",
+      "RqmtIsFullyConfdOnTimeAfterRun",
+      "RqmtIsFullyConfdAfterRun",
+      "OnTimeConfdQtyBfrRunInBaseUnit",
+      "OnTimeConfdQtyAftRunInBaseUnit",
+      "ErlstConfdProdAvailyDteTmeBfr",
+      "ErlstConfdProdAvailyTmznBfr",
+      "LatestConfdProdAvailyDteTmeBfr",
+      "LatestConfdProdAvailyTmznBfr",
+      "ErlstConfdQtyBfrRunInBaseUnit",
+      "ConfdQtyBeforeRunInBaseUnit",
+      "ErlstConfdProdAvailyDteTmeAft",
+      "ErlstConfdProdAvailyTmznAft",
+      "LatestConfdProdAvailyDteTmeAft",
+      "LatestConfdProdAvailyTmznAft",
+      "ErlstConfdQtyAftRunInBaseUnit",
+      "ConfdQtyAfterRunInBaseUnit",
+      "RqmtHasSubstitutionsAfterRun",
+      "BaseUnit",
+      "_ATPRecipientTypeText",
+      "_Material",
+      "_Segment",
+      "_BaseUnit",
+      "_SupplyingPlant",
+      "_SupplyingStorageLocation",
+      "_ABOPStrategyText",
+      "_SupAssgmtItemStatusText",
+      "_ItemStatusText"
+    ],
+    "associations": [
+      {
+        "target": "I_SalesDocument",
+        "alias": "_SalesDocument"
+      },
+      {
+        "target": "I_Material",
+        "alias": "_Material"
+      },
+      {
+        "target": "I_UnitOfMeasure",
+        "alias": "_BaseUnit"
+      },
+      {
+        "target": "I_ABOPStrategyText",
+        "alias": "_ABOPStrategyText"
+      },
+      {
+        "target": "I_ATPCheckItemStatusText",
+        "alias": "_ItemStatusText"
+      },
+      {
+        "target": "I_ATPSupAssgmtItemStatusText",
+        "alias": "_SupAssgmtItemStatusText"
+      },
+      {
+        "target": "I_ATPRecipientTypeText",
+        "alias": "_ATPRecipientTypeText"
+      },
+      {
+        "target": "I_ABOPSegment",
+        "alias": "_Segment"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPRunIterationSoldToParty",
+    "description": "Iteration conf. details by Sold To Party",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "L",
+      "MIXED",
+      "I_ABOPRunIterationSoldToParty",
+      "P_ABOPRunIterationSoldToParty",
+      "ATPCheckUUID",
+      "ATPCheckIterationUUID",
+      "Recipient",
+      "RecipientText",
+      "ATPRecipientType",
+      "IsBusinessPurposeCompleted",
+      "_ATPRecipientTypeText"
+    ],
+    "associations": [
+      {
+        "target": "I_ATPRecipientTypeText",
+        "alias": "_ATPRecipientTypeText"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPRunIterationStrategy",
+    "description": "Iteration conf. details by strategy",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "L",
+      "MIXED",
+      "I_ABOPRunIterationStrategy",
+      "P_ABOPRunIterationStrategy",
+      "ATPCheckIterationUUID",
+      "ABOPConfirmationStrategy",
+      "ATPCheckUUID",
+      "_ABOPStrategyText",
+      "_Requirements",
+      "_ABOPRun"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPRunIterationRequirement",
+        "alias": "_Requirements"
+      },
+      {
+        "target": "I_ABOPRunIteration",
+        "alias": "_ABOPRun"
+      },
+      {
+        "target": "I_ABOPStrategyText",
+        "alias": "_ABOPStrategyText"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPRunMaterialPlant",
+    "description": "Run conf. details by material-plant",
+    "domain": "MM",
+    "fields": [
+      "D",
+      "L",
+      "MIXED",
+      "I_ABOPRunMaterialPlant",
+      "P_ABOPRunMaterialPlant",
+      "Material",
+      "Plant",
+      "ABOPRunUUID",
+      "_SupplyingPlant",
+      "_ResultFiguresForAllRqmts"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPRunPrtRsltFigsByProdPlnt",
+        "alias": "_ResultFiguresForAllRqmts"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPRunPartResultFigures",
+    "description": "BOP Run Part Result Figures",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "L",
+      "MIXED",
+      "I_ABOPRunPartResultFigures",
+      "parameters",
+      "boole_d",
+      "ABOPRunPartUUID",
+      "NumberOfRequirements",
+      "NumberOfProcessedRequirements",
+      "NumberOfLockedRequirements",
+      "NumberOfExcludedRequirements",
+      "NumberOfRequirementsWithIssues",
+      "NumberOfSupAssgmtRelevantRqmts",
+      "NumberOfRqmtsIncldInConfFigs",
+      "NumberOfRqmtsIncldInAssgmtFigs",
+      "NmbrOfConfdRqmtsOnTimeBfrRun",
+      "NmbrOfConfdRqmtsOnTimeAfterRun",
+      "NmbrOfSupAssgdRqmtsOnTmeBfrRun",
+      "NmbrOfSupAssgdRqmtsOnTmeAftRun",
+      "NmbrOfConfdRqmtsBeforeRun",
+      "NmbrOfConfdRqmtsAfterRun",
+      "NmbrOfSupAssgdRqmtsBeforeRun",
+      "NmbrOfSupAssgdRqmtsAfterRun",
+      "NmbrOfRqmtsSentToOrderUpdate",
+      "NmbrOfRqmtsWithOrderUpdtIssues"
+    ],
+    "associations": []
+  },
+  {
+    "name": "I_ABOPRunPartRsltFigsByRcpnt",
+    "description": "BOP Run Part Result Figures By Recipient",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "L",
+      "MIXED",
+      "I_ABOPRunPartRsltFigsByRcpnt",
+      "boole_d",
+      "ABOPRunPartUUID",
+      "Recipient",
+      "NumberOfRequirements",
+      "NumberOfProcessedRequirements",
+      "NumberOfLockedRequirements",
+      "NumberOfExcludedRequirements",
+      "NumberOfRequirementsWithIssues",
+      "NumberOfSupAssgmtRelevantRqmts",
+      "NumberOfRqmtsIncldInConfFigs",
+      "NumberOfRqmtsIncldInAssgmtFigs",
+      "NmbrOfConfdRqmtsOnTimeBfrRun",
+      "NmbrOfConfdRqmtsOnTimeAfterRun",
+      "NmbrOfSupAssgdRqmtsOnTmeBfrRun",
+      "NmbrOfSupAssgdRqmtsOnTmeAftRun",
+      "NmbrOfConfdRqmtsBeforeRun",
+      "NmbrOfConfdRqmtsAfterRun",
+      "NmbrOfSupAssgdRqmtsBeforeRun",
+      "NmbrOfSupAssgdRqmtsAfterRun",
+      "NmbrOfRqmtsSentToOrderUpdate",
+      "NmbrOfRqmtsWithOrderUpdtIssues"
+    ],
+    "associations": []
+  },
+  {
+    "name": "I_ABOPRunPartRsltFigsByStrgy",
+    "description": "BOP Run Part Result Figures By Confirmation Strategy",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "L",
+      "MIXED",
+      "I_ABOPRunPartRsltFigsByStrgy",
+      "boole_d",
+      "ABOPRunPartUUID",
+      "ABOPConfirmationStrategy",
+      "NumberOfRequirements",
+      "NumberOfProcessedRequirements",
+      "NumberOfLockedRequirements",
+      "NumberOfExcludedRequirements",
+      "NumberOfRequirementsWithIssues",
+      "NumberOfSupAssgmtRelevantRqmts",
+      "NumberOfRqmtsIncldInConfFigs",
+      "NumberOfRqmtsIncldInAssgmtFigs",
+      "NmbrOfConfdRqmtsOnTimeBfrRun",
+      "NmbrOfConfdRqmtsOnTimeAfterRun",
+      "NmbrOfSupAssgdRqmtsOnTmeBfrRun",
+      "NmbrOfSupAssgdRqmtsOnTmeAftRun",
+      "NmbrOfConfdRqmtsBeforeRun",
+      "NmbrOfConfdRqmtsAfterRun",
+      "NmbrOfSupAssgdRqmtsBeforeRun",
+      "NmbrOfSupAssgdRqmtsAfterRun",
+      "NmbrOfRqmtsSentToOrderUpdate",
+      "NmbrOfRqmtsWithOrderUpdtIssues"
+    ],
+    "associations": []
+  },
+  {
+    "name": "I_ABOPRunPrtRsltFigsByProdPlnt",
+    "description": "BOP Run Part Result Figures By Product Plant-Combination",
+    "domain": "PP",
+    "fields": [
+      "D",
+      "L",
+      "MIXED",
+      "I_ABOPRunPrtRsltFigsByProdPlnt",
+      "boole_d",
+      "ABOPRunPartUUID",
+      "Material",
+      "Plant",
+      "NumberOfRequirements",
+      "NumberOfProcessedRequirements",
+      "NumberOfLockedRequirements",
+      "NumberOfExcludedRequirements",
+      "NumberOfRequirementsWithIssues",
+      "NumberOfSupAssgmtRelevantRqmts",
+      "NumberOfRqmtsIncldInConfFigs",
+      "NumberOfRqmtsIncldInAssgmtFigs",
+      "NmbrOfConfdRqmtsOnTimeBfrRun",
+      "NmbrOfConfdRqmtsOnTimeAfterRun",
+      "NmbrOfSupAssgdRqmtsOnTmeBfrRun",
+      "NmbrOfSupAssgdRqmtsOnTmeAftRun",
+      "NmbrOfConfdRqmtsBeforeRun",
+      "NmbrOfConfdRqmtsAfterRun",
+      "NmbrOfSupAssgdRqmtsBeforeRun",
+      "NmbrOfSupAssgdRqmtsAfterRun",
+      "NmbrOfRqmtsSentToOrderUpdate",
+      "NmbrOfRqmtsWithOrderUpdtIssues"
+    ],
+    "associations": []
+  },
+  {
+    "name": "I_ABOPRunRequirement",
+    "description": "Requested Schedule Line in BOP",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "XL",
+      "MIXED",
+      "I_ABOPRunRequirement",
+      "ABOPRunUUID",
+      "ATPRelevantDocument",
+      "ATPRelevantDocumentItem",
+      "ATPRelevantDocScheduleLine",
+      "ATPRelevantDocumentCategory",
+      "Recipient",
+      "RecipientText",
+      "PurchaseOrderItem",
+      "ATPRecipientType",
+      "Material",
+      "Plant",
+      "StorageLocation",
+      "IsBusinessPurposeCompleted",
+      "IsSalesDocument",
+      "IsStockTransportDocument",
+      "ABOPConfirmationStrategy",
+      "ABOPRqmtEvaluationSequence",
+      "ATPCheckItemStatus",
+      "RqmtIsProcessed",
+      "RqmtIsLocked",
+      "RqmtIsWithIssues",
+      "RqmtIsWithOrderUpdateIssues",
+      "ABOPSegmentUUID",
+      "RqmtIsSupAssgmtRelevant",
+      "SupAssgmtItemStatus",
+      "ReqdProdAvailabilityUTCDateTme",
+      "ReqdProdAvailabilityTimeZone",
+      "RequestedQuantityInBaseUnit",
+      "RqmtIsFullyConfdOnTimeAfterRun",
+      "RqmtIsFullyConfdAfterRun",
+      "OnTimeConfdQtyBfrRunInBaseUnit",
+      "OnTimeConfdQtyAftRunInBaseUnit",
+      "ErlstConfdProdAvailyDteTmeBfr",
+      "ErlstConfdProdAvailyTmznBfr",
+      "LatestConfdProdAvailyDteTmeBfr",
+      "LatestConfdProdAvailyTmznBfr",
+      "ErlstConfdQtyBfrRunInBaseUnit",
+      "ConfdQtyBeforeRunInBaseUnit",
+      "ErlstConfdProdAvailyDteTmeAft",
+      "ErlstConfdProdAvailyTmznAft",
+      "LatestConfdProdAvailyDteTmeAft",
+      "LatestConfdProdAvailyTmznAft",
+      "ErlstConfdQtyAftRunInBaseUnit",
+      "ConfdQtyAfterRunInBaseUnit",
+      "RqmtHasSubstitutionsAfterRun",
+      "RqmtIsFullyAssignedAfterRun",
+      "ErlstSupAssgmtDteTmeBeforeRun",
+      "ErlstSupAssgmtTmznBeforeRun",
+      "LatestSupAssgmtDteTmeBeforeRun",
+      "LatestSupAssgmtTmznBeforeRun",
+      "ErlstSupAssgmtQtyBfrInBaseUnit",
+      "SupAssgmtQtyBfrRunInBaseUnit",
+      "ErlstSupAssgmtDteTmeAfterRun",
+      "ErlstSupAssgmtTmznAfterRun",
+      "LatestSupAssgmtDteTmeAfterRun",
+      "LatestSupAssgmtTmznAfterRun",
+      "ErlstSupAssgmtQtyAftInBaseUnit",
+      "SupAssgmtQtyAftRunInBaseUnit",
+      "BaseUnit",
+      "_ATPRecipientTypeText",
+      "_Material",
+      "_Segment",
+      "_BaseUnit",
+      "_SupplyingPlant",
+      "_SupplyingStorageLocation",
+      "_ABOPStrategyText",
+      "_SupAssgmtItemStatusText",
+      "_ItemStatusText"
+    ],
+    "associations": [
+      {
+        "target": "I_Material",
+        "alias": "_Material"
+      },
+      {
+        "target": "I_UnitOfMeasure",
+        "alias": "_BaseUnit"
+      },
+      {
+        "target": "I_ABOPStrategyText",
+        "alias": "_ABOPStrategyText"
+      },
+      {
+        "target": "I_ATPCheckItemStatusText",
+        "alias": "_ItemStatusText"
+      },
+      {
+        "target": "I_ATPSupAssgmtItemStatusText",
+        "alias": "_SupAssgmtItemStatusText"
+      },
+      {
+        "target": "I_ATPRecipientTypeText",
+        "alias": "_ATPRecipientTypeText"
+      },
+      {
+        "target": "I_ABOPSegment",
+        "alias": "_Segment"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPRunSoldToParty",
+    "description": "Run confirmation details by Sold To Party",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "L",
+      "MIXED",
+      "I_ABOPRunSoldToParty",
+      "P_ABOPRunSoldToParty",
+      "Recipient",
+      "ABOPRunUUID",
+      "RecipientText",
+      "ATPRecipientType",
+      "IsBusinessPurposeCompleted",
+      "_ResultFiguresForAllRqmts",
+      "_ATPRecipientTypeText"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPRunPartRsltFigsByRcpnt",
+        "alias": "_ResultFiguresForAllRqmts"
+      },
+      {
+        "target": "I_ATPRecipientTypeText",
+        "alias": "_ATPRecipientTypeText"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPRunStrategy",
+    "description": "Run confirmation details by strategy",
+    "domain": "CA",
+    "fields": [
+      "D",
+      "L",
+      "MIXED",
+      "I_ABOPRunStrategy",
+      "P_ABOPRunStrategy",
+      "ABOPConfirmationStrategy",
+      "ABOPRunUUID",
+      "_ResultFiguresForAllRqmts",
+      "_ABOPStrategyText",
+      "_Requirements",
+      "_ABOPRun"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPRunPartRsltFigsByStrgy",
+        "alias": "_ResultFiguresForAllRqmts"
+      },
+      {
+        "target": "I_ABOPRunRequirement",
+        "alias": "_Requirements"
+      },
+      {
+        "target": "I_ABOPRun",
+        "alias": "_ABOPRun"
+      },
+      {
+        "target": "I_ABOPStrategyText",
+        "alias": "_ABOPStrategyText"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPSegment",
+    "description": "ABOP Segment",
+    "domain": "CA",
+    "fields": [
+      "true",
+      "BUSINESS_OBJECT",
+      "A",
+      "M",
+      "MASTER",
+      "I_ABOPSegment",
+      "atp_bop_seg",
+      "ABOPSegmentUUID",
+      "ABOPSegmentName",
+      "ABOPSegmentType",
+      "ABOPSegmentCondition",
+      "ABOPSegmentProcedure",
+      "ATPSelOptnToolDefUUID",
+      "ABOPSegmentSelOptnToolProced",
+      "CreationDateTime",
+      "CreatedByUser",
+      "LastChangeDateTime",
+      "LastChangedByUser",
+      "LastUsageUTCDateTime",
+      "_Sort",
+      "_Simulation",
+      "_Text",
+      "_SelOptnToolDefinition",
+      "_CreatedByUser",
+      "_LastChangedByUser"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPSegmentSort",
+        "alias": "_Sort"
+      },
+      {
+        "target": "I_ABOPSegmentSimulation",
+        "alias": "_Simulation"
+      },
+      {
+        "target": "I_ABOPSegmentText",
+        "alias": "_Text"
+      },
+      {
+        "target": "I_ATPSelOptnToolDefinition",
+        "alias": "_SelOptnToolDefinition"
+      },
+      {
+        "target": "I_User",
+        "alias": "_CreatedByUser"
+      },
+      {
+        "target": "I_User",
+        "alias": "_LastChangedByUser"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPSegmentSimulation",
+    "description": "ABOP Segment Simulation",
+    "domain": "CA",
+    "fields": [
+      "A",
+      "M",
+      "MASTER",
+      "I_ABOPSegmentSimulation",
+      "atp_bop_seg_sim",
+      "ABOPSegmentSimulationUUID",
+      "ABOPSegmentUUID",
+      "CreatedByUser",
+      "CreationDateTime",
+      "_Segment",
+      "_ScheduleLine"
+    ],
+    "associations": []
+  },
+  {
+    "name": "I_ABOPSegmentSimulationTP",
+    "description": "ABOP Segment Simulation Transactional Processing",
+    "domain": "CA",
+    "fields": [
+      "true",
+      "C",
+      "M",
+      "MASTER",
+      "I_ABOPSegmentSimulationTP",
+      "I_ABOPSegmentSimulation",
+      "ABOPSegmentSimulationUUID",
+      "ABOPSegmentUUID",
+      "CreatedByUser",
+      "CreationDateTime",
+      "_Segment",
+      "_ScheduleLine"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPSegmentTP",
+        "alias": "_Segment"
+      },
+      {
+        "target": "I_ABOPSgmtSimlnSchedLineTP",
+        "alias": "_ScheduleLine"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPSegmentSort",
+    "description": "ABOP Segment Sort",
+    "domain": "CA",
+    "fields": [
+      "TEXT",
+      "A",
+      "M",
+      "MASTER",
+      "I_ABOPSegmentSort",
+      "atp_bop_seg_sort",
+      "ABOPSegmentSortUUID",
+      "ABOPSegmentUUID",
+      "ABOPSortAttribute",
+      "ABOPSortAttributeFldPathUUID",
+      "ABOPSortAttributeFldPathIntID",
+      "ABOPSortDirection",
+      "ABOPSortAttributeSequence",
+      "ABOPCustomSortUUID",
+      "_Segment",
+      "_CustomSort"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPSegment",
+        "alias": "_Segment"
+      },
+      {
+        "target": "I_ABOPCustomSort",
+        "alias": "_CustomSort"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPSegmentSortTP",
+    "description": "BOP Segment Sort Transactional Processing",
+    "domain": "CA",
+    "fields": [
+      "true",
+      "C",
+      "M",
+      "MASTER",
+      "I_ABOPSegmentSortTP",
+      "I_ABOPSegmentSort",
+      "ABOPSegmentSortUUID",
+      "ABOPSegmentUUID",
+      "ABOPSortAttribute",
+      "ABOPSortAttributeFldPathUUID",
+      "ABOPSortAttributeFldPathIntID",
+      "ABOPSortDirection",
+      "ABOPSortAttributeSequence",
+      "ABOPCustomSortUUID",
+      "ABOPCustomSortName",
+      "_Segment",
+      "_CustomSort"
+    ],
+    "associations": [
+      {
+        "target": "I_ABOPSegmentTP",
+        "alias": "_Segment"
+      }
+    ]
+  },
+  {
+    "name": "I_ABOPSegmentText",
+    "description": "ABOP Segment Text",
+    "domain": "CA",
+    "fields": [
+      "TEXT",
+      "A",
+      "M",
+      "MASTER",
+      "I_ABOPSegmentText",
+      "atp_bop_segt",
+      "ABOPSegmentUUID",
+      "Language",
+      "ABOPSegmentDescription",
+      "ABOPSegmentDescriptionUUID",
+      "_Segment",
+      "_Language"
+    ],
+    "associations": [
+      {
+        "target": "I_Language",
+        "alias": "_Language"
+      },
+      {
+        "target": "I_ABOPSegment",
+        "alias": "_Segment"
+      }
+    ]
+  }
+]

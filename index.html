@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SAP S/4HANA CDS AI Requirement Evaluator</title>
+  <meta name="description" content="AI-powered 4-step wizard to evaluate SAP S/4HANA CDS view requirements, compute FAISS vector similarities, and generate Clean Core ABAP DDL.">
+  
+  <!-- Modern Typography: Inter and JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            sap: {
+              blue: '#0a6ed1',
+              gold: '#f0ab00',
+              dark: '#080d1a',
+              card: '#0f172a',
+              border: '#1e293b'
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- Highlight.js for ABAP / SQL DDL Syntax Highlighting -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+
+  <style>
+    /* Custom Glassmorphism & Glow Styles */
+    body {
+      background: radial-gradient(circle at 15% 20%, rgba(10, 110, 209, 0.12) 0%, transparent 40%),
+                  radial-gradient(circle at 85% 80%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+                  #070b14;
+      min-height: 100vh;
+    }
+    .glass-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .glass-card-active {
+      border-color: rgba(59, 130, 246, 0.6);
+      box-shadow: 0 0 20px -3px rgba(59, 130, 246, 0.25);
+    }
+    .step-active {
+      border-color: #3b82f6;
+      background: rgba(59, 130, 246, 0.15);
+      color: #60a5fa;
+      box-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+    }
+    .step-complete {
+      border-color: #10b981;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+    }
+    .tag-chip {
+      animation: popIn 0.18s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+    @keyframes popIn {
+      0% { opacity: 0; transform: scale(0.85); }
+      100% { opacity: 1; transform: scale(1); }
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #0b1120;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #233554;
+      border-radius: 3px;
+    }
+  </style>
+</head>
+
+<body class="text-slate-100 font-sans antialiased selection:bg-blue-600 selection:text-white">
+
+  <!-- Header & Top Navigation -->
+  <header class="border-b border-slate-800/80 bg-slate-950/60 sticky top-0 z-50 backdrop-blur-md">
+    <div class="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-cyan-500 flex items-center justify-center shadow-lg shadow-blue-500/20 font-bold text-white text-lg">
+          SAP
+        </div>
+        <div>
+          <h1 class="font-bold text-base md:text-lg tracking-tight text-white flex items-center gap-2">
+            CDS View AI Evaluator
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-400 border border-blue-500/20">S/4HANA Clean Core</span>
+          </h1>
+          <p class="text-xs text-slate-400">TF-IDF Vector Retrieval & LLM Architectural Recommendation</p>
+        </div>
+      </div>
+      
+      <!-- Backend Status Indicator -->
+      <div class="flex items-center space-x-3">
+        <div id="backend-status" class="flex items-center space-x-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs">
+          <span class="w-2 h-2 rounded-full bg-amber-400 animate-pulse" id="status-dot"></span>
+          <span class="text-slate-300 font-medium" id="status-text">Checking Backend...</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="max-w-4xl mx-auto px-4 py-8 md:py-10">
+
+    <!-- Step Progress Tracker Bar -->
+    <div class="mb-8">
+      <div class="grid grid-cols-4 gap-2 md:gap-4 relative">
+        
+        <!-- Step 1 Indicator -->
+        <div class="flex flex-col items-center cursor-pointer group" onclick="goToStep(1)">
+          <div id="step-bubble-1" class="w-10 h-10 rounded-xl border flex items-center justify-center font-bold text-sm transition-all duration-300 step-active mb-2">
+            1
+          </div>
+          <span class="text-xs font-medium text-slate-400 group-hover:text-slate-200 transition-colors hidden sm:inline">Module Domain</span>
+        </div>
+
+        <!-- Step 2 Indicator -->
+        <div class="flex flex-col items-center cursor-pointer group" onclick="goToStep(2)">
+          <div id="step-bubble-2" class="w-10 h-10 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-400 flex items-center justify-center font-bold text-sm transition-all duration-300 mb-2">
+            2
+          </div>
+          <span class="text-xs font-medium text-slate-400 group-hover:text-slate-200 transition-colors hidden sm:inline">Entities & Objective</span>
+        </div>
+
+        <!-- Step 3 Indicator -->
+        <div class="flex flex-col items-center cursor-pointer group" onclick="goToStep(3)">
+          <div id="step-bubble-3" class="w-10 h-10 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-400 flex items-center justify-center font-bold text-sm transition-all duration-300 mb-2">
+            3
+          </div>
+          <span class="text-xs font-medium text-slate-400 group-hover:text-slate-200 transition-colors hidden sm:inline">Field Specs</span>
+        </div>
+
+        <!-- Step 4 Indicator -->
+        <div class="flex flex-col items-center cursor-pointer group" onclick="goToStep(4)">
+          <div id="step-bubble-4" class="w-10 h-10 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-400 flex items-center justify-center font-bold text-sm transition-all duration-300 mb-2">
+            4
+          </div>
+          <span class="text-xs font-medium text-slate-400 group-hover:text-slate-200 transition-colors hidden sm:inline">Review & Evaluate</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Wizard Card Wrapper -->
+    <div class="glass-card rounded-2xl p-6 md:p-8 shadow-2xl relative overflow-hidden">
+
+      <!-- ==================================================================== -->
+      <!-- STEP 1: DOMAIN SELECTION -->
+      <!-- ==================================================================== -->
+      <section id="step-1" class="space-y-6">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight text-white">Select SAP Module / Domain</h2>
+          <p class="text-sm text-slate-400 mt-1">Choose the primary business functional domain for your CDS view requirement.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="domain-cards-container">
+          
+          <!-- SD Card -->
+          <div class="domain-card glass-card p-4 rounded-xl border border-slate-800 hover:border-blue-500/50 cursor-pointer transition-all duration-200 group" data-domain="SD" onclick="selectDomain('SD', this)">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-blue-500/10 text-blue-400 border border-blue-500/20">SD</span>
+              <div class="check-icon w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-transparent text-xs">✓</div>
+            </div>
+            <h3 class="font-semibold text-white group-hover:text-blue-400 transition-colors">Sales & Distribution</h3>
+            <p class="text-xs text-slate-400 mt-1">Orders, Deliveries, Invoices, Pricing, Customer Master Data</p>
+            <div class="mt-3 flex flex-wrap gap-1 text-[10px] text-slate-500 font-mono">
+              <span class="bg-slate-800/80 px-1.5 py-0.5 rounded">I_SalesOrder</span>
+              <span class="bg-slate-800/80 px-1.5 py-0.5 rounded">I_Customer</span>
+            </div>
+          </div>
+
+          <!-- FI Card -->
+          <div class="domain-card glass-card p-4 rounded-xl border border-slate-800 hover:border-emerald-500/50 cursor-pointer transition-all duration-200 group" data-domain="FI" onclick="selectDomain('FI', this)">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">FI</span>
+              <div class="check-icon w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-transparent text-xs">✓</div>
+            </div>
+            <h3 class="font-semibold text-white group-hover:text-emerald-400 transition-colors">Financial Accounting</h3>
+            <p class="text-xs text-slate-400 mt-1">General Ledger, ACDOCA Universal Journal, Balance Sheet</p>
+            <div class="mt-3 flex flex-wrap gap-1 text-[10px] text-slate-500 font-mono">
+              <span class="bg-slate-800/80 px-1.5 py-0.5 rounded">I_JournalEntry</span>
+              <span class="bg-slate-800/80 px-1.5 py-0.5 rounded">I_GLAccount</span>
+            </div>
+          </div>
+
+          <!-- MM Card -->
+          <div class="domain-card glass-card p-4 rounded-xl border border-slate-800 hover:border-amber-500/50 cursor-pointer transition-all duration-200 group" data-domain="MM" onclick="selectDomain('MM', this)">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20">MM</span>
+              <div class="check-icon w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-transparent text-xs">✓</div>
+            </div>
+            <h3 class="font-semibold text-white group-hover:text-amber-400 transition-colors">Materials Management</h3>
+            <p class="text-xs text-slate-400 mt-1">Purchase Orders, Requisitions, Inventory, Stock Levels</p>
+            <div class="mt-3 flex flex-wrap gap-1 text-[10px] text-slate-500 font-mono">
+              <span class="bg-slate-800/80 px-1.5 py-0.5 rounded">I_PurchaseOrder</span>
+              <span class="bg-slate-800/80 px-1.5 py-0.5 rounded">I_MaterialStock</span>
+            </div>
+          </div>
+
+          <!-- CO Card -->
+          <div class="domain-card glass-card p-4 rounded-xl border border-slate-800 hover:border-purple-500/50 cursor-pointer transition-all duration-200 group" data-domain="CO" onclick="selectDomain('CO', this)">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-purple-500/10 text-purple-400 border border-purple-500/20">CO</span>
+              <div class="check-icon w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-transparent text-xs">✓</div>
+            </div>
+            <h3 class="font-semibold text-white group-hover:text-purple-400 transition-colors">Controlling</h3>
+            <p class="text-xs text-slate-400 mt-1">Cost Centers, Profit Centers, Internal Orders, Activity Types</p>
+            <div class="mt-3 flex flex-wrap gap-1 text-[10px] text-slate-500 font-mono">
+              <span class="bg-slate-800/80 px-1.5 py-0.5 rounded">I_CostCenter</span>
+              <span class="bg-slate-800/80 px-1.5 py-0.5 rounded">I_ProfitCenter</span>
+            </div>
+          </div>
+
+          <!-- PP Card -->
+          <div class="domain-card glass-card p-4 rounded-xl border border-slate-800 hover:border-rose-500/50 cursor-pointer transition-all duration-200 group" data-domain="PP" onclick="selectDomain('PP', this)">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-rose-500/10 text-rose-400 border border-rose-500/20">PP</span>
+              <div class="check-icon w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-transparent text-xs">✓</div>
+            </div>
+            <h3 class="font-semibold text-white group-hover:text-rose-400 transition-colors">Production Planning</h3>
+            <p class="text-xs text-slate-400 mt-1">Manufacturing Orders, Routing, Bill of Materials (BOM)</p>
+            <div class="mt-3 flex flex-wrap gap-1 text-[10px] text-slate-500 font-mono">
+              <span class="bg-slate-800/80 px-1.5 py-0.5 rounded">I_ProductionOrder</span>
+              <span class="bg-slate-800/80 px-1.5 py-0.5 rounded">I_WorkCenter</span>
+            </div>
+          </div>
+
+          <!-- PM Card -->
+          <div class="domain-card glass-card p-4 rounded-xl border border-slate-800 hover:border-cyan-500/50 cursor-pointer transition-all duration-200 group" data-domain="PM" onclick="selectDomain('PM', this)">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-mono font-bold px-2.5 py-1 rounded-md bg-cyan-500/10 text-cyan-400 border border-cyan-500/20">PM</span>
+              <div class="check-icon w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-transparent text-xs">✓</div>
+            </div>
+            <h3 class="font-semibold text-white group-hover:text-cyan-400 transition-colors">Plant Maintenance</h3>
+            <p class="text-xs text-slate-400 mt-1">Maintenance Orders, Functional Locations, Equipment</p>
+            <div class="mt-3 flex flex-wrap gap-1 text-[10px] text-slate-500 font-mono">
+              <span class="bg-slate-800/80 px-1.5 py-0.5 rounded">I_MaintenanceOrder</span>
+              <span class="bg-slate-800/80 px-1.5 py-0.5 rounded">I_Equipment</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex justify-end pt-4 border-t border-slate-800">
+          <button id="btn-step1-next" onclick="validateStep1()" class="px-6 py-2.5 rounded-xl font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition-all flex items-center gap-2">
+            Continue to Entities
+            <span>→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================================== -->
+      <!-- STEP 2: ENTITIES & OBJECTIVE -->
+      <!-- ==================================================================== -->
+      <section id="step-2" class="space-y-6 hidden">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight text-white">Target Entities & Business Objective</h2>
+          <p class="text-sm text-slate-400 mt-1">Specify which SAP business objects are involved and explain what problem the CDS view solves.</p>
+        </div>
+
+        <!-- Target Entities -->
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
+            Target Business Entities <span class="text-rose-400">*</span>
+          </label>
+          <div class="glass-card p-3 rounded-xl border border-slate-800 focus-within:border-blue-500/60 transition-colors">
+            <div id="entity-chips" class="flex flex-wrap gap-2 mb-2"></div>
+            <div class="flex gap-2">
+              <input type="text" id="entity-input" placeholder="Type entity name (e.g. SalesOrder, Customer) and press Enter" 
+                     class="w-full bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none"
+                     onkeydown="handleEntityKey(event)">
+              <button type="button" onclick="addEntityFromInput()" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-xs font-medium rounded-lg text-slate-200 transition-colors">Add</button>
+            </div>
+          </div>
+          <!-- Quick suggestions -->
+          <div class="mt-2 flex items-center gap-2 text-xs text-slate-400">
+            <span>Suggestions:</span>
+            <div id="entity-suggestions" class="flex flex-wrap gap-1.5"></div>
+          </div>
+        </div>
+
+        <!-- Business Objective -->
+        <div>
+          <div class="flex items-center justify-between mb-2">
+            <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300">
+              Plain-Language Business Objective <span class="text-rose-400">*</span>
+            </label>
+            <button type="button" onclick="fillObjectiveTemplate()" class="text-xs text-blue-400 hover:text-blue-300 underline font-medium">Use Sample Template</button>
+          </div>
+          <textarea id="business-objective" rows="4" 
+                    placeholder="Describe your user story or reporting requirements in detail (e.g., We need a CDS view to report outstanding sales orders with customer delivery address, total net value in document currency, and creation date for open item reconciliations)..."
+                    class="w-full glass-card p-4 rounded-xl border border-slate-800 focus:border-blue-500/60 focus:outline-none text-sm text-white placeholder-slate-500 transition-all"></textarea>
+        </div>
+
+        <div class="flex justify-between pt-4 border-t border-slate-800">
+          <button onclick="goToStep(1)" class="px-5 py-2.5 rounded-xl font-medium bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-colors">
+            ← Back
+          </button>
+          <button id="btn-step2-next" onclick="validateStep2()" class="px-6 py-2.5 rounded-xl font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition-all flex items-center gap-2">
+            Continue to Fields
+            <span>→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================================== -->
+      <!-- STEP 3: FIELD SELECTION -->
+      <!-- ==================================================================== -->
+      <section id="step-3" class="space-y-6 hidden">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight text-white">Specify Required Fields</h2>
+          <p class="text-sm text-slate-400 mt-1">Add key fields, dimensions, and measures that must be present in the target CDS view.</p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wider text-slate-300 mb-2">
+            Requested Field List <span class="text-rose-400">*</span>
+          </label>
+          <div class="glass-card p-3 rounded-xl border border-slate-800 focus-within:border-blue-500/60 transition-colors min-h-[120px]">
+            <div id="field-chips" class="flex flex-wrap gap-2 mb-3"></div>
+            <div class="flex gap-2">
+              <input type="text" id="field-input" placeholder="Type field name (e.g. TotalNetAmount, CreationDate) and press Enter" 
+                     class="w-full bg-transparent text-sm text-white placeholder-slate-500 focus:outline-none"
+                     onkeydown="handleFieldKey(event)">
+              <button type="button" onclick="addFieldFromInput()" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-xs font-medium rounded-lg text-slate-200 transition-colors">Add</button>
+            </div>
+          </div>
+
+          <!-- Recommended Fields Suggestions based on Domain -->
+          <div class="mt-3">
+            <span class="text-xs text-slate-400 block mb-1.5 font-medium">Recommended Domain Fields (Click to add):</span>
+            <div id="recommended-fields" class="flex flex-wrap gap-1.5"></div>
+          </div>
+        </div>
+
+        <div class="flex justify-between pt-4 border-t border-slate-800">
+          <button onclick="goToStep(2)" class="px-5 py-2.5 rounded-xl font-medium bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-colors">
+            ← Back
+          </button>
+          <button id="btn-step3-next" onclick="validateStep3()" class="px-6 py-2.5 rounded-xl font-semibold bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 transition-all flex items-center gap-2">
+            Review Specification
+            <span>→</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================================== -->
+      <!-- STEP 4: REVIEW & SUBMIT -->
+      <!-- ==================================================================== -->
+      <section id="step-4" class="space-y-6 hidden">
+        <div>
+          <h2 class="text-2xl font-bold tracking-tight text-white">Review & Run RAG Evaluation</h2>
+          <p class="text-sm text-slate-400 mt-1">Review the synthesized requirement specification before querying the FAISS vector index.</p>
+        </div>
+
+        <!-- Summary Cards -->
+        <div class="space-y-4">
+          
+          <div class="glass-card p-4 rounded-xl border border-slate-800">
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Functional Domain</span>
+              <span id="review-domain-badge" class="px-2.5 py-0.5 rounded-md text-xs font-mono font-bold bg-blue-500/10 text-blue-400 border border-blue-500/20">SD</span>
+            </div>
+            <p id="review-domain-name" class="text-sm font-semibold text-white">Sales & Distribution</p>
+          </div>
+
+          <div class="glass-card p-4 rounded-xl border border-slate-800">
+            <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-2">Business Objective</span>
+            <p id="review-objective" class="text-sm text-slate-200 leading-relaxed italic bg-slate-900/50 p-3 rounded-lg border border-slate-800/80"></p>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="glass-card p-4 rounded-xl border border-slate-800">
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-2">Target Entities</span>
+              <div id="review-entities" class="flex flex-wrap gap-1.5"></div>
+            </div>
+
+            <div class="glass-card p-4 rounded-xl border border-slate-800">
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400 block mb-2">Requested Fields</span>
+              <div id="review-fields" class="flex flex-wrap gap-1.5"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="flex justify-between pt-4 border-t border-slate-800">
+          <button onclick="goToStep(3)" class="px-5 py-2.5 rounded-xl font-medium bg-slate-800/80 hover:bg-slate-700 text-slate-300 transition-colors">
+            ← Back
+          </button>
+          <button id="btn-submit-rag" onclick="submitRAGEvaluation()" class="px-8 py-3 rounded-xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-cyan-500 hover:from-blue-500 hover:to-cyan-400 text-white shadow-xl shadow-blue-500/30 transition-all flex items-center gap-3 group">
+            <span>Run RAG Evaluation</span>
+            <span class="group-hover:translate-x-1 transition-transform">✨</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ==================================================================== -->
+      <!-- EVALUATION PROGRESS STATE (Active Animated Overlay) -->
+      <!-- ==================================================================== -->
+      <div id="evaluation-loader" class="hidden py-12 flex flex-col items-center justify-center space-y-6 text-center">
+        <div class="relative w-20 h-20">
+          <div class="absolute inset-0 rounded-full border-4 border-blue-500/20 animate-ping"></div>
+          <div class="w-20 h-20 rounded-full border-4 border-t-blue-500 border-r-cyan-400 border-b-transparent border-l-transparent animate-spin"></div>
+          <div class="absolute inset-0 flex items-center justify-center text-lg font-bold text-blue-400 font-mono">
+            RAG
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-lg font-bold text-white tracking-tight" id="loader-status-text">Vectorizing Requirements...</h3>
+          <p class="text-xs text-slate-400 mt-1 max-w-sm">Querying TF-IDF Vector Retriever (Cosine Similarity) & evaluating SAP S/4HANA Clean Core guidelines</p>
+        </div>
+
+        <div class="w-64 bg-slate-900 rounded-full h-1.5 overflow-hidden border border-slate-800">
+          <div class="bg-gradient-to-r from-blue-500 to-cyan-400 h-full w-2/3 animate-[pulse_1s_infinite]"></div>
+        </div>
+      </div>
+
+      <!-- ==================================================================== -->
+      <!-- EVALUATION RESULTS VIEW -->
+      <!-- ==================================================================== -->
+      <section id="results-container" class="space-y-6 hidden">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-slate-800 gap-4">
+          <div>
+            <span class="text-xs uppercase font-mono tracking-widest text-slate-500">Evaluation Result</span>
+            <h2 class="text-2xl font-bold tracking-tight text-white flex items-center gap-3 mt-0.5">
+              Architectural Recommendation
+              <span id="res-badge" class="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider">REUSE</span>
+            </h2>
+          </div>
+          <button onclick="resetWizard()" class="px-4 py-2 bg-slate-800 hover:bg-slate-700 text-xs font-semibold rounded-xl text-slate-300 transition-colors self-start sm:self-auto">
+            ↻ New Evaluation
+          </button>
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+          
+          <div class="glass-card p-4 rounded-xl border border-slate-800">
+            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block">Top Match Score</span>
+            <div class="flex items-baseline gap-2 mt-1">
+              <span id="res-score" class="text-3xl font-bold text-white font-mono">--</span>
+              <span class="text-xs text-slate-400 font-medium">cosine similarity</span>
+            </div>
+            <div class="w-full bg-slate-800/80 rounded-full h-2 mt-3 overflow-hidden">
+              <div id="res-score-bar" class="h-full bg-blue-500 rounded-full transition-all duration-700" style="width: 0%"></div>
+            </div>
+          </div>
+
+          <div class="glass-card p-4 rounded-xl border border-slate-800">
+            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block">Target CDS View</span>
+            <div class="mt-1">
+              <span id="res-target-view" class="text-lg font-bold font-mono text-cyan-400">None</span>
+              <span id="res-target-label" class="block text-xs text-slate-400 truncate">No view to modify</span>
+            </div>
+          </div>
+
+          <div class="glass-card p-4 rounded-xl border border-slate-800">
+            <span class="text-xs font-semibold text-slate-400 uppercase tracking-wider block">Processing Time</span>
+            <div class="flex items-baseline gap-2 mt-1">
+              <span id="res-latency" class="text-3xl font-bold text-white font-mono">--</span>
+              <span class="text-xs text-slate-400 font-medium">milliseconds</span>
+            </div>
+            <span class="text-[10px] text-emerald-400 mt-2 block">✓ End-to-end vector + LLM</span>
+          </div>
+
+        </div>
+
+        <!-- LLM Explanation -->
+        <div class="glass-card p-5 rounded-xl border border-slate-800">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-300 mb-2 flex items-center gap-2">
+            <span>💡</span> Architectural Reasoning & Guideline
+          </h4>
+          <p id="res-explanation" class="text-sm text-slate-200 leading-relaxed"></p>
+        </div>
+
+        <!-- Generated DDL Block (If applicable) -->
+        <div id="ddl-section" class="glass-card rounded-xl border border-slate-800 overflow-hidden">
+          <div class="bg-slate-900/90 px-4 py-3 border-b border-slate-800 flex items-center justify-between">
+            <div class="flex items-center space-x-2">
+              <span class="w-3 h-3 rounded-full bg-rose-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-amber-500/80"></span>
+              <span class="w-3 h-3 rounded-full bg-emerald-500/80"></span>
+              <span class="ml-2 text-xs font-mono text-slate-400" id="ddl-filename">CDS_DEFINITION.asddls</span>
+            </div>
+            <div class="flex items-center space-x-2">
+              <button onclick="copyGeneratedDDL()" id="btn-copy" class="px-3 py-1 bg-slate-800 hover:bg-slate-700 text-xs font-medium rounded-lg text-slate-300 flex items-center gap-1.5 transition-colors">
+                <span>📋</span> Copy DDL
+              </button>
+              <button onclick="downloadDDLFile()" class="px-3 py-1 bg-blue-600/30 hover:bg-blue-600/50 text-blue-300 text-xs font-medium rounded-lg transition-colors">
+                ↓ Export
+              </button>
+            </div>
+          </div>
+          <pre class="p-4 text-xs font-mono overflow-x-auto bg-[#0d1117] leading-relaxed"><code id="res-code-block" class="language-sql"></code></pre>
+        </div>
+
+        <!-- Candidate Views Accordion -->
+        <div class="glass-card p-5 rounded-xl border border-slate-800">
+          <h4 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+            Top 3 Retrieved Candidate CDS Views
+          </h4>
+          <div id="res-candidates-list" class="space-y-3"></div>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- Notification Toast Container -->
+  <div id="toast" class="fixed bottom-6 right-6 px-4 py-3 rounded-xl bg-slate-900 border border-slate-700 text-sm shadow-2xl flex items-center gap-3 translate-y-20 opacity-0 transition-all duration-300 z-50">
+    <span id="toast-icon">ℹ️</span>
+    <span id="toast-msg" class="text-slate-200 font-medium">Notification</span>
+  </div>
+
+  <!-- Application Logic -->
+  <script>
+    // State Container
+    const wizardState = {
+      domain: 'SD',
+      entities: ['SalesOrder', 'Customer'],
+      objective: '',
+      fields: ['SalesOrder', 'TotalNetAmount', 'CustomerName', 'CityName', 'CreationDate']
+    };
+
+    const domainPresets = {
+      SD: {
+        name: 'Sales & Distribution',
+        entities: ['SalesOrder', 'Customer', 'DeliveryDocument'],
+        fields: ['SalesOrder', 'TotalNetAmount', 'SoldToParty', 'CustomerName', 'CreationDate', 'TransactionCurrency', 'Plant'],
+        sampleObjective: 'Need a CDS view to report outstanding sales orders with customer delivery address, total net value, and creation date for open sales order tracking.'
+      },
+      FI: {
+        name: 'Financial Accounting',
+        entities: ['JournalEntry', 'GLAccount', 'CompanyCode'],
+        fields: ['AccountingDocument', 'Ledger', 'CompanyCode', 'FiscalYear', 'GLAccount', 'AmountInCompanyCodeCurrency', 'PostingDate'],
+        sampleObjective: 'Track operational journal entry line items in company code currency across fiscal years with chart of accounts mapping.'
+      },
+      MM: {
+        name: 'Materials Management',
+        entities: ['PurchaseOrder', 'MaterialStock', 'Supplier'],
+        fields: ['PurchaseOrder', 'Material', 'Plant', 'StorageLocation', 'UnrestrictedStockQuantity', 'Supplier', 'DocumentCurrency'],
+        sampleObjective: 'Provide a real-time view of current unrestricted inventory stock levels along with open purchase order commitments per plant.'
+      },
+      CO: {
+        name: 'Controlling',
+        entities: ['CostCenter', 'ProfitCenter', 'ControllingArea'],
+        fields: ['CostCenter', 'ProfitCenter', 'ControllingArea', 'ChartOfAccounts', 'CostElement'],
+        sampleObjective: 'Aggregate monthly actual vs planned costs by Cost Center and Controlling Area for managerial performance accounting.'
+      },
+      PP: {
+        name: 'Production Planning',
+        entities: ['ProductionOrder', 'WorkCenter', 'BillOfMaterial'],
+        fields: ['ProductionOrder', 'Material', 'Plant', 'OrderQuantity', 'ProductionStartDate'],
+        sampleObjective: 'Monitor manufacturing order progress, scrap rates, and scheduled completion dates across plant work centers.'
+      },
+      PM: {
+        name: 'Plant Maintenance',
+        entities: ['MaintenanceOrder', 'Equipment', 'FunctionalLocation'],
+        fields: ['MaintenanceOrder', 'Equipment', 'Plant', 'BreakdownDuration', 'OrderStartDate'],
+        sampleObjective: 'Analyze plant equipment breakdown frequencies and scheduled preventive maintenance order fulfillment.'
+      }
+    };
+
+    // Initialization
+    document.addEventListener('DOMContentLoaded', () => {
+      selectDomain('SD');
+      renderEntityChips();
+      renderFieldChips();
+      checkBackendHealth();
+    });
+
+    // Check Backend Server Status
+    async function checkBackendHealth() {
+      const dot = document.getElementById('status-dot');
+      const text = document.getElementById('status-text');
+
+      try {
+        const res = await fetch('http://localhost:8000/health', { method: 'GET' });
+        if (res.ok) {
+          const data = await res.json();
+          dot.className = 'w-2 h-2 rounded-full bg-emerald-400';
+          text.textContent = `Backend Online (${data.indexed_vectors} CDS Views)`;
+        } else {
+          throw new Error('Non-200 response');
+        }
+      } catch (err) {
+        dot.className = 'w-2 h-2 rounded-full bg-amber-400';
+        text.textContent = 'Backend Offline (Demo Fallback Active)';
+      }
+    }
+
+    // Step Navigation
+    function goToStep(stepNumber) {
+      // Hide all step sections
+      for (let i = 1; i <= 4; i++) {
+        document.getElementById(`step-${i}`).classList.add('hidden');
+        const bubble = document.getElementById(`step-bubble-i` || `step-bubble-${i}`);
+        if (bubble) {
+          bubble.className = 'w-10 h-10 rounded-xl border border-slate-700 bg-slate-900/60 text-slate-400 flex items-center justify-center font-bold text-sm transition-all duration-300 mb-2';
+        }
+      }
+
+      document.getElementById('results-container').classList.add('hidden');
+      document.getElementById('evaluation-loader').classList.add('hidden');
+
+      // Highlight bubbles up to current step
+      for (let i = 1; i < stepNumber; i++) {
+        const bubble = document.getElementById(`step-bubble-${i}`);
+        bubble.className = 'w-10 h-10 rounded-xl border flex items-center justify-center font-bold text-sm transition-all duration-300 step-complete mb-2';
+        bubble.innerHTML = '✓';
+      }
+
+      const currentBubble = document.getElementById(`step-bubble-${stepNumber}`);
+      currentBubble.className = 'w-10 h-10 rounded-xl border flex items-center justify-center font-bold text-sm transition-all duration-300 step-active mb-2';
+      currentBubble.innerHTML = stepNumber;
+
+      // Show target step section
+      document.getElementById(`step-${stepNumber}`).classList.remove('hidden');
+
+      if (stepNumber === 4) {
+        renderReviewSummary();
+      }
+    }
+
+    // Step 1: Domain Selection
+    function selectDomain(domainKey, element) {
+      wizardState.domain = domainKey;
+      const cards = document.querySelectorAll('.domain-card');
+      cards.forEach(card => {
+        card.classList.remove('glass-card-active');
+        const check = card.querySelector('.check-icon');
+        check.className = 'check-icon w-5 h-5 rounded-full border border-slate-700 flex items-center justify-center text-transparent text-xs';
+      });
+
+      const selectedCard = element || document.querySelector(`[data-domain="${domainKey}"]`);
+      if (selectedCard) {
+        selectedCard.classList.add('glass-card-active');
+        const check = selectedCard.querySelector('.check-icon');
+        check.className = 'check-icon w-5 h-5 rounded-full bg-blue-500 border border-blue-400 flex items-center justify-center text-white text-xs font-bold';
+      }
+
+      // Update recommended suggestions
+      updateSuggestionsForDomain(domainKey);
+    }
+
+    function updateSuggestionsForDomain(domainKey) {
+      const preset = domainPresets[domainKey] || domainPresets.SD;
+      
+      // Update entity suggestions
+      const entContainer = document.getElementById('entity-suggestions');
+      entContainer.innerHTML = '';
+      preset.entities.forEach(ent => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'px-2 py-0.5 rounded bg-slate-800 hover:bg-slate-700 text-slate-300 transition-colors font-mono text-[11px]';
+        btn.textContent = `+ ${ent}`;
+        btn.onclick = () => addEntity(ent);
+        entContainer.appendChild(btn);
+      });
+
+      // Update recommended fields
+      const fieldContainer = document.getElementById('recommended-fields');
+      fieldContainer.innerHTML = '';
+      preset.fields.forEach(field => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'px-2 py-1 rounded-lg bg-slate-800/80 hover:bg-slate-700 border border-slate-700 text-slate-300 transition-colors font-mono text-xs flex items-center gap-1';
+        btn.innerHTML = `<span class="text-blue-400">+</span> ${field}`;
+        btn.onclick = () => addField(field);
+        fieldContainer.appendChild(btn);
+      });
+    }
+
+    function validateStep1() {
+      if (!wizardState.domain) {
+        showToast('Please select a functional SAP module domain.', 'warning');
+        return;
+      }
+      goToStep(2);
+    }
+
+    // Step 2: Entities & Objective
+    function renderEntityChips() {
+      const container = document.getElementById('entity-chips');
+      container.innerHTML = '';
+      wizardState.entities.forEach((ent, idx) => {
+        const chip = document.createElement('div');
+        chip.className = 'tag-chip inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-blue-500/10 text-blue-300 border border-blue-500/20 text-xs font-mono font-medium';
+        chip.innerHTML = `
+          <span>${ent}</span>
+          <button type="button" onclick="removeEntity(${idx})" class="text-blue-400 hover:text-white ml-0.5 font-bold">×</button>
+        `;
+        container.appendChild(chip);
+      });
+    }
+
+    function addEntity(name) {
+      const clean = name.trim();
+      if (clean && !wizardState.entities.includes(clean)) {
+        wizardState.entities.push(clean);
+        renderEntityChips();
+      }
+    }
+
+    function addEntityFromInput() {
+      const input = document.getElementById('entity-input');
+      if (input.value.trim()) {
+        addEntity(input.value);
+        input.value = '';
+      }
+    }
+
+    function handleEntityKey(e) {
+      if (e.key === 'Enter' || e.key === ',') {
+        e.preventDefault();
+        addEntityFromInput();
+      }
+    }
+
+    function removeEntity(index) {
+      wizardState.entities.splice(index, 1);
+      renderEntityChips();
+    }
+
+    function fillObjectiveTemplate() {
+      const preset = domainPresets[wizardState.domain] || domainPresets.SD;
+      document.getElementById('business-objective').value = preset.sampleObjective;
+    }
+
+    function validateStep2() {
+      const objective = document.getElementById('business-objective').value.trim();
+      if (wizardState.entities.length === 0) {
+        showToast('Please add at least one business entity (e.g. SalesOrder).', 'warning');
+        return;
+      }
+      if (!objective) {
+        showToast('Please enter your plain-language business objective.', 'warning');
+        return;
+      }
+      wizardState.objective = objective;
+      goToStep(3);
+    }
+
+    // Step 3: Fields
+    function renderFieldChips() {
+      const container = document.getElementById('field-chips');
+      container.innerHTML = '';
+      wizardState.fields.forEach((f, idx) => {
+        const chip = document.createElement('div');
+        chip.className = 'tag-chip inline-flex items-center gap-1.5 px-3 py-1 rounded-lg bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 text-xs font-mono font-medium';
+        chip.innerHTML = `
+          <span>${f}</span>
+          <button type="button" onclick="removeField(${idx})" class="text-emerald-400 hover:text-white ml-0.5 font-bold">×</button>
+        `;
+        container.appendChild(chip);
+      });
+    }
+
+    function addField(name) {
+      const clean = name.trim();
+      if (clean && !wizardState.fields.includes(clean)) {
+        wizardState.fields.push(clean);
+        renderFieldChips();
+      }
+    }
+
+    function addFieldFromInput() {
+      const input = document.getElementById('field-input');
+      if (input.value.trim()) {
+        addField(input.value);
+        input.value = '';
+      }
+    }
+
+    function handleFieldKey(e) {
+      if (e.key === 'Enter' || e.key === ',') {
+        e.preventDefault();
+        addFieldFromInput();
+      }
+    }
+
+    function removeField(index) {
+      wizardState.fields.splice(index, 1);
+      renderFieldChips();
+    }
+
+    function validateStep3() {
+      if (wizardState.fields.length === 0) {
+        showToast('Please add at least one required field.', 'warning');
+        return;
+      }
+      goToStep(4);
+    }
+
+    // Step 4: Review Summary
+    function renderReviewSummary() {
+      const preset = domainPresets[wizardState.domain] || domainPresets.SD;
+      document.getElementById('review-domain-badge').textContent = wizardState.domain;
+      document.getElementById('review-domain-name').textContent = preset.name;
+      document.getElementById('review-objective').textContent = `"${wizardState.objective}"`;
+
+      const entContainer = document.getElementById('review-entities');
+      entContainer.innerHTML = '';
+      wizardState.entities.forEach(ent => {
+        const span = document.createElement('span');
+        span.className = 'px-2.5 py-0.5 rounded bg-blue-500/10 text-blue-300 border border-blue-500/20 font-mono text-xs';
+        span.textContent = ent;
+        entContainer.appendChild(span);
+      });
+
+      const fieldContainer = document.getElementById('review-fields');
+      fieldContainer.innerHTML = '';
+      wizardState.fields.forEach(f => {
+        const span = document.createElement('span');
+        span.className = 'px-2.5 py-0.5 rounded bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 font-mono text-xs';
+        span.textContent = f;
+        fieldContainer.appendChild(span);
+      });
+    }
+
+    // Submit Evaluation to Backend
+    async function submitRAGEvaluation() {
+      const step4 = document.getElementById('step-4');
+      const loader = document.getElementById('evaluation-loader');
+      const results = document.getElementById('results-container');
+
+      step4.classList.add('hidden');
+      loader.classList.remove('hidden');
+
+      const payload = {
+        domain: wizardState.domain,
+        business_objective: wizardState.objective,
+        entities: wizardState.entities,
+        fields: wizardState.fields
+      };
+
+      try {
+        const response = await fetch('http://localhost:8000/api/evaluate-cds', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+          throw new Error(`Server returned HTTP ${response.status}`);
+        }
+
+        const data = await response.json();
+        renderResults(data);
+
+      } catch (err) {
+        console.warn('Backend unavailable, rendering realistic demo response:', err);
+        showToast('Backend offline - displaying local demo evaluation.', 'warning');
+        renderDemoResults();
+      } finally {
+        loader.classList.add('hidden');
+        results.classList.remove('hidden');
+      }
+    }
+
+    // Render Live Results
+    function renderResults(data) {
+      const badge = document.getElementById('res-badge');
+      const recType = data.recommendation_type || 'EXTEND';
+      
+      // Recommendation badge colors
+      if (recType === 'REUSE') {
+        badge.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-emerald-500/15 text-emerald-400 border border-emerald-500/30';
+      } else if (recType === 'EXTEND') {
+        badge.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-500/15 text-amber-400 border border-amber-500/30';
+      } else {
+        badge.className = 'px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-blue-500/15 text-blue-400 border border-blue-500/30';
+      }
+      badge.textContent = recType;
+
+      // Metrics
+      const topScore = data.candidate_matches && data.candidate_matches.length > 0
+        ? data.candidate_matches[0].match_score
+        : 78.4;
+      document.getElementById('res-score').textContent = `${topScore}%`;
+      document.getElementById('res-score-bar').style.width = `${Math.min(100, topScore)}%`;
+
+      document.getElementById('res-target-view').textContent = data.target_cds || 'None (Custom View)';
+      document.getElementById('res-target-label').textContent = data.target_cds 
+        ? `Target for S/4HANA Clean Core ${recType}`
+        : 'New standalone view entity required';
+
+      document.getElementById('res-latency').textContent = data.processing_time_ms ? Math.round(data.processing_time_ms) : '24';
+      document.getElementById('res-explanation').textContent = data.explanation;
+
+      // Code Block Rendering
+      const ddlSection = document.getElementById('ddl-section');
+      const codeBlock = document.getElementById('res-code-block');
+
+      if (data.generated_ddl) {
+        ddlSection.classList.remove('hidden');
+        codeBlock.textContent = data.generated_ddl;
+        hljs.highlightElement(codeBlock);
+        document.getElementById('ddl-filename').textContent = recType === 'EXTEND' 
+          ? `EXTEND_${data.target_cds || 'VIEW'}.asddls` 
+          : 'Z_CUSTOM_VIEW.asddls';
+      } else {
+        ddlSection.classList.add('hidden');
+      }
+
+      // Candidate List
+      renderCandidateMatches(data.candidate_matches || []);
+    }
+
+    // Render Candidates List
+    function renderCandidateMatches(candidates) {
+      const container = document.getElementById('res-candidates-list');
+      container.innerHTML = '';
+
+      if (!candidates || candidates.length === 0) {
+        container.innerHTML = '<p class="text-xs text-slate-500">No candidates available.</p>';
+        return;
+      }
+
+      candidates.forEach((cand, idx) => {
+        const item = document.createElement('div');
+        item.className = 'p-3 rounded-lg bg-slate-900/60 border border-slate-800/80 flex flex-col sm:flex-row sm:items-center justify-between gap-2';
+        item.innerHTML = `
+          <div>
+            <div class="flex items-center gap-2">
+              <span class="font-mono text-sm font-semibold text-white">${cand.cds_name}</span>
+              <span class="text-[10px] px-1.5 py-0.2 rounded bg-slate-800 text-slate-400">${cand.domain}</span>
+            </div>
+            <span class="text-xs text-slate-400">${cand.label || 'Standard CDS View'}</span>
+          </div>
+          <div class="flex items-center gap-4 text-xs font-mono">
+            <span class="text-slate-400">${cand.field_count} fields · ${cand.association_count} assocs</span>
+            <span class="px-2 py-0.5 rounded font-bold ${cand.match_score >= 80 ? 'bg-emerald-500/10 text-emerald-400' : 'bg-slate-800 text-slate-300'}">
+              ${cand.match_score}%
+            </span>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+    }
+
+    // Demo Fallback Result
+    function renderDemoResults() {
+      const demoData = {
+        recommendation_type: 'EXTEND',
+        target_cds: 'I_SalesOrder',
+        explanation: "Standard CDS View 'I_SalesOrder' matches your business model with an FAISS similarity score of 78.4%, but does not expose specialized customer address fields. Following SAP S/4HANA Clean Core guidelines, you should not modify the standard view or create an unneeded duplicate. Use EXTEND VIEW ENTITY to append the missing fields without disrupting standard upgrades.",
+        generated_ddl: `@EndUserText.label: 'Extension for I_SalesOrder - SD'
+extend view entity I_SalesOrder with Z_EXT_SalesOrder_SD
+{
+  _SoldToParty.CityName as CustomerCity,
+  _SoldToParty.PostalCode as CustomerPostalCode,
+  _Base.CustomerGroup as CustomerGroup
+};`,
+        candidate_matches: [
+          {
+            cds_name: 'I_SalesOrder',
+            label: 'Sales Order',
+            domain: 'Sales & Distribution (SD)',
+            match_score: 78.4,
+            key_fields: ['SalesOrder'],
+            field_count: 11,
+            association_count: 3
+          },
+          {
+            cds_name: 'I_SalesOrderItem',
+            label: 'Sales Order Item',
+            domain: 'Sales & Distribution (SD)',
+            match_score: 64.2,
+            key_fields: ['SalesOrder', 'SalesOrderItem'],
+            field_count: 10,
+            association_count: 2
+          },
+          {
+            cds_name: 'I_Customer',
+            label: 'Customer Master Data',
+            domain: 'Sales & Distribution (SD)',
+            match_score: 55.1,
+            key_fields: ['Customer'],
+            field_count: 6,
+            association_count: 1
+          }
+        ],
+        processing_time_ms: 28.5
+      };
+      renderResults(demoData);
+    }
+
+    // Copy to Clipboard
+    function copyGeneratedDDL() {
+      const code = document.getElementById('res-code-block').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        const btn = document.getElementById('btn-copy');
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<span>✓</span> Copied!';
+        btn.classList.add('text-emerald-400');
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+          btn.classList.remove('text-emerald-400');
+        }, 2000);
+      });
+    }
+
+    // Download DDL File
+    function downloadDDLFile() {
+      const code = document.getElementById('res-code-block').innerText;
+      const filename = document.getElementById('ddl-filename').innerText;
+      const blob = new Blob([code], { type: 'text/plain;charset=utf-8' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = filename;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      showToast(`Downloaded ${filename}`, 'info');
+    }
+
+    // Reset Wizard
+    function resetWizard() {
+      goToStep(1);
+    }
+
+    // Toast Notification
+    function showToast(message, type = 'info') {
+      const toast = document.getElementById('toast');
+      const msg = document.getElementById('toast-msg');
+      const icon = document.getElementById('toast-icon');
+
+      msg.textContent = message;
+      icon.textContent = type === 'warning' ? '⚠️' : 'ℹ️';
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(() => {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3500);
+    }
+  </script>
+
+</body>
+</html>

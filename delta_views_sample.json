@@ -1,0 +1,92 @@
+[
+  {
+    "cds_name": "Z_I_SalesOrderCustomAnalytics",
+    "label": "Custom Sales Order Analytics with Loyalty Category",
+    "domain": "Sales & Distribution (SD)",
+    "fields": [
+      {
+        "name": "SalesOrder",
+        "type": "CHAR",
+        "is_key": true,
+        "label": "Sales Order"
+      },
+      {
+        "name": "SoldToParty",
+        "type": "CHAR",
+        "is_key": false,
+        "label": "Customer ID"
+      },
+      {
+        "name": "CustomerLoyaltyTier",
+        "type": "CHAR",
+        "is_key": false,
+        "label": "Loyalty Tier (Gold/Silver)"
+      },
+      {
+        "name": "TotalNetAmount",
+        "type": "CURR",
+        "is_key": false,
+        "label": "Total Net Amount"
+      },
+      {
+        "name": "CustomMarginPercentage",
+        "type": "DEC",
+        "is_key": false,
+        "label": "Calculated Profit Margin"
+      }
+    ],
+    "associations": [
+      {
+        "alias": "_Customer",
+        "target_cds": "I_Customer",
+        "cardinality": "[0..1]",
+        "condition": "$projection.SoldToParty = _Customer.Customer"
+      }
+    ]
+  },
+  {
+    "cds_name": "Z_I_MaterialValuationRealtime",
+    "label": "Real-time Material Valuation and Stock Margin",
+    "domain": "Materials Management (MM)",
+    "fields": [
+      {
+        "name": "Material",
+        "type": "CHAR",
+        "is_key": true,
+        "label": "Material Number"
+      },
+      {
+        "name": "Plant",
+        "type": "CHAR",
+        "is_key": true,
+        "label": "Plant"
+      },
+      {
+        "name": "StorageLocation",
+        "type": "CHAR",
+        "is_key": true,
+        "label": "Storage Location"
+      },
+      {
+        "name": "ValuationAmount",
+        "type": "CURR",
+        "is_key": false,
+        "label": "Current Valuation Amount"
+      },
+      {
+        "name": "Currency",
+        "type": "CHAR",
+        "is_key": false,
+        "label": "Currency"
+      }
+    ],
+    "associations": [
+      {
+        "alias": "_Product",
+        "target_cds": "I_Product",
+        "cardinality": "[0..1]",
+        "condition": "$projection.Material = _Product.Product"
+      }
+    ]
+  }
+]
