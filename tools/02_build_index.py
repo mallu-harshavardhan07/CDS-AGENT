@@ -409,11 +409,11 @@ def parse_args() -> argparse.Namespace:
         description="Build Persistent ChromaDB Vector Index for SAP S/4HANA CDS Views",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
-    default_catalog = "extracted_views.json" if os.path.exists("extracted_views.json") else "cds_catalog.json"
+    default_catalog = "cds_catalog.json" if os.path.exists("cds_catalog.json") else "extracted_views.json"
     parser.add_argument(
         "-i", "--input-catalog",
         default=default_catalog,
-        help="Path to extracted CDS catalog JSON file (extracted_views.json or cds_catalog.json)"
+        help="Path to extracted CDS catalog JSON file (default: cds_catalog.json)"
     )
     parser.add_argument(
         "-d", "--db-path",

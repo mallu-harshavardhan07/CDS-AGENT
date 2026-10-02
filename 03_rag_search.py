@@ -283,9 +283,8 @@ def build_vector_store_from_json(
     candidate_paths = [
         json_path,
         os.getenv("EXTRACTED_VIEWS_PATH"),
-        "extracted_views.json",
         "cds_catalog.json",
-        "cds_mapping.json"
+        "extracted_views.json"
     ]
     base_dir = os.path.dirname(os.path.abspath(__file__))
 
