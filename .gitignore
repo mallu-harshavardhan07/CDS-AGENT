@@ -6,6 +6,9 @@
 __pycache__/
 *.py[cod]
 *$py.class
+*.pyc
+*.pyo
+*.pyd
 
 # C extensions
 *.so
@@ -18,7 +21,11 @@ env/
 env.bak/
 venv.bak/
 
-# Vector Database & Retrieval Cache
+# Local Vector Store Binaries & Databases
+*.sqlite3
+*.sqlite
+*.db
+cds_metadata.db
 cds_vector_db/
 *.pkl
 

@@ -84,26 +84,63 @@ The extracted catalog is saved directly to `cds_catalog.json` with the following
 ## Quickstart
 
 ### 1. Installation
-Install core requirements (Pure Python & Scikit-Learn):
+Install core requirements:
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Phase 1: Extract CDS Metadata
+### 2. Option 1: SAP ABAP CDS Extraction via File (`Z_EXPORT_CDS_CATALOG.abap`)
+In SAP GUI (SE38/SE80) on SAP S/4HANA:
+1. Create executable report `Z_EXPORT_CDS_CATALOG`.
+2. Paste the source code from [Z_EXPORT_CDS_CATALOG.abap](file:///c:/Users/mallu/CDS-Agent/Z_EXPORT_CDS_CATALOG.abap).
+3. Execute (`F8`), specify selection criteria (e.g., `s_ddl = I_*` for standard VDM views), and save the extracted `cds_catalog.json` to your local machine.
+4. Populate ChromaDB from the JSON file:
+   ```bash
+   python 02_build_index.py --batch-size 128 --reset
+   ```
+
+### 3. Option 2: Direct Real-Time SAP In-Memory Connector (`01_sap_direct_connector.py`)
+Directly extracts active CDS views (`DDDDLSRC`) in-memory via `pyrfc` (RFC) or standard SAP OData / ADT REST endpoints and immediately embeds & upserts into ChromaDB without intermediate JSON file writes:
 ```bash
-python 01_extract.py --mock
+# Direct in-memory sync and vector indexing (auto detects pyrfc / REST / fallback):
+python 01_sap_direct_connector.py --reset
+
+# Specific method or dry-run:
+python 01_sap_direct_connector.py --method auto --batch-size 128 --reset
+python 01_sap_direct_connector.py --dry-run
 ```
 
-### 3. Phase 2: Build ChromaDB Vector Index (Batch Processing)
+### 4. Part 3: RAG Search & Retrieval Engine (`03_rag_search.py`)
+Search CDS views using natural language and generate Clean Core LLM prompts:
 ```bash
-# Build ChromaDB vector collection from cds_catalog.json in batches of 64
-python 02_build_index.py --batch-size 64
+# Direct semantic search with top 3 results and LLM prompt:
+python 03_rag_search.py -q "Find CDS views for billing document items with customer details" --top-k 3 --show-prompt
 
-# Or with clean reset:
-python 02_build_index.py --batch-size 64 --reset
+# Launch interactive REPL session:
+python 03_rag_search.py
 ```
 
-### 4. Phase 3: Start AI Evaluation Core Server & Web UI
+### 5. Part 4: Clean Core ABAP CDS Code Generator Agent (`04_cds_agent.py`)
+Automatically generate production-ready, Clean Core compliant ABAP CDS View Entities based on natural language queries and RAG context:
+```bash
+# Run in deterministic Clean Core mock mode:
+python 04_cds_agent.py -q "Create a custom CDS view entity for sales order header and item details with customer name" --mock
+
+# Export generated view entity directly to an .asddls file:
+python 04_cds_agent.py -q "Create a custom CDS view entity for sales order header and item details with customer name" --mock -o Z_SalesOrderDetails.asddls
+```
+
+### 6. Part 5: Launch Streamlit Web UI Dashboard (`app.py`)
+Launch the interactive Streamlit dashboard on `http://localhost:8501`:
+```bash
+streamlit run app.py
+```
+Features:
+- Instant semantic search across all **89,401 live CDS views** in ChromaDB.
+- Clean Core automated decision badge (`REUSE`, `EXTEND`, `CREATE`).
+- Syntax-highlighted ABAP CDS DDL editor with one-click `.asddls` file download.
+
+### 7. Part 6: Start FastAPI Core Server & 4-Step Wizard Web UI (`03_server.py`)
 ```bash
 python 03_server.py
 # Or using uvicorn directly:
@@ -111,7 +148,7 @@ uvicorn 03_server:app --host 0.0.0.0 --port 8000 --reload
 ```
 Once the server is running, navigate directly to **`http://localhost:8000`** in any web browser to access the 4-Step Wizard Web Interface! (Or open `index.html` directly).
 
-### 5. Phase 4: Run Incremental Delta Sync
+### 8. Part 7: Run Incremental Delta Sync
 **Dry-run Validation:**
 ```bash
 python 04_delta_sync.py --delta-file delta_views_sample.json --dry-run

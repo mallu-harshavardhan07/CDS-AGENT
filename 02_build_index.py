@@ -3,9 +3,11 @@
 Module: 02_build_index.py
 Description: Production-ready ChromaDB Vector Search Index Builder with
              SentenceTransformers embeddings for SAP S/4HANA CDS Views.
-             Processes CDS catalogs in batch chunks to efficiently scale
-             to thousands of views, persisting vectors to ./cds_vector_db.
-Author: Senior AI / RAG Engineer
+             Processes CDS catalogs in batch chunks (default: 128) to
+             efficiently scale to thousands of views, persisting vectors to
+             ./cds_vector_db.
+             Supports both high-fidelity DDL definitions and legacy schemas.
+Author: SAP S/4HANA Cloud & AI Integration Engineering
 =============================================================================
 """
 
@@ -69,89 +71,83 @@ class BenchmarkTimer:
 class CDSDocumentSynthesizer:
     """
     Transforms structured CDS catalog records into rich, semantically dense
-    searchable text strings combining name, description, domain, fields, and associations.
+    searchable text representations combining view_name, description, annotations,
+    and ddl_code (with graceful fallback for legacy schema structures).
     """
 
     @staticmethod
     def build_text_representation(cds: Dict[str, Any]) -> str:
         """
         Creates a high-signal contextual document combining:
-        1. CDS View Name & @EndUserText.label description
-        2. Functional Domain / Module (SD, FI, MM, PP, CA, etc.)
-        3. Primary Key Fields & Key Attribute Labels
-        4. Field schema with data types & descriptions
-        5. Associations, target views, and join relationships
+        1. CDS View Name & DDL Source Name
+        2. Description / Label
+        3. Annotations (@VDM, @Analytics, @EndUserText, @ObjectModel)
+        4. DDL Source Code (or legacy fields & associations if DDL code is absent)
         """
-        cds_name = (cds.get("cds_name") or cds.get("name") or "").strip()
-        label = (cds.get("label") or cds.get("description") or "").strip()
-        domain = (cds.get("domain") or "").strip()
-        fields = cds.get("fields", [])
-        associations = cds.get("associations", [])
+        view_name = (
+            cds.get("view_name") or
+            cds.get("cds_name") or
+            cds.get("name") or
+            ""
+        ).strip()
 
-        # Categorize fields into Keys vs Attributes
-        key_fields: List[str] = []
-        regular_fields: List[str] = []
+        ddl_source_name = (
+            cds.get("ddl_source_name") or
+            cds.get("source_name") or
+            view_name
+        ).strip()
 
-        for f in fields:
-            if isinstance(f, dict):
-                name = f.get("name", "")
-                ftype = f.get("type", "CHAR")
-                flabel = f.get("label", name)
-                is_key = f.get("is_key", False)
-                field_desc = f"{name} ({ftype}): {flabel}" if flabel != name else f"{name} ({ftype})"
-            else:
-                name = str(f)
-                is_key = False
-                field_desc = name
+        description = (
+            cds.get("description") or
+            cds.get("label") or
+            ""
+        ).strip()
 
-            if is_key:
-                key_fields.append(field_desc)
-            else:
-                regular_fields.append(field_desc)
+        annotations = cds.get("annotations", [])
+        ddl_code = (cds.get("ddl_code") or cds.get("source") or "").strip()
 
-        # Format Associations & Related Entities
-        assoc_descriptions: List[str] = []
-        for a in associations:
-            if isinstance(a, dict):
-                alias = a.get("alias", "")
-                target = a.get("target") or a.get("target_cds", "")
-                cardinality = a.get("cardinality", "")
-                cond = a.get("condition", "").replace("\n", " ").strip()
-                parts = []
-                if alias:
-                    parts.append(alias)
-                if target:
-                    parts.append(f"-> {target}")
-                if cardinality:
-                    parts.append(cardinality)
-                if cond:
-                    parts.append(f"ON {cond}")
-                assoc_descriptions.append(" ".join(parts).strip() if parts else str(a))
-            else:
-                assoc_descriptions.append(f"Association: {str(a)}")
-
-        # Construct structured searchable representation
-        doc_parts = [
-            f"CDS View: {cds_name}",
-            f"Business Label: {label}",
-            f"Functional Domain: {domain}",
-            f"Summary: Standard SAP S/4HANA CDS View '{cds_name}' ({label}) belonging to functional area {domain}.",
+        # Build document payload
+        doc_parts: List[str] = [
+            f"CDS View Name: {view_name}",
+            f"DDL Source Name: {ddl_source_name}",
+            f"Description: {description}",
         ]
 
-        if key_fields:
-            doc_parts.append("Key Fields:\n  - " + "\n  - ".join(key_fields))
+        # Add annotations if present
+        if annotations:
+            if isinstance(annotations, list):
+                annos_str = ", ".join(str(a) for a in annotations)
+            else:
+                annos_str = str(annotations)
+            doc_parts.append(f"Annotations: {annos_str}")
 
-        if regular_fields:
-            # Show up to first 50 fields to prevent exceeding embedding model context window
-            capped_fields = regular_fields[:50]
-            if len(regular_fields) > 50:
-                capped_fields.append(f"... and {len(regular_fields) - 50} more fields")
-            doc_parts.append("Attributes & Measures:\n  - " + "\n  - ".join(capped_fields))
+        # Add full DDL code if present
+        if ddl_code:
+            doc_parts.append(f"DDL Code:\n{ddl_code}")
+        else:
+            # Fallback to legacy fields and associations format if DDL is not provided
+            domain = (cds.get("domain") or "").strip()
+            if domain:
+                doc_parts.append(f"Functional Domain: {domain}")
 
-        if assoc_descriptions:
-            doc_parts.append("Associations & Relationships:\n  - " + "\n  - ".join(assoc_descriptions))
+            raw_fields = cds.get("fields", [])
+            if raw_fields:
+                field_names = [f.get("name", str(f)) if isinstance(f, dict) else str(f) for f in raw_fields]
+                doc_parts.append("Fields: " + ", ".join(field_names[:50]))
 
-        return "\n".join(doc_parts)
+            raw_assocs = cds.get("associations", [])
+            if raw_assocs:
+                assoc_list = []
+                for a in raw_assocs:
+                    if isinstance(a, dict):
+                        alias = a.get("alias", "")
+                        tgt = a.get("target") or a.get("target_cds", "")
+                        assoc_list.append(f"{alias} -> {tgt}".strip(" ->"))
+                    else:
+                        assoc_list.append(str(a))
+                doc_parts.append("Associations: " + ", ".join(assoc_list))
+
+        return "\n\n".join(doc_parts)
 
 
 # =============================================================================
@@ -162,18 +158,19 @@ class CDSChromaIndexBuilder:
     """
     Builds and manages a persistent ChromaDB vector collection using
     SentenceTransformers neural embeddings. Scales to thousands of CDS views
-    via robust batch chunking.
+    via robust batch chunking (default: 128).
     """
 
     def __init__(
         self,
         db_path: str = "./cds_vector_db",
         collection_name: str = "cds_views",
-        model_name: str = "all-MiniLM-L6-v2",
-        batch_size: int = 64
+        model_name: str = "sentence-transformers/all-MiniLM-L6-v2",
+        batch_size: int = 128
     ):
         self.db_path = db_path
         self.collection_name = collection_name
+        # Allow short form or full HuggingFace path
         self.model_name = model_name
         self.batch_size = max(1, batch_size)
 
@@ -186,9 +183,15 @@ class CDSChromaIndexBuilder:
         logger.info(f"Initializing Persistent ChromaDB client at: '{self.db_path}'")
         self.client = chromadb.PersistentClient(path=self.db_path)
 
-        logger.info(f"Configuring SentenceTransformer embedding function: '{self.model_name}'")
+        # Standardize model name for SentenceTransformerEmbeddingFunction
+        transformer_name = (
+            self.model_name.replace("sentence-transformers/", "")
+            if "/" in self.model_name
+            else self.model_name
+        )
+        logger.info(f"Configuring SentenceTransformer embedding function: '{transformer_name}'")
         self.embedding_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
-            model_name=self.model_name
+            model_name=transformer_name
         )
 
     def load_catalog(self, catalog_path: str) -> List[Dict[str, Any]]:
@@ -213,10 +216,11 @@ class CDSChromaIndexBuilder:
         """
         Executes end-to-end vector indexing in batch chunks:
         1. Loads cds_catalog.json
-        2. Configures ChromaDB persistent collection with cosine distance
-        3. Iterates over views in configurable batch chunks (default 64)
-        4. Synthesizes documents, extracts schema metadata, and upserts to ChromaDB
-        5. Executes validation query to verify retrieval performance
+        2. Configures ChromaDB persistent collection with cosine distance metric
+        3. Iterates over views in configurable batch chunks (default 128)
+        4. Synthesizes documents combining view_name, description, ddl_code, annotations
+        5. Upserts documents and metadata into ChromaDB collection
+        6. Executes validation query to verify retrieval performance
         """
         total_start = time.perf_counter()
         catalog = self.load_catalog(catalog_path)
@@ -230,7 +234,7 @@ class CDSChromaIndexBuilder:
         if reset_collection:
             try:
                 self.client.delete_collection(name=self.collection_name)
-                logger.info(f"Existing collection '{self.collection_name}' deleted for clean rebuild.")
+                logger.info(f"Existing collection '{self.collection_name}' deleted for clean rebuild (--reset).")
             except Exception:
                 pass
 
@@ -263,41 +267,70 @@ class CDSChromaIndexBuilder:
 
                 for i, cds in enumerate(chunk):
                     global_idx = batch_idx + i
-                    cds_name = (cds.get("cds_name") or cds.get("name") or "").strip()
-                    label = (cds.get("label") or cds.get("description") or "").strip()
-                    domain = (cds.get("domain") or "").strip()
-                    raw_fields = cds.get("fields", [])
-                    raw_associations = cds.get("associations", [])
+                    view_name = (
+                        cds.get("view_name") or
+                        cds.get("cds_name") or
+                        cds.get("name") or
+                        f"CDS_{global_idx}"
+                    ).strip()
+
+                    ddl_source_name = (
+                        cds.get("ddl_source_name") or
+                        cds.get("source_name") or
+                        view_name
+                    ).strip()
+
+                    description = (
+                        cds.get("description") or
+                        cds.get("label") or
+                        ""
+                    ).strip()
+
+                    annotations = cds.get("annotations", [])
+                    ddl_code = (cds.get("ddl_code") or cds.get("source") or "").strip()
 
                     # Ensure unique, stable document ID
-                    doc_id = cds_name if cds_name else f"cds_view_{global_idx}"
+                    doc_id = view_name
                     if doc_id in seen_ids:
-                        doc_id = f"{doc_id}_{global_idx}"
+                        doc_id = f"{view_name}_{global_idx}"
                     seen_ids.add(doc_id)
 
-                    # Synthesize semantic text
+                    # Synthesize semantic text payload
                     doc_text = CDSDocumentSynthesizer.build_text_representation(cds)
 
-                    # Extract primary key fields
-                    key_fields = []
-                    for f in raw_fields:
-                        if isinstance(f, dict) and f.get("is_key"):
-                            key_fields.append(f.get("name", ""))
+                    # Prepare snippet for prompt / display preview
+                    first_lines = [line.strip() for line in ddl_code.splitlines() if line.strip()]
+                    ddl_snippet = "\n".join(first_lines[:8]) if first_lines else f"define view {view_name}"
+
+                    # Clean Core scope calculation
+                    is_standard = (
+                        (view_name.startswith("I_") or view_name.startswith("C_"))
+                        and not view_name.startswith("Z19_")
+                        and not view_name.startswith("P_")
+                    )
+                    is_rel_val = 1 if is_standard else 0
+                    v_type_val = "standard" if is_standard else "custom"
 
                     # ChromaDB metadata values must be primitive types (str, int, float, bool)
-                    # Complex nested lists/dicts are serialized to JSON strings
-                    metadata = {
-                        "cds_name": cds_name,
-                        "name": cds_name,
-                        "label": label,
-                        "description": label,
-                        "domain": domain,
-                        "field_count": len(raw_fields),
-                        "association_count": len(raw_associations),
-                        "key_fields_json": json.dumps(key_fields),
-                        "fields_json": json.dumps(raw_fields),
-                        "associations_json": json.dumps(raw_associations),
+                    metadata: Dict[str, Any] = {
+                        "view_name": view_name,
+                        "ddl_source_name": ddl_source_name,
+                        "description": description,
+                        "annotations_json": json.dumps(annotations),
+                        "ddl_code": ddl_code,
+                        "ddl_snippet": ddl_snippet,
+                        "has_ddl_code": bool(ddl_code),
+                        "is_released": is_rel_val,
+                        "view_type": v_type_val,
                     }
+
+                    # Preserve legacy fields if available
+                    if "domain" in cds:
+                        metadata["domain"] = str(cds["domain"])
+                    if "fields" in cds:
+                        metadata["fields_json"] = json.dumps(cds["fields"])
+                    if "associations" in cds:
+                        metadata["associations_json"] = json.dumps(cds["associations"])
 
                     batch_ids.append(doc_id)
                     batch_docs.append(doc_text)
@@ -327,7 +360,7 @@ class CDSChromaIndexBuilder:
 
         # Execute sample verification query
         logger.info("Executing retrieval verification test query on ChromaDB...")
-        test_query = "Sales order delivery status and customer billing document"
+        test_query = "Find CDS views for billing document items with customer details"
         verification_results = collection.query(
             query_texts=[test_query],
             n_results=min(3, final_count)
@@ -376,10 +409,11 @@ def parse_args() -> argparse.Namespace:
         description="Build Persistent ChromaDB Vector Index for SAP S/4HANA CDS Views",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
+    default_catalog = "extracted_views.json" if os.path.exists("extracted_views.json") else "cds_catalog.json"
     parser.add_argument(
         "-i", "--input-catalog",
-        default="cds_catalog.json",
-        help="Path to extracted CDS catalog JSON file"
+        default=default_catalog,
+        help="Path to extracted CDS catalog JSON file (extracted_views.json or cds_catalog.json)"
     )
     parser.add_argument(
         "-d", "--db-path",
@@ -393,13 +427,13 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument(
         "-m", "--model-name",
-        default=os.getenv("EMBEDDING_MODEL_NAME", "all-MiniLM-L6-v2"),
+        default=os.getenv("EMBEDDING_MODEL_NAME", "sentence-transformers/all-MiniLM-L6-v2"),
         help="SentenceTransformers neural embedding model name"
     )
     parser.add_argument(
         "-b", "--batch-size",
         type=int,
-        default=64,
+        default=128,
         help="Number of CDS views to process per batch chunk"
     )
     parser.add_argument(
